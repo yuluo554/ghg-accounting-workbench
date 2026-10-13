@@ -9,8 +9,8 @@
   4. **探活**：审计必须能对"注入的泄露"命中 —— 否则"全绿"可能只是"什么都没扫"
      （沿用 M0 零字面量门禁与 M4 基准的同一条纪律：不配探活的门禁不可信）。
 
-提交元数据那条在**改写前**必然是红的（O-6 待办），故以 ``xfail`` 语义显式标注：
-它红着是"已知待办"，不是"测试写错了"；改写完成后应自动转绿。
+提交元数据那条是**发布门禁**（违规即失败，不设 xfail 出口）：真实邮箱留在提交里会随每次
+clone 永久带出，推到远端后不可逆。O-6 已于 M6 完成（全历史改写为 noreply）。
 """
 
 import os
@@ -70,13 +70,16 @@ def test_commit_identity_checker_allows_listed_address():
 
 
 def test_history_commit_identities_are_noreply():
-    """全历史提交身份必须为 noreply（O-6 改写后转绿；改写前为已知待办）。"""
+    """全历史提交身份必须为 noreply（O-6）。
+
+    这是**发布门禁**：违规即失败，不 xfail。真实邮箱留在提交元数据里会随每次
+    clone 永久带出，且一旦推送到远端就不可逆 —— 这种门禁不能有"红着也算过"的出口。
+    """
     entries = D.iter_commit_identities(REPO_ROOT)
     assert entries, "未读到任何提交（浅克隆会让历史扫描静默空验）"
     violations = D.check_commit_identities(entries)
-    if violations:
-        pytest.xfail("O-6 待办：%d 处提交身份非 noreply，发布前须跑 "
-                     "tools/desensitize.py rewrite" % len(violations))
+    assert violations == [], (
+        "提交身份非 noreply（发布前须跑 tools/desensitize.py rewrite）：%s" % violations[:5])
 
 
 # ---------- 泄露模式判定 ----------
