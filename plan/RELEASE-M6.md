@@ -16,14 +16,16 @@
 | 账号 | `yuluo554`（GitHub user id `282769740`） |
 | 可见性 | **public**（已核对 `gh repo view`） |
 | 默认分支 | `main` |
-| 提交数 | **15**（含 CI 首跑修复） |
-| HEAD = 标签指向 | `6ce552dc6ef435696cf4e88155d214985b69e600` |
-| 标签 | `v0.1.0`（指向 HEAD，已 `--verify-tag` 创建 Release） |
+| 标签 `v0.1.0` 指向（发布提交） | `6ce552dc6ef435696cf4e88155d214985b69e600` |
+| 提交数（截至 `main` HEAD） | **16**（发布提交 + 发布后回填 1 条，**仅文档**） |
 | 许可 | MIT |
 | 远端协议 | SSH（`git@github.com:yuluo554/ghg-accounting-workbench.git`） |
 
-> **注**：首版标签曾指向 `e4a46a9`（CI 首跑前的提交）；CI 首跑暴露 ubuntu 缺 Qt 系统库后，
-> 修复提交 `6ce552d` 已入 main，标签随之移动到该全绿提交（Release 已按 `--verify-tag` 重建）。
+> **注（标签与 main 的关系）**：`v0.1.0` 指向**发布提交** `6ce552d`（含 CI 首跑修复，
+> 代码与数据在该提交上完全确定）；此后 `main` 前进的 1 个提交**只改计划文档**（本文件的回填），
+> 不触及代码、数据与附件 —— 这是常规做法：标签钉发布提交，回填随 main 走。
+> 首版标签曾指向 `e4a46a9`（CI 首跑前）；首跑暴露 ubuntu 缺 Qt 系统库后，修复提交入 main，
+> 标签随之移到 `6ce552d` 并按 `--verify-tag` 重建 Release。
 
 ## 二、脱敏结果（O-6，已完成）
 
