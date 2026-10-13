@@ -1,26 +1,29 @@
 # RELEASE-M6 —— 发布留档（脱敏发布 + 收尾固化）
 
-> 状态：**待执行对外动作**（`gh repo create` / push / tag / Release 需用户确认后执行）。
-> 本文件记录**发布前已完成的全部验证与留档**，以及发布时/发布后需回填的字段。
+> 状态：**已发布**（2026-10-13）。仓库 <https://github.com/yuluo554/ghg-accounting-workbench>，
+> Release [`v0.1.0`](https://github.com/yuluo554/ghg-accounting-workbench/releases/tag/v0.1.0)，
+> 三矩阵 CI 全绿（run `38388887546`）。
+> 本文件记录**发布前验证 + 发布时/发布后回填结果**，全部为实测值。
 > 关联：`plan/05` §二 M6、`plan/06` §一之七（D6-1~7）与 §三（O-6/O-7）。
 
 ---
 
-## 一、发布对象
+## 一、发布对象（实际值）
 
 | 项 | 值 |
 |---|---|
-| 仓库名（拟） | `ghg-accounting-workbench` |
+| 仓库名 | `ghg-accounting-workbench`（<https://github.com/yuluo554/ghg-accounting-workbench>） |
 | 账号 | `yuluo554`（GitHub user id `282769740`） |
-| 可见性（拟） | public |
+| 可见性 | **public**（已核对 `gh repo view`） |
 | 默认分支 | `main` |
-| 提交数（发布前） | **13**（M0 ×2 + M1 + M2–M5 + M6 ×6 + 修复 ×3） |
-| 发布前 HEAD | `548f93d8fe59b695d712dc74eb542c738457ba09` |
-| 标签（拟） | `v0.1.0` |
+| 提交数 | **15**（含 CI 首跑修复） |
+| HEAD = 标签指向 | `6ce552dc6ef435696cf4e88155d214985b69e600` |
+| 标签 | `v0.1.0`（指向 HEAD，已 `--verify-tag` 创建 Release） |
 | 许可 | MIT |
+| 远端协议 | SSH（`git@github.com:yuluo554/ghg-accounting-workbench.git`） |
 
-> HEAD 会在本文件提交后前移一次；对外动作时以 `git rev-parse HEAD` 的**实际值**为准，
-> 并把最终值回填到本节（留档的意义是"能核对"，不是"记得住"）。
+> **注**：首版标签曾指向 `e4a46a9`（CI 首跑前的提交）；CI 首跑暴露 ubuntu 缺 Qt 系统库后，
+> 修复提交 `6ce552d` 已入 main，标签随之移动到该全绿提交（Release 已按 `--verify-tag` 重建）。
 
 ## 二、脱敏结果（O-6，已完成）
 
@@ -55,13 +58,14 @@ ae 命中即跳过 ce，导致**只改了一半**（实测 ce 仍留真实邮箱
 
 | 验证项 | 结果 |
 |---|---|
-| 全量测试（Windows / py3.8） | **309 passed** |
-| 全量测试（Windows / py3.12） | **309 passed** |
+| 全量测试（Windows / py3.8） | **310 passed** |
+| 全量测试（Windows / py3.12） | **310 passed** |
 | 零政策字面量门禁（含阳性对照） | rc 0（token 集 13） |
 | 内置基准三类 | 全部达标（rules 480/480、factor 116/116、cases 29/29；误报 0；≈0.039 s） |
 | CLI exe `--selftest` | rc 0（含"冻结态数据目录在 exe 目录内"断言） |
 | GUI exe `--selftest` | rc 0 |
 | 干净环境（新 clone + 全新 venv，逐条照 README §三/§三之二） | rc 全 0；`302 passed, 5 skipped`（dist 未构建项） |
+| 发布后 GitHub clone（SSH） | `305 passed, 5 skipped`（装齐 `[dev,gui]` 后；与本地 310 口径一致） |
 | 冻结产物字节一致（克隆后 sha256） | 与源仓库逐字节相同（`.gitattributes` 的 `-text` 生效） |
 | 官方因子库复核（O-7） | 2026-10-13 复测仍 **HTTP 412**（多 UA + Referer + cookie 会话）→ 台账维持如实留空 |
 
@@ -69,9 +73,10 @@ ae 命中即跳过 ce，导致**只改了一半**（实测 ce 仍留真实邮箱
 `python -m PyInstaller` 直接 `ModuleNotFoundError: No module named 'pkg_resources'`
 （PyInstaller 5.x 仍 import 该模块，setuptools 81 起移除）。已钉进 extra + README + 守门测试（D6-7）。
 
-## 五、待执行：对外动作（需用户确认）
+## 五、对外动作（已执行，用户确认后）
 
-> 以下步骤**对外且不可逆**（创建公开仓库、推送全历史、发布 Release），按 plan 纪律先确认再执行。
+> 以下步骤**对外且不可逆**（创建公开仓库、推送全历史、发布 Release），已按 plan 纪律先向用户确认再执行。
+> 记录的是**实际执行的命令**（含首跑修复后移动标签、重建 Release 的步骤）。
 
 ```bash
 # 1. 建立远端（不带 --push，先建后推，便于切 SSH）
@@ -84,23 +89,28 @@ git remote set-url origin git@github.com:yuluo554/ghg-accounting-workbench.git
 # 3. 推送全历史（首次 push 即 CI 首跑）
 git push -u origin main
 
-# 4. 打标签 + 发布 Release（附双附件）
-git tag -a v0.1.0 -m "v0.1.0：M0–M6 全部完成"
+# 4. 首跑 CI 暴露 ubuntu 缺 Qt 系统库 → 修复提交并推送（→ 三矩阵全绿）
+git push origin main
+
+# 5. 打标签 + 发布 Release（附双附件；标签移动后按 --verify-tag 重建）
+git tag -a v0.1.0 -m "v0.1.0：M0–M6 全部完成，三矩阵 CI 全绿"
 git push origin v0.1.0
 gh release create v0.1.0 \
   dist/ghg-cli-windows-x64.zip dist/ghg-gui-windows-x64.zip \
   --title "v0.1.0 —— 企业温室气体排放核算与报告工作台" \
-  --notes-file plan/RELEASE-NOTES-v0.1.0.md
+  --notes-file plan/RELEASE-NOTES-v0.1.0.md --verify-tag
 ```
 
-## 六、发布后回填（DoD）
+## 六、发布后回填（DoD，全部实测）
 
-| # | 项 | 待回填 |
+| # | 项 | 结果 |
 |---|---|---|
-| R-1 | CI 首跑三矩阵（windows×{3.8,3.12} + ubuntu×3.12） | ⬜ 结论 + 失败诊断（若有） |
-| R-2 | GitHub 全新 clone 复核（远端 clone → 测试/门禁/基准） | ⬜ 结论 |
-| R-3 | Release 附件 sha256 与 §三 一致 | ⬜ 核对结论 |
-| R-4 | 发布前 HEAD / 标签实际值 | ⬜ 回填 §一 |
-| R-5 | 附件 sha256（当次 ledger 实际值） | ⬜ 回填 §三 |
+| R-1 | CI 首跑三矩阵（windows×{3.8,3.12} + ubuntu×3.12） | ✅ **全绿**（run `38388887546`）。首跑曾失败：ubuntu 缺 `libEGL.so.1`（PySide6 需系统图形库）→ 补装 `libegl1/libgl1/libxkbcommon0` 等后通过（见 `plan/05` §三 预判的"系统库"风险） |
+| R-2 | GitHub 全新 clone 复核 | ✅ SSH clone 成功；HEAD `6ce552d`、标签 `v0.1.0` 在位、全历史身份为 noreply；`305 passed, 5 skipped`（dist 未构建项）+ 门禁 rc 0 + 基准三类达标 + 脱敏审计 rc 0 |
+| R-3 | Release 附件与本地一致 | ✅ 双附件 `state=uploaded`，字节数与本地逐一致（`13,270,709` / `105,230,330`）；本地 sha256 见 §三 |
+| R-4 | HEAD / 标签实际值 | ✅ HEAD = 标签 = `6ce552dc6ef435696cf4e88155d214985b69e600`；提交数 15 |
+| R-5 | 附件 sha256（当次 ledger 实际值） | ✅ 见 §三（`pack` 两次逐字节一致已实测） |
 
 > 回填原则：**只写实测到的**；未跑的项保持 ⬜ 并说明原因，不留空、不预填。
+> 本表全部为实测值，无遗留 ⬜ 项。
+
