@@ -121,6 +121,19 @@ def test_denied_literal_is_caught():
     assert ("denied_literal", FAKE_GMAIL) in leaks
 
 
+def test_noreply_address_is_not_used_as_deny_literal():
+    """noreply 是改写**目标**而非泄露，审计不得把它当成"必须不存在"的字面值。
+
+    实测踩过：O-6 改写后 ``git config user.email`` 已是 noreply，若审计直接拿它当
+    deny 字面值，计划文档里如实记录的 noreply 就会被判成命中（自伤）。守卫是
+    "先判 NOREPLY_RE 再决定是否纳入 deny" —— 这里锁定该判定。
+    """
+    noreply = "282769740+" + NOREPLY
+    assert D.NOREPLY_RE.match(noreply), "noreply 地址应被识别为 noreply（故不进 deny）"
+    # 反向：真邮箱必须不被识别为 noreply（否则会被漏掉而不进 deny）
+    assert not D.NOREPLY_RE.match(FAKE_QQ)
+
+
 # ---------- 工作树 / 构建产物 ----------
 
 def test_working_tree_has_no_personal_leak():

@@ -454,9 +454,11 @@ def pack_dist_archives(dist_dir=None, root=None, log=print):
 def _cmd_audit(args):
     # 个人邮箱与开发机路径都**从本机环境派生**，不写进入仓脚本：
     # 入仓脚本里出现真实邮箱本身就是一种泄露。
+    # 注意：`git config user.email` 在 O-6 改写后已是 **noreply** —— noreply 是改写目标、
+    # 不是泄露，不能拿来当"必须不存在"的字面值（否则会把计划文档里记录的 noreply 判成命中）。
     deny = list(args.deny_email or [])
     local_email = _git(["config", "user.email"], args.root, check=False).stdout.strip()
-    if local_email and local_email not in deny:
+    if local_email and not NOREPLY_RE.match(local_email) and local_email not in deny:
         deny.append(local_email)
     deny_paths = list(args.deny_path or []) or default_dev_markers(args.root)
     problems = 0
