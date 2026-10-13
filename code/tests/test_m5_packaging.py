@@ -139,6 +139,19 @@ def test_gui_spec_console_disabled():
     assert "console=False" in text
 
 
+def test_build_extra_pins_setuptools_below_81():
+    """打包 extra 必须钉住 ``setuptools<81``。
+
+    PyInstaller 5.x 仍 ``import pkg_resources``，而 setuptools 81 起移除了该模块；
+    Python 3.12 新建 venv 默认不带旧版 setuptools → 干净环境照 README 打包会直接
+    ``ModuleNotFoundError``（M6 干净环境实测踩到）。这条钉在 extra 里，
+    让"照文档走"必然拿到可用的构建环境，而不是靠 README 的一句提醒。
+    """
+    pyproject = os.path.join(P.repo_root(), "code", "pyproject.toml")
+    text = open(pyproject, "r", encoding="utf-8").read()
+    assert "setuptools<81" in text, "build extra 未钉住 setuptools<81"
+
+
 # ---------- 真实打包产物（可选：已构建时校验）----------
 
 def _dist_exe(name):

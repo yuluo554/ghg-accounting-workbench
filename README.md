@@ -135,6 +135,7 @@ QT_QPA_PLATFORM=offscreen python -c "import sys; sys.path[:0]=['code/src','code/
 
 # 4. 打包双 exe（PyInstaller onedir；数据白名单取自 tools/ghg_packaging.py）
 python -m pip install -e "code[build]"
+python -m pip install "setuptools<81"                     # PyInstaller 5.x 仍需 pkg_resources（见 §九）
 python -m PyInstaller tools/ghg_cli.spec --noconfirm      # → dist/ghg-cli/ghg-cli.exe
 python -m PyInstaller tools/ghg_gui.spec --noconfirm      # → dist/ghg-gui/ghg-gui.exe
 
