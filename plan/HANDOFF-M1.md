@@ -107,3 +107,12 @@ PYTHONPATH=code/src py -X utf8 -m ghg.cli selftest         # → rc 0
 2. 打开 `data/README.md` §二，从**已确认的锚点**（GB/T 32150-2025 发布/实施日期）开始逐条核对。
 3. 核对一条 → 改生成器 → 重跑生成器 → 跑测试（`test_rules_gate.py::test_all_policy_values_are_null_in_m0` 会变红，**这是预期的**：该测试是 M0 初态守门，M1 开始填值后应改名为"已核对条目数 > 0"的等价断言，而不是删掉）。
 4. 全部核对完一个坐标 → `ghg calc` 该坐标应首次返回 0。
+
+## 八、发布前必办（记在 M6，别忘了）
+
+| 项 | 状态 | 动作 |
+|---|---|---|
+| **提交元数据邮箱** | ⚠️ 当前为真实个人邮箱（`git log --format="%ae %ce"` 可见） | M6 发布前 `git filter-branch --env-filter` 全历史改写为 GitHub noreply（见 plan/06 缓议项 O-6）；改后清 refs/original + reflog + gc，固定字面值 grep 验证 **ae 与 ce 两个字段** |
+| 远端仓库 | 尚未建立（`git remote -v` 为空） | M6 用 `gh repo create ... --source . --remote origin`（**不带 --push**）→ 切 SSH → push（对外动作，先向用户确认） |
+| 脱敏审计脚本 | 尚未固化 | M6 前把脱敏四步做成入仓可复跑脚本 + 守门测试（selftest 阳性对照 + tracked/history/messages 三模式） |
+| CI 首跑 | 未跑（无远端） | M6 首次 push 即首跑；按需诊断环境差异型失败（编码/EOL/系统库） |
