@@ -41,6 +41,19 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -e ".[dev,gui]"
 
+      # PySide6 的 Qt 运行时依赖系统图形库；ubuntu 最小镜像不含 libEGL/libGL 等，
+      # 缺了会在 `import PySide6.QtGui` 直接 ImportError: libEGL.so.1（CI 首跑实测）。
+      # offscreen 平台仍需要这些库做符号解析，故必须显式装。
+      - name: Install Qt system libraries (Linux only)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libegl1 libgl1 libglx-mesa0 libxkbcommon0 libdbus-1-3 \
+            libfontconfig1 libxcb-cursor0 libxcb-icccm4 libxcb-keysyms1 \
+            libxcb-randr0 libxcb-render-util0 libxcb-shape0 libxcb-xinerama0 \
+            libxcb-xkb1 libxkbcommon-x11-0
+
       - name: Zero-policy-literal gate
         run: python tools/check_zero_literals.py --selftest
 
