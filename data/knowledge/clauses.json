@@ -1,0 +1,493 @@
+{
+  "generated_on": "2026-10-13",
+  "generator": "gen_knowledge/0.1.0",
+  "note": "本索引登记官方依据（文号/日期/URL/条款要点）与原文快照 sha256；搜索摘要一律不采信，数值以官方原文直连核对为准。快照为官方公文/标准页面（著作权法第五条官方文件不适用版权保护）。",
+  "raw_dir": "data/knowledge/raw",
+  "schema": "ghg-clause-index/v1",
+  "sources": [
+    {
+      "access_note": "全文经 openstd 在线预览（防复制精灵图）逐页核对；未获取可下载 PDF 与编制说明。",
+      "clauses": [
+        {
+          "article": "封面",
+          "point": "代替 GB/T 32150—2015；2025-12-31 发布、2026-07-01 实施"
+        },
+        {
+          "article": "前言 主要技术变化 a)",
+          "point": "增加碳汇、碳清除等相关术语（见第 3 章）"
+        },
+        {
+          "article": "前言 主要技术变化 b)",
+          "point": "「燃料燃烧排放」更名为「化石燃料燃烧排放」并改定义（见 3.7）"
+        },
+        {
+          "article": "前言 主要技术变化 c)",
+          "point": "增加报告主体涉及温室气体汇与不可忽略的其他间接排放内容（见第 6 章）"
+        },
+        {
+          "article": "前言 主要技术变化 d)",
+          "point": "增加外购非化石能源电力排放因子确定要求（见 7.5.6）"
+        },
+        {
+          "article": "前言 主要技术变化 e)",
+          "point": "增加外购非化石能源热力排放因子选取要求（见 7.5.7）"
+        },
+        {
+          "article": "前言 主要技术变化 f)",
+          "point": "增加「不可忽略的其他间接排放」及四种主要类别（见附录 A）"
+        },
+        {
+          "article": "前言 主要技术变化 g)",
+          "point": "增加非化石能源电力排放因子取值要求及证明文件（见附录 B）"
+        },
+        {
+          "article": "6 温室气体排放核算边界",
+          "point": "以企业法人或视同法人的独立核算单位为边界；含主要/辅助/附属生产系统"
+        },
+        {
+          "article": "7.2.2 排放因子法（公式 1）",
+          "point": "温室气体排放量 = 活动数据 × 排放因子 × 全球变暖潜势"
+        },
+        {
+          "article": "7.4 选择或测定温室气体排放因子（表 4）",
+          "point": "因子获取优先级：来源明确有公信力、适用性"
+        }
+      ],
+      "doc_no": "GB/T 32150-2025",
+      "effective": "2026-07-01",
+      "id": "gbt32150-2025",
+      "kind": "国家标准",
+      "published": "2025-12-31",
+      "publisher": "国家市场监督管理总局、国家标准化管理委员会",
+      "snapshot_files": [
+        {
+          "bytes": 24201,
+          "file": "openstd-gbt32150-2025-detail.html",
+          "present": true,
+          "sha256": "afb6282f666a4abf797112865533af30ece5769aa543c5bba170a1c58e59a2e9"
+        },
+        {
+          "bytes": 99682,
+          "file": "openstd-gbt32150-2025-review.html",
+          "present": true,
+          "sha256": "ce5b5ee80d20e1af696da3d7ea6760982f8bee0dd61b4ac40fcf3f60bcbad330"
+        }
+      ],
+      "status_text": "现行；全部代替 GB/T 32150-2015",
+      "title": "GB/T 32150-2025《工业企业温室气体排放核算和报告通则》",
+      "url": "https://openstd.samr.gov.cn/bzgk/gb/newGbInfo?hcno=6E4997D6B3118055931BC13C71B9A452"
+    },
+    {
+      "clauses": [
+        {
+          "article": "3.7 燃料燃烧排放",
+          "point": "旧版术语（2025 版更名为「化石燃料燃烧排放」）"
+        }
+      ],
+      "doc_no": "GB/T 32150-2015",
+      "effective": "2016-06-01",
+      "id": "gbt32150-2015",
+      "kind": "国家标准",
+      "published": "2015-11-19",
+      "publisher": "国家质量监督检验检疫总局、国家标准化管理委员会",
+      "snapshot_files": [
+        {
+          "bytes": 23903,
+          "file": "openstd-gbt32150-2015-detail.html",
+          "present": true,
+          "sha256": "057e461bdb56141e8d0c6305e34db067b5a08c573d67264f7e6b1e3cab495d1d"
+        }
+      ],
+      "status_text": "废止（不提供标准文本阅读服务）",
+      "title": "GB/T 32150-2015《工业企业温室气体排放核算和报告通则》",
+      "url": "https://openstd.samr.gov.cn/bzgk/gb/newGbInfo?hcno=29DE620206A268D0E27B8739E332D70E"
+    },
+    {
+      "clauses": [
+        {
+          "article": "5.2 排放源",
+          "point": "核算范围为化石燃料燃烧产生的二氧化碳排放（含掺烧生物质时的化石燃料部分）"
+        },
+        {
+          "article": "6.1.1 公式(1)",
+          "point": "E燃烧 = Σ(FCi × Car,i × OFi × 44/12)"
+        },
+        {
+          "article": "6.2.3.3",
+          "point": "无实测时燃煤收到基低位发热量取 26.7 GJ/t"
+        },
+        {
+          "article": "6.2.4.1",
+          "point": "未实测时单位热值含碳量取 0.03085 tC/GJ（非常规燃煤机组 0.02858）"
+        },
+        {
+          "article": "6.2.5（2026 更新）",
+          "point": "燃煤/燃油/燃气碳氧化率改用国家温室气体排放因子数据库取值"
+        },
+        {
+          "article": "6.2.5.1（更新前原文，更新通知附件 1 引述）",
+          "point": "燃煤的碳氧化率取 99%"
+        },
+        {
+          "article": "附录 A",
+          "point": "常用化石燃料低位发热量 / 单位热值含碳量 / 碳氧化率缺省值"
+        },
+        {
+          "article": "2026 更新通知（环办气候函〔2026〕237号）",
+          "point": "全文删除「购入使用电力排放」，购入使用电量改列辅助报告项"
+        }
+      ],
+      "doc_no": "环办气候函〔2026〕237号",
+      "id": "cets-ag-01-power",
+      "kind": "全国碳排放权交易市场技术规范",
+      "published": "2026-06-29",
+      "publisher": "生态环境部办公厅",
+      "snapshot_files": [
+        {
+          "bytes": 48350,
+          "file": "mee-2026-06-29-power-guideline-update.html",
+          "present": true,
+          "sha256": "24d4271507ff9e64e2c7c79c1369f32e362134ea321cea155f0795362f24dc03"
+        },
+        {
+          "bytes": 1538857,
+          "file": "mee-2026-06-29-power-ag-full.pdf",
+          "present": true,
+          "sha256": "6054f6166cbe2dc12b3d18726fe2e6c0add4210559968a3ac30a17623e2a317e"
+        },
+        {
+          "bytes": 3491,
+          "file": "power-update-1.txt",
+          "present": true,
+          "sha256": "321a2d5cb508e57bf2da352b7e9b4acf73a63eb86c2013ecd2b1cbc5549afaf8"
+        }
+      ],
+      "spec_no": "CETS-AG-01.01-V04-2026",
+      "status_text": "现行（适用自 2026 年度起）",
+      "title": "《企业温室气体排放核算与报告指南 发电设施》",
+      "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202606/t20260629_1160473.html"
+    },
+    {
+      "clauses": [
+        {
+          "article": "5.1.1 熟料生产",
+          "point": "边界为熟料烧成系统（预热器、分解炉、水泥窑）"
+        },
+        {
+          "article": "5.2.1 熟料生产排放源",
+          "point": "化石燃料燃烧排放 + 过程排放（碳酸盐分解）"
+        },
+        {
+          "article": "6.1.1 公式(1)",
+          "point": "E燃烧 = Σ(消耗量 × 收到基低位发热量 × 单位热值含碳量 × 碳氧化率 × 44/12)"
+        },
+        {
+          "article": "6.1.2.2",
+          "point": "无法区分煤种或未列煤种时，低位发热量取烟煤缺省值 23.076 GJ/t"
+        },
+        {
+          "article": "6.1.2.3",
+          "point": "无法区分煤种或未列煤种时，单位热值含碳量取褐煤缺省值 0.02797 tC/GJ"
+        },
+        {
+          "article": "6.1.2.4 / 附录 A",
+          "point": "碳氧化率按燃烧设备取值：水泥窑 99%、发电锅炉 95%、工业锅炉 85%"
+        }
+      ],
+      "doc_no": "环办气候函〔2024〕321号",
+      "id": "cets-ag-02-cement",
+      "kind": "全国碳排放权交易市场技术规范",
+      "published": "2024-09-14",
+      "publisher": "生态环境部办公厅",
+      "snapshot_files": [
+        {
+          "bytes": 1397460,
+          "file": "cement-ag.pdf",
+          "present": true,
+          "sha256": "d99bb8e2d7df39ba2c1491c043a59f278443beb691057b0b7fc96628155c0ebb"
+        },
+        {
+          "bytes": 66606,
+          "file": "cement-ag.txt",
+          "present": true,
+          "sha256": "0dc08737b01e15fcfe7772a60e43f62d542149c34b77e3634a96b6eb0104f6d4"
+        }
+      ],
+      "spec_no": "CETS-AG-02.01-V01-2024",
+      "status_text": "现行",
+      "title": "《企业温室气体排放核算与报告指南 水泥行业》",
+      "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202409/t20240914_1086067.html"
+    },
+    {
+      "clauses": [
+        {
+          "article": "5.2.1 企业层级排放源",
+          "point": "消耗化石燃料排放 + 过程排放 + 含碳产品隐含排放"
+        },
+        {
+          "article": "5.2.2 工序层级排放源",
+          "point": "焦化/烧结/球团/炼铁/转炉/电炉六工序净消耗 + 掺烧自产二次能源发电设施 + 其他"
+        },
+        {
+          "article": "6.1.1",
+          "point": "企业层级采用物料平衡法（公式 1）"
+        },
+        {
+          "article": "6.2.3 / 附录 A 附表 A.1",
+          "point": "单位热值含碳量取附录 A 缺省值（烟煤 0.02618 tC/GJ）"
+        },
+        {
+          "article": "附录 A 附表 A.1",
+          "point": "固体燃料碳氧化率 99%、液体 98%、气体 99%"
+        }
+      ],
+      "doc_no": "环办气候函〔2025〕27号",
+      "id": "cets-ag-03-steel",
+      "kind": "全国碳排放权交易市场技术规范",
+      "published": "2025-01-24",
+      "publisher": "生态环境部办公厅",
+      "snapshot_files": [
+        {
+          "bytes": 1476156,
+          "file": "steel-ag.pdf",
+          "present": true,
+          "sha256": "fb4c1fdc11f7ed9bb6153ba281d72f3801d7774a11beb65e21c2c4aee2250185"
+        },
+        {
+          "bytes": 80553,
+          "file": "steel-ag.txt",
+          "present": true,
+          "sha256": "47a8c491b13b95d4bc5d615ba6ca9d78161ddb2197a6df8f4edbc419598c2183"
+        }
+      ],
+      "spec_no": "CETS-AG-03.01-V01-2024",
+      "status_text": "现行",
+      "title": "《企业温室气体排放核算与报告指南 钢铁行业》",
+      "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202501/t20250124_1101316.html"
+    },
+    {
+      "clauses": [
+        {
+          "article": "5.1.1 铝电解工序层级",
+          "point": "工序边界为电解槽和整流器的集合"
+        },
+        {
+          "article": "5.2.1 铝电解工序排放源",
+          "point": "能源作为原材料用途的排放（阳极消耗）+ 阳极效应排放（CF4/C2F6）"
+        },
+        {
+          "article": "6.1.1 公式(1)",
+          "point": "E原材料,j = 阳极净耗量 × (1 − 含硫量 − 灰分含量) × 44/12"
+        },
+        {
+          "article": "6.1.2.2",
+          "point": "阳极损失率缺省值 15.18%"
+        },
+        {
+          "article": "6.1.2.3",
+          "point": "阳极平均含硫量缺省值 2%"
+        },
+        {
+          "article": "6.1.2.4",
+          "point": "阳极平均灰分含量缺省值 0.4%"
+        },
+        {
+          "article": "7.1.2.4/7.1.2.5 / 附录 A 附表 A.1",
+          "point": "单位热值含碳量与碳氧化率取附录 A 缺省值（固体燃料碳氧化率 98%）"
+        }
+      ],
+      "doc_no": "环办气候函〔2024〕321号",
+      "id": "cets-ag-04-aluminum",
+      "kind": "全国碳排放权交易市场技术规范",
+      "published": "2024-09-14",
+      "publisher": "生态环境部办公厅",
+      "snapshot_files": [
+        {
+          "bytes": 1460837,
+          "file": "aluminum-ag.pdf",
+          "present": true,
+          "sha256": "270dd9e3aae99db48635a79ac4f90c497b03927ea55365bc54303c643bc313f6"
+        },
+        {
+          "bytes": 67627,
+          "file": "aluminum-ag.txt",
+          "present": true,
+          "sha256": "10912703d606ff2515b3248668992fc44684b9b9ebd84f9e68190fc90f645e29"
+        }
+      ],
+      "spec_no": "CETS-AG-04.01-V01-2024",
+      "status_text": "现行",
+      "title": "《企业温室气体排放核算与报告指南 铝冶炼行业》",
+      "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202409/t20240914_1086067.html"
+    },
+    {
+      "clauses": [
+        {
+          "article": "一、总体要求",
+          "point": "启动实施阶段 2024—2026 年度；2024 年度为首个管控年度"
+        },
+        {
+          "article": "二（一）确定管控范围",
+          "point": "钢铁/水泥管控 CO2；铝冶炼管控 CO2、CF4、C2F6；仅直接排放，不含间接排放"
+        },
+        {
+          "article": "二（二）确定重点排放单位",
+          "point": "年度排放量达 2.6 万吨 CO2 当量者纳入重点排放单位"
+        }
+      ],
+      "doc_no": "环气候〔2025〕23号",
+      "id": "coverage-plan",
+      "kind": "政策文件",
+      "published": "2025-03-21",
+      "publisher": "生态环境部",
+      "snapshot_files": [
+        {
+          "bytes": 662337,
+          "file": "coverage-plan.pdf",
+          "present": true,
+          "sha256": "c1ba9848c08e519098408ca2187fa892168c0e02adb05821bfe2097022ab88be"
+        },
+        {
+          "bytes": 8604,
+          "file": "coverage-plan.txt",
+          "present": true,
+          "sha256": "8f7eb415e9494aeea5f2dafe7972ee0286afaf7085fae2ea876431b9f49644b3"
+        }
+      ],
+      "status_text": "现行（启动实施阶段 2024—2026 年度）",
+      "title": "《全国碳排放权交易市场覆盖钢铁、水泥、铝冶炼行业工作方案》",
+      "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk03/202503/t20250326_1104736.html"
+    },
+    {
+      "clauses": [
+        {
+          "article": "三、配额计算方法",
+          "point": "发电采用碳排放强度基准法；钢铁/水泥/铝冶炼 2026 年度采用碳排放强度系数法"
+        },
+        {
+          "article": "三（一）表 1",
+          "point": "2025—2026 年度各类别机组碳排放基准值（I 类：2025 年 0.7902、2026 年 0.7894 tCO2/MWh）"
+        },
+        {
+          "article": "三（一）表 2",
+          "point": "常规燃煤机组调峰修正系数为负荷率 F 的函数"
+        },
+        {
+          "article": "三（二）表 3",
+          "point": "2026 年度碳排放强度系数 α：-20%<X<20% 取 0.15X；X≥20% 取 0.03；X≤-20% 取 -0.03"
+        },
+        {
+          "article": "三（二）",
+          "point": "行业平衡值 BP 由全国碳市场管理平台测算（正文未印具体数值）"
+        }
+      ],
+      "doc_no": "国环规气候〔2026〕1号",
+      "id": "quota-plan-2026",
+      "kind": "政策文件",
+      "published": "2026-09-02",
+      "publisher": "生态环境部",
+      "snapshot_files": [
+        {
+          "bytes": 46856,
+          "file": "mee-2026-09-02-quota-plan.html",
+          "present": true,
+          "sha256": "6f3e523a10852480fec45e41ccda6d1cddc349cfb59b579daeb58b3d3425bd0e"
+        },
+        {
+          "bytes": 1290497,
+          "file": "mee-2026-09-02-quota-plan.pdf",
+          "present": true,
+          "sha256": "091fd2d14b975e42da6f68d0f7659cb817cdf76530fe57e77038434a3d464935"
+        },
+        {
+          "bytes": 40306,
+          "file": "quota-plan.txt",
+          "present": true,
+          "sha256": "3d9c91d867180d59d27fa4ddc9df117c469b87a21c9a9c51ee85b64ca3a1b76f"
+        }
+      ],
+      "status_text": "现行",
+      "title": "《全国碳排放权交易市场2025、2026年度发电行业以及2026年度钢铁、水泥、铝冶炼行业配额总量和分配方案》",
+      "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk03/202609/t20260903_1165029.html"
+    },
+    {
+      "clauses": [
+        {
+          "article": "配额计算方法",
+          "point": "定额公式 A = E × (1 + α)；2024 年度按经核查实际排放量等量分配"
+        }
+      ],
+      "doc_no": "国环规气候〔2025〕2号",
+      "id": "quota-plan-2025",
+      "kind": "政策文件",
+      "published": "2025-11-17",
+      "publisher": "生态环境部",
+      "snapshot_files": [
+        {
+          "bytes": 1359388,
+          "file": "quota2425.pdf",
+          "present": true,
+          "sha256": "98c78aaed027a16d0e2fec6bdbe921a7adc9d462d8956fd3135337b10558d6fd"
+        },
+        {
+          "bytes": 31524,
+          "file": "quota2425.txt",
+          "present": true,
+          "sha256": "64ae68f71e375c854bba412e9bcbe9d9aea26d23a4bb96372800736263a3150e"
+        }
+      ],
+      "status_text": "现行",
+      "title": "《2024、2025年度全国碳排放权交易市场钢铁、水泥、铝冶炼行业配额总量和分配方案》",
+      "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk03/202511/t20251118_1134175.html"
+    },
+    {
+      "access_note": "因子库站点直连返回 HTTP 412（WAF），M1 未逐条摘录；见 data/factors/manifest.json",
+      "clauses": [
+        {
+          "article": "发布通知",
+          "point": "第二版新增和更新共 291 个因子，因子总数增至 576 个；同步上线英文版"
+        }
+      ],
+      "doc_no": null,
+      "id": "mee-factor-db-v2",
+      "kind": "政策发布",
+      "published": "2026-03-01",
+      "publisher": "生态环境部",
+      "snapshot_files": [
+        {
+          "bytes": 46224,
+          "file": "mee-2026-03-01-factors-db-v2.html",
+          "present": true,
+          "sha256": "edfc0fbff53f7973f169c1cae6204c062358ff6b2b6acc03113cf88bcef23205"
+        }
+      ],
+      "status_text": "已发布（官方入口 data.ncsc.org.cn；实测 WAF 拦截 HTTP 412）",
+      "title": "国家温室气体排放因子数据库（第二版）正式发布",
+      "url": "https://www.mee.gov.cn/ywgz/ydqhbh/wsqtkz/202603/t20260301_1145117.shtml"
+    },
+    {
+      "clauses": [
+        {
+          "article": "通知",
+          "point": "组织更新发电设施指南燃煤碳氧化率因子等技术要求并公开征求意见"
+        }
+      ],
+      "doc_no": "环办便函〔2026〕172号",
+      "id": "power-oxidation-draft",
+      "kind": "政策文件（征求意见稿）",
+      "published": "2026-05-21",
+      "publisher": "生态环境部办公厅",
+      "snapshot_files": [
+        {
+          "bytes": 48537,
+          "file": "mee-2026-05-21-oxidation-draft.html",
+          "present": true,
+          "sha256": "5c06d7eefbbfed0ac3b05a22a38714513ad87209f0158af69f48b82453643429"
+        }
+      ],
+      "status_text": "征求意见（2026-05-31 截止）",
+      "title": "关于公开征求更新《企业温室气体排放核算与报告指南 发电设施》…燃煤碳氧化率因子等技术要求意见的通知",
+      "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202605/t20260521_1154888.html"
+    }
+  ]
+}

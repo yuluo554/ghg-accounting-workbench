@@ -78,6 +78,37 @@ class CalcError(GhgError):
     exit_code = EXIT_INPUT
 
 
+class BoundaryError(InputError):
+    """边界识别非法：档案缺应核算源输入 / 含未知排放源 / 差异声明与结构不一致。
+
+    归入退出码 2 —— 属"输入不可用"，与 FR-01.4 一致（不得静默按空清单核算）。
+    """
+
+
+class ProvenanceError(InputError):
+    """溯源表不完整或出现悬空引用（plan/04 §6.3：不得导出"半溯源"报告）。"""
+
+
+class QualityError(InputError):
+    """校核层输入不可用（档案结构非法、跨年数据缺失形状错误等）→ 退出码 2。"""
+
+
+class QuotaUnavailable(InputError):
+    """配额试算所需参数不可用 → 退出码 2（不得静默取 0 或 1）。
+
+    典型触发：行业平衡值（``benchmark_value``）属"平台可查"输入，规则包内保持
+    ``input_required``；档案/参数未提供即硬失败，而非按 0 试算。
+    """
+
+
+class BenchConfigError(InputError):
+    """内置基准缺少验收门槛配置（``manifest.bench.targets``）→ 退出码 2。
+
+    门槛一律取自数据（见 plan/06 D4-1）；缺配置属**用法/数据错误**，不得回落到
+    代码内默认值——否则又是"抄进代码的第二份真相"。
+    """
+
+
 def exit_code_for(exc):
     """把异常映射为 CLI 退出码。"""
     if isinstance(exc, GhgError):

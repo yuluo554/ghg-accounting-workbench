@@ -13,6 +13,17 @@ from .errors import UnitError
 
 UNITS_FILE = "units.json"
 
+# 复合因子单位的分隔符：``tCO2e_per_t`` / ``tCO2e_per_MWh``（单一真相源，见 plan/06 D3-3）
+PER_SEPARATOR = "_per_"
+
+
+def split_compound_unit(unit):
+    """把 ``<排放单位>_per_<活动单位>`` 拆成二元组；非复合单位返回 ``(unit, None)``。"""
+    if unit and PER_SEPARATOR in unit:
+        numerator, denominator = unit.split(PER_SEPARATOR, 1)
+        return numerator or None, denominator or None
+    return unit, None
+
 
 class UnitTable(object):
     """量纲 → 基准单位 → 换算因子 的换算表。"""
@@ -45,6 +56,16 @@ class UnitTable(object):
 
     def known(self, unit):
         return unit in self._dim_of
+
+    def scale(self, unit):
+        """该单位到本量纲基本单位的换算因子（定义性关系，来自 units.json）。"""
+        try:
+            return self._factor[unit]
+        except KeyError:
+            raise UnitError("未知单位：%s" % unit)
+
+    def base_of(self, unit):
+        return self._raw["dimensions"][self.dimension_of(unit)]["base"]
 
     def dimension_of(self, unit):
         try:

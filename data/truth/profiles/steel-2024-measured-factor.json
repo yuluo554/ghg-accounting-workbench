@@ -1,0 +1,49 @@
+{
+  "coordinate": {
+    "industry": "steel",
+    "standard": "gbt32150-2025",
+    "year": 2024
+  },
+  "facility": {
+    "credit_code": "90000000steel2024measuredfactorSYN",
+    "name": "示例钢铁（合成）有限公司",
+    "note": "虚构企业（合成数据），非真实企业；不得用于对外披露",
+    "synthetic": true
+  },
+  "schema": "ghg-profile/v1",
+  "sources": [
+    {
+      "activity": {
+        "unit": "t",
+        "value": "61465"
+      },
+      "factor": {
+        "ref": "示例检测报告（合成数据，非真实报告）",
+        "source": "measured",
+        "unit": "tCO2e_per_t",
+        "value": "1.139248880"
+      },
+      "source_id": "stationary_combustion"
+    },
+    {
+      "activity": {
+        "unit": "t",
+        "value": "9899"
+      },
+      "factor": {
+        "ref": "国家温室气体排放因子数据库（第二版）—— 摘录位（示例，非真实摘录）",
+        "source": "official_db",
+        "unit": "tCO2e_per_t",
+        "value": "1.139248880"
+      },
+      "source_id": "process_emission"
+    },
+    {
+      "activity": {
+        "unit": "t",
+        "value": "3127"
+      },
+      "source_id": "carbon_product"
+    }
+  ]
+}

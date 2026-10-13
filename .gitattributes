@@ -6,3 +6,9 @@
 *.ico binary
 *.exe binary
 *.zip binary
+# 官方原文快照（M1）：PDF 与图片为二进制，禁 text 属性改写
+*.pdf binary
+*.webp binary
+# 官方原文快照须**字节精确**（clauses.json 记录其 sha256）：禁行尾归一化，
+# 否则克隆/检出时 CRLF→LF 会改字节、令 sha256 失配（CI 首跑必挂）
+data/knowledge/raw/** -text

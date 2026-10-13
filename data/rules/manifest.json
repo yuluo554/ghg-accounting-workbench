@@ -1,288 +1,297 @@
 {
+  "bench": {
+    "targets": {
+      "case_false_positive_rate": 0,
+      "case_hit_rate": 0.95,
+      "factor_unit_consistency_rate": 1.0,
+      "rules_self_consistency_rate": 1.0,
+      "runtime_seconds": 2
+    }
+  },
   "coordinates": [
     {
       "file": "ruleset-gbt32150-2015-2022-power.json",
       "industry": "power",
-      "sha256": "209cb1f7b3e54f692a861fd43256599ef7fe40f858cf6361be32ccd680aeb35a",
+      "sha256": "4abfaf777036845df8173293f0482c1c7df13fac06711a65262936409d2325c7",
       "standard": "gbt32150-2015",
       "year": 2022
     },
     {
       "file": "ruleset-gbt32150-2015-2022-steel.json",
       "industry": "steel",
-      "sha256": "847e57f761cd9e7acdc8563e8031d86d1e8f61558a835b579137e8ff6c4b51fc",
+      "sha256": "b583b03868975de13052e91672e5de84e4843696f5878232a785229608217651",
       "standard": "gbt32150-2015",
       "year": 2022
     },
     {
       "file": "ruleset-gbt32150-2015-2022-cement.json",
       "industry": "cement",
-      "sha256": "b900e459b8dafc8c9e7ea908a5b9a953a8a77781b08e4a831c3bda1e6e8181c7",
+      "sha256": "19b59fb991593f7f89e7337050c49c82384de94012f3bac47d53d65c40dd24eb",
       "standard": "gbt32150-2015",
       "year": 2022
     },
     {
       "file": "ruleset-gbt32150-2015-2022-aluminum.json",
       "industry": "aluminum",
-      "sha256": "57b898926eb4743ccb21d7c47a367c7f18d58def6db0b8b9a29c3813d01d636e",
+      "sha256": "e3e4a8851b53be7f8ae5dc8280f5cb3a5d74c7e5f300dc4d6f6371f8a70b6404",
       "standard": "gbt32150-2015",
       "year": 2022
     },
     {
       "file": "ruleset-gbt32150-2015-2023-power.json",
       "industry": "power",
-      "sha256": "a6c7d4faac912d305c351c874ffa364a8ef3dbd287df0ffd5084f223e2a58007",
+      "sha256": "8a1bed71ca681993a84c2746959c693a28328556dcde4d982094f6e3dc17b3cf",
       "standard": "gbt32150-2015",
       "year": 2023
     },
     {
       "file": "ruleset-gbt32150-2015-2023-steel.json",
       "industry": "steel",
-      "sha256": "af8919194f3500fcc7c733fcfeb9309a012520243f9548626b61b12151511a1f",
+      "sha256": "cdfb3c34281f875d21ee64c42959bea38f5d6f34784e6758878d1002a40a1d3d",
       "standard": "gbt32150-2015",
       "year": 2023
     },
     {
       "file": "ruleset-gbt32150-2015-2023-cement.json",
       "industry": "cement",
-      "sha256": "a6b5aa9591454a296d009b74620c1784a329dacefa8ae8048f87fbb880f1f409",
+      "sha256": "7d7deb23f7957ab65740ca1d09a9c7d087fc845bb885ab1a173180092037674c",
       "standard": "gbt32150-2015",
       "year": 2023
     },
     {
       "file": "ruleset-gbt32150-2015-2023-aluminum.json",
       "industry": "aluminum",
-      "sha256": "3d58b5beb4b6e8ef1a3ee9b4c7640c49fe343fe3d4dad9421b6c9a79d0aee898",
+      "sha256": "5d26b12bba380611bee629163009885c8d7d6046ed36226f7cd32ed1d90b718b",
       "standard": "gbt32150-2015",
       "year": 2023
     },
     {
       "file": "ruleset-gbt32150-2015-2024-power.json",
       "industry": "power",
-      "sha256": "980b83a864e17c536bdf217bdde1a57e6906d5e35848bd5e1f16b2446c883eeb",
+      "sha256": "2e5fbb081bd47f991d35b5017cd41b79539ebe152c9ceb567e953167726b470c",
       "standard": "gbt32150-2015",
       "year": 2024
     },
     {
       "file": "ruleset-gbt32150-2015-2024-steel.json",
       "industry": "steel",
-      "sha256": "95575f680b51868a67126f532e7dac942537d2124717177541b5dbfd19c95db4",
+      "sha256": "7b2eb3a4146bbc68da55f4f3cc6eeda40db8d8823d246a9116a0e4a3faf98cd2",
       "standard": "gbt32150-2015",
       "year": 2024
     },
     {
       "file": "ruleset-gbt32150-2015-2024-cement.json",
       "industry": "cement",
-      "sha256": "45cf2c0ff23fef4ac2462e34925705f3709351939f90ea80855513ca969e98c8",
+      "sha256": "2113dae00b32ecac886d8b95f92089f9e30f7a3ea61584b579df4e444be573ca",
       "standard": "gbt32150-2015",
       "year": 2024
     },
     {
       "file": "ruleset-gbt32150-2015-2024-aluminum.json",
       "industry": "aluminum",
-      "sha256": "c622c7607de914b4454f56f6c244133020b8c1eacc4bdbae706e252a9a7b1d55",
+      "sha256": "acb699a8a13cebf5c8b33d99e837c1c04e566465baafa3a9982d1713432f87cb",
       "standard": "gbt32150-2015",
       "year": 2024
     },
     {
       "file": "ruleset-gbt32150-2015-2025-power.json",
       "industry": "power",
-      "sha256": "39a91227fa90b76d02d268766d83747056be43a4ef3e10ef20c1b3336d7e1049",
+      "sha256": "9a5bcdfad717cbaab4dfcc668d56c01edf37298ae3e646b67e7855b4a1bb7ed1",
       "standard": "gbt32150-2015",
       "year": 2025
     },
     {
       "file": "ruleset-gbt32150-2015-2025-steel.json",
       "industry": "steel",
-      "sha256": "6e13f3e7737dff8d773285f72aa0dc15ee4c3d317027074c81213f5ca2d12d4d",
+      "sha256": "d21d8435c84cc24c170660e63ff0308a4db24b2e0b5c62035a562ecf9b637c9f",
       "standard": "gbt32150-2015",
       "year": 2025
     },
     {
       "file": "ruleset-gbt32150-2015-2025-cement.json",
       "industry": "cement",
-      "sha256": "b9fab8e55753c3afd7eb0682083a4adff331c214b42724061f7aefe1bfa0b6db",
+      "sha256": "aeb3861f19bf7fb896c7d1c19dbcaa264cca841415ab1a3bd1f386d81f4fc935",
       "standard": "gbt32150-2015",
       "year": 2025
     },
     {
       "file": "ruleset-gbt32150-2015-2025-aluminum.json",
       "industry": "aluminum",
-      "sha256": "25fc9fce9a65f83ce06b7ad4df38e9c88d396f1be2925fa100a6cf0626c47d89",
+      "sha256": "af6d04ebebda3d292cdad66c709d46f6ba3d07b5974594987727d70507b317f7",
       "standard": "gbt32150-2015",
       "year": 2025
     },
     {
       "file": "ruleset-gbt32150-2015-2026-power.json",
       "industry": "power",
-      "sha256": "a7fc4cdbd39ff8ae25ba1e65389452e45beee12b330e5a632784e6fb776466d7",
+      "sha256": "2e4dca9dcc617fde53e551238c2e73b6c5e03f5e59f59dc48bd058b87d011162",
       "standard": "gbt32150-2015",
       "year": 2026
     },
     {
       "file": "ruleset-gbt32150-2015-2026-steel.json",
       "industry": "steel",
-      "sha256": "e604d29366f0f80293f798f7f2b517a145eac9014e5fe65f66aa0188d64b3a13",
+      "sha256": "9d9323fffe514b74db8b3ca1f7931e8d17576b6eddc73bf296da6f99f97fdc81",
       "standard": "gbt32150-2015",
       "year": 2026
     },
     {
       "file": "ruleset-gbt32150-2015-2026-cement.json",
       "industry": "cement",
-      "sha256": "10d9ee9f19bc4c55d53411b8f29d9718447b0d5180c1ad1ed59d5984f7f31461",
+      "sha256": "ccba18e6a3567eca7297012ba5667ada6e66f9b63487040109f3b245c25b8af9",
       "standard": "gbt32150-2015",
       "year": 2026
     },
     {
       "file": "ruleset-gbt32150-2015-2026-aluminum.json",
       "industry": "aluminum",
-      "sha256": "769d9b3497702ee4cf56637c23e63f8cdedb351c602682a57ac8a697246a92d9",
+      "sha256": "79d3dd90e7f90651dfdc32e94ac9ccec131e2f22236850efa209876eeefc4b38",
       "standard": "gbt32150-2015",
       "year": 2026
     },
     {
       "file": "ruleset-gbt32150-2025-2022-power.json",
       "industry": "power",
-      "sha256": "b65c8845657d95b1b3faedb6819f977f8501ee3ae194091c6497adb939d94ebf",
+      "sha256": "364235b6987ac3d99babe63062e657c1231e0dceaf65df27dc0dc2103aa0bee0",
       "standard": "gbt32150-2025",
       "year": 2022
     },
     {
       "file": "ruleset-gbt32150-2025-2022-steel.json",
       "industry": "steel",
-      "sha256": "28c274a9689669da7573cb0272b8be0df9db28b2fa1d61169a63622763af173c",
+      "sha256": "e173d4dfe2f33618e7c02d4ece4e5a09f1abb4bd9284db773cedff92745c78c2",
       "standard": "gbt32150-2025",
       "year": 2022
     },
     {
       "file": "ruleset-gbt32150-2025-2022-cement.json",
       "industry": "cement",
-      "sha256": "b59bf4e45a968018def480f46eb2a8728222ab555e953789e9bb2dbea19cfdf1",
+      "sha256": "39781db3c79779307bfab741cf0da37481c93bd00ee3e4b61c3ace3f4711d971",
       "standard": "gbt32150-2025",
       "year": 2022
     },
     {
       "file": "ruleset-gbt32150-2025-2022-aluminum.json",
       "industry": "aluminum",
-      "sha256": "0f564e7022c106066579bb4f6246d43f00f34018b40b4fb9fe4b60cbb0ac78b5",
+      "sha256": "54867495489422cfaeb16448dcd23b2d42e9a3e60dbd47a12bb8058c4dd67cc6",
       "standard": "gbt32150-2025",
       "year": 2022
     },
     {
       "file": "ruleset-gbt32150-2025-2023-power.json",
       "industry": "power",
-      "sha256": "8f19c2f1bdb48631ba1feceacddee0f8512b77038c47ab3409c2d969a0f22938",
+      "sha256": "aab0b073912165f32ad924a20f50898dfc0034718f3e39b75088217fc7e1c651",
       "standard": "gbt32150-2025",
       "year": 2023
     },
     {
       "file": "ruleset-gbt32150-2025-2023-steel.json",
       "industry": "steel",
-      "sha256": "70c6bcf762c5977b2edbf2ea53eea0ce19d66facebf384e05d180f6e282a85ae",
+      "sha256": "96e2d0d72dd72df1ca207bdc865c58046f997e2a1bdedeb652864e695078ce94",
       "standard": "gbt32150-2025",
       "year": 2023
     },
     {
       "file": "ruleset-gbt32150-2025-2023-cement.json",
       "industry": "cement",
-      "sha256": "7669304dfdb655f02fed4e9b5cb3c679d98d21025076c6511b47a19107221c2f",
+      "sha256": "536b37e989652f18643f4d682ca38397759d7328a75acc10edf37dbbdc9cd4ce",
       "standard": "gbt32150-2025",
       "year": 2023
     },
     {
       "file": "ruleset-gbt32150-2025-2023-aluminum.json",
       "industry": "aluminum",
-      "sha256": "2db56dfd4892e3cd93dda921d6267d2ee581a96c7e2045a5ac0d3d7d4589d655",
+      "sha256": "8dcb8a59beed5039e18642ab9472cbffff211bf53ede9318697d5da6bc4c0257",
       "standard": "gbt32150-2025",
       "year": 2023
     },
     {
       "file": "ruleset-gbt32150-2025-2024-power.json",
       "industry": "power",
-      "sha256": "f17a59186f2635ea0a43e4d49085776dc61ee0f896806f475a19b200d0f6ad8c",
+      "sha256": "af30129079ba1234ba48991b7a4eadad1eb0c691ed68811a0c64a230e4a1cd26",
       "standard": "gbt32150-2025",
       "year": 2024
     },
     {
       "file": "ruleset-gbt32150-2025-2024-steel.json",
       "industry": "steel",
-      "sha256": "1cb56b3b5eb782ce276b08da7dfc31ffa9ccb8581d0a0de8ba4248ca101f4da2",
+      "sha256": "a3fdc35c8604b5cd86974f79c7bf3c076b26f56c28c61a2fc19aa8dcf8fd2e9c",
       "standard": "gbt32150-2025",
       "year": 2024
     },
     {
       "file": "ruleset-gbt32150-2025-2024-cement.json",
       "industry": "cement",
-      "sha256": "93a385380fe00e10fd36e64f1809965de44c73ce4a715dd44366760802af55aa",
+      "sha256": "8ce57f94a8b219cb86749a8602ed02ad9ba30714cbee931a70ff661944d76462",
       "standard": "gbt32150-2025",
       "year": 2024
     },
     {
       "file": "ruleset-gbt32150-2025-2024-aluminum.json",
       "industry": "aluminum",
-      "sha256": "5132e2afa12cad6a665cf81306f714310942942a11dab89521c85769d252e083",
+      "sha256": "ba5fb5345a92ef643767dbf88565aeaa7742742b5b01da4af21c09de256b4343",
       "standard": "gbt32150-2025",
       "year": 2024
     },
     {
       "file": "ruleset-gbt32150-2025-2025-power.json",
       "industry": "power",
-      "sha256": "3982c05f787b45c549f5ce5c18a2e3e13718c09fede5d069ef91607cb0820060",
+      "sha256": "25451abc72d9119154545cfe78421ff5d159633e17c5e891e0192228b1cce0a0",
       "standard": "gbt32150-2025",
       "year": 2025
     },
     {
       "file": "ruleset-gbt32150-2025-2025-steel.json",
       "industry": "steel",
-      "sha256": "29fb885e3126d618c8efc4658de76b9b47cb484e262c3b2ded77213f8875111a",
+      "sha256": "437abafbc6c2efba659ffd4da79102c50b244fd134df5ef2ae405c2fbb90d887",
       "standard": "gbt32150-2025",
       "year": 2025
     },
     {
       "file": "ruleset-gbt32150-2025-2025-cement.json",
       "industry": "cement",
-      "sha256": "5b28917e757a66230f0d3a0b938daf2b209b62cbe213ba462b8ed585f975008c",
+      "sha256": "b13e39c5352caeb70ff9ecc5de442395d0986ce98c25d5f54ca6f0e8fb02fbd2",
       "standard": "gbt32150-2025",
       "year": 2025
     },
     {
       "file": "ruleset-gbt32150-2025-2025-aluminum.json",
       "industry": "aluminum",
-      "sha256": "165875dd87484013232a531cf9059c40e150b9c78851e32422358fbd772a0cd3",
+      "sha256": "e22a99db0f1caba7bf813ecd7746a0090dae8ee0ef07fca2e21f53d7aa2fc845",
       "standard": "gbt32150-2025",
       "year": 2025
     },
     {
       "file": "ruleset-gbt32150-2025-2026-power.json",
       "industry": "power",
-      "sha256": "72e856942982c80a0a150f18aa54aeb9fdb1bfa95992f02dd026d01a21963482",
+      "sha256": "63090c9771c872a2ec02dda9964baef1bfbda6a58612663a570602570c8fa476",
       "standard": "gbt32150-2025",
       "year": 2026
     },
     {
       "file": "ruleset-gbt32150-2025-2026-steel.json",
       "industry": "steel",
-      "sha256": "5ebad87e085fa76c9758d6cc25e8878254b25f1815ad40bb482e285d97b951e5",
+      "sha256": "5c986b9922495035a0c91f3c9dee1f91d8b63dfbe6f18bdd8a9e561cdce8a964",
       "standard": "gbt32150-2025",
       "year": 2026
     },
     {
       "file": "ruleset-gbt32150-2025-2026-cement.json",
       "industry": "cement",
-      "sha256": "d5a122aafe7fcaba873cfa3eb71638a9f2e3d0c10fb90bd6883c1321bc11251a",
+      "sha256": "ff47a7a4381c92a6b8fd049245614eb4e8aa39d657de7211d4279173e3e2b490",
       "standard": "gbt32150-2025",
       "year": 2026
     },
     {
       "file": "ruleset-gbt32150-2025-2026-aluminum.json",
       "industry": "aluminum",
-      "sha256": "c1ff47da98984c13c7e55470dd27e5877ddb8b6f30c7e27063a82dfe5a3bf4d1",
+      "sha256": "c50f6cad4f617bd99c90f98d74e37ab6a078ff51c6de9554857e32997a8bc4cf",
       "standard": "gbt32150-2025",
       "year": 2026
     }
   ],
   "generated_on": "2026-10-13",
-  "generator": "gen_rulesets/0.1.0",
+  "generator": "gen_rulesets/0.3.0",
   "industries": [
     "power",
     "steel",

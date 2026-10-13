@@ -10,15 +10,20 @@
         ],
         "category": "combustion",
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "5.2",
+          "code": "CETS-AG-04.01-V01-2024",
+          "note": "企业层级「化石燃料燃烧排放」：各种固定或移动燃烧设备；通则 2025 前言 b) 术语更名"
         },
-        "delta_vs_2015": null,
+        "delta_vs_2015": "adjusted",
         "id": "stationary_combustion",
         "name": "化石燃料燃烧排放",
-        "required": null,
-        "status": "pending"
+        "ref": {
+          "source": "《企业温室气体排放核算与报告指南 铝冶炼行业》（CETS-AG-04.01-V01-2024，环办气候函〔2024〕321号；2024-09-14）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202409/t20240914_1086067.html",
+          "version": "CETS-AG-04.01-V01-2024"
+        },
+        "required": true,
+        "status": "verified"
       },
       {
         "applicable_industries": [
@@ -28,15 +33,20 @@
         ],
         "category": "process",
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "5.2",
+          "code": "CETS-AG-04.01-V01-2024",
+          "note": "铝电解工序「能源作为原材料用途的排放」（阳极消耗）+「阳极效应排放」（CF4/C2F6）+ 企业层级碳酸盐分解排放；通则 2025 与 2015 均设过程排放"
         },
-        "delta_vs_2015": null,
+        "delta_vs_2015": "same",
         "id": "process_emission",
         "name": "工业生产过程排放",
-        "required": null,
-        "status": "pending"
+        "ref": {
+          "source": "《企业温室气体排放核算与报告指南 铝冶炼行业》（CETS-AG-04.01-V01-2024，环办气候函〔2024〕321号；2024-09-14）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202409/t20240914_1086067.html",
+          "version": "CETS-AG-04.01-V01-2024"
+        },
+        "required": true,
+        "status": "verified"
       },
       {
         "applicable_industries": [
@@ -47,15 +57,20 @@
         ],
         "category": "purchased_energy",
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "5.2",
+          "code": "CETS-AG-04.01-V01-2024",
+          "note": "铝冶炼行业核算范围为直接排放，不覆盖电力间接排放；通则 2025 增加 7.5.6 与附录 B"
         },
-        "delta_vs_2015": null,
+        "delta_vs_2015": "adjusted",
         "id": "purchased_electricity",
         "name": "净购入电力隐含排放",
-        "required": null,
-        "status": "pending"
+        "ref": {
+          "source": "《企业温室气体排放核算与报告指南 铝冶炼行业》（CETS-AG-04.01-V01-2024，环办气候函〔2024〕321号；2024-09-14）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202409/t20240914_1086067.html",
+          "version": "CETS-AG-04.01-V01-2024"
+        },
+        "required": false,
+        "status": "verified"
       },
       {
         "applicable_industries": [
@@ -66,15 +81,20 @@
         ],
         "category": "purchased_energy",
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "5.2",
+          "code": "CETS-AG-04.01-V01-2024",
+          "note": "铝冶炼行业不覆盖净购入热力隐含排放；通则 2025 增加 7.5.7"
         },
-        "delta_vs_2015": null,
+        "delta_vs_2015": "adjusted",
         "id": "purchased_heat",
         "name": "净购入热力隐含排放",
-        "required": null,
-        "status": "pending"
+        "ref": {
+          "source": "《企业温室气体排放核算与报告指南 铝冶炼行业》（CETS-AG-04.01-V01-2024，环办气候函〔2024〕321号；2024-09-14）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202409/t20240914_1086067.html",
+          "version": "CETS-AG-04.01-V01-2024"
+        },
+        "required": false,
+        "status": "verified"
       },
       {
         "applicable_industries": [
@@ -84,15 +104,20 @@
         ],
         "category": "carbon_product",
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "5.2",
+          "code": "CETS-AG-04.01-V01-2024",
+          "note": "铝冶炼指南未设含碳产品隐含排放源；通则 2025 前言 c) 增加温室气体汇相关内容"
         },
-        "delta_vs_2015": null,
+        "delta_vs_2015": "adjusted",
         "id": "carbon_product",
         "name": "固碳产品隐含排放",
-        "required": null,
-        "status": "pending"
+        "ref": {
+          "source": "《企业温室气体排放核算与报告指南 铝冶炼行业》（CETS-AG-04.01-V01-2024，环办气候函〔2024〕321号；2024-09-14）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202409/t20240914_1086067.html",
+          "version": "CETS-AG-04.01-V01-2024"
+        },
+        "required": false,
+        "status": "verified"
       }
     ]
   },
@@ -105,20 +130,25 @@
     "coefficients": {
       "oxidation_rate": {
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "7.1.2.5 / 附录 A 附表 A.1",
+          "code": "CETS-AG-04.01-V01-2024",
+          "note": "固体燃料碳氧化率缺省值 98%（气体 99%）"
         },
-        "status": "pending",
-        "unit": "1",
-        "value": null
+        "ref": {
+          "source": "《企业温室气体排放核算与报告指南 铝冶炼行业》（CETS-AG-04.01-V01-2024，环办气候函〔2024〕321号；2024-09-14）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202409/t20240914_1086067.html",
+          "version": "CETS-AG-04.01-V01-2024"
+        },
+        "status": "verified",
+        "unit": "%",
+        "value": 98
       }
     },
     "formula": {
       "clause": {
-        "article": "待核对",
-        "code": null,
-        "note": "条款要点与数值待官方原文核对（M1）"
+        "article": "7.2.2 排放因子法（公式 1）",
+        "code": "GB/T 32150-2025",
+        "note": "温室气体排放量 = 活动数据 × 排放因子 × 全球变暖潜势；行业指南 7.1.1 公式(5)：化石燃料燃烧排放；另有 6.1.1 公式(1) 能源作原材料用途排放"
       },
       "expr": {
         "args": [
@@ -139,36 +169,46 @@
       },
       "id": "emission_basic",
       "name": "排放量 = 活动数据 × 排放因子 × 氧化率系数",
-      "status": "pending"
+      "ref": {
+        "source": "《企业温室气体排放核算与报告指南 铝冶炼行业》（CETS-AG-04.01-V01-2024，环办气候函〔2024〕321号；2024-09-14）",
+        "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202409/t20240914_1086067.html",
+        "version": "CETS-AG-04.01-V01-2024"
+      },
+      "status": "verified"
     }
   },
   "factors": {
     "industry_default_values": {
       "default_factor": {
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "附录 A 附表 A.1",
+          "code": "CETS-AG-04.01-V01-2024",
+          "note": "行业缺省排放因子（按代表性兜底燃料合成）：烟煤 低位发热量 23.337 GJ/t（附录 A 附表 A.1：烟煤收到基低位发热量缺省值 23.337 GJ/t）× 单位热值含碳量 0.02618 tC/GJ（附录 A 附表 A.1：烟煤单位热值含碳量缺省值 0.02618 tC/GJ）× 44/12"
         },
         "ref": {
-          "source": "国家温室气体排放因子数据库（第二版）",
-          "url": "待核对",
-          "version": "第二版"
+          "source": "《企业温室气体排放核算与报告指南 铝冶炼行业》（CETS-AG-04.01-V01-2024，环办气候函〔2024〕321号；2024-09-14）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202409/t20240914_1086067.html",
+          "version": "CETS-AG-04.01-V01-2024"
         },
-        "status": "pending",
-        "unit": "tCO2e_per_activity_unit",
-        "value": null
+        "status": "verified",
+        "unit": "tCO2e_per_t",
+        "value": 2.240196420
       }
     },
     "priority": [
       "measured",
       "official_db",
       "industry_default"
-    ]
+    ],
+    "priority_clause": {
+      "article": "7.4 选择或测定温室气体排放因子（表 4 获取优先级）",
+      "code": "GB/T 32150-2025",
+      "note": "企业实测 > 官方因子库 > 行业缺省值；缺省值来源不明不得作为默认因子"
+    }
   },
   "provenance": {
     "generated_on": "2026-10-13",
-    "generator": "gen_rulesets/0.1.0",
+    "generator": "gen_rulesets/0.3.0",
     "source_ledger": "data/README.md §二 依据查证记录",
     "unverified_discipline": "未挂官方原文核对（status=pending）的条目不得进入计算路径"
   },
@@ -177,134 +217,187 @@
       {
         "advice": "统一到规则包声明的基本单位后重新录入",
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "8 核算工作的质量保证",
+          "code": "GB/T 32150-2025",
+          "note": "行业指南数据质量管理要求（CETS-AG-04.01-V01-2024）"
         },
         "id": "Q-UNIT-01",
         "level": "error",
         "name": "活动数据单位与因子单位口径不一致",
-        "status": "pending",
+        "ref": {
+          "source": "《企业温室气体排放核算与报告指南 铝冶炼行业》（CETS-AG-04.01-V01-2024，环办气候函〔2024〕321号；2024-09-14）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202409/t20240914_1086067.html",
+          "version": "CETS-AG-04.01-V01-2024"
+        },
+        "status": "verified",
         "type": "unit_consistency"
       },
       {
         "advice": "核对活动数据原始计量凭证与单位",
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "8 核算工作的质量保证",
+          "code": "GB/T 32150-2025",
+          "note": "行业指南数据质量管理要求（CETS-AG-04.01-V01-2024）"
         },
         "id": "Q-MAG-01",
         "level": "warning",
         "name": "排放源活动数据/排放量超出规则包声明区间",
-        "status": "pending",
+        "ref": {
+          "source": "《企业温室气体排放核算与报告指南 铝冶炼行业》（CETS-AG-04.01-V01-2024，环办气候函〔2024〕321号；2024-09-14）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202409/t20240914_1086067.html",
+          "version": "CETS-AG-04.01-V01-2024"
+        },
+        "status": "verified",
         "type": "magnitude_outlier"
       },
       {
         "advice": "提供变化原因说明（产量、工艺、计量口径变更）",
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "8 核算工作的质量保证",
+          "code": "GB/T 32150-2025",
+          "note": "行业指南数据质量管理要求（CETS-AG-04.01-V01-2024）"
         },
         "id": "Q-YOY-01",
         "level": "warning",
         "name": "同一排放源跨年度变化率超过阈值",
-        "status": "pending",
+        "ref": {
+          "source": "《企业温室气体排放核算与报告指南 铝冶炼行业》（CETS-AG-04.01-V01-2024，环办气候函〔2024〕321号；2024-09-14）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202409/t20240914_1086067.html",
+          "version": "CETS-AG-04.01-V01-2024"
+        },
+        "status": "verified",
         "type": "yoy_jump"
       },
       {
         "advice": "结合产量与工艺核对比强度合理性",
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "8 核算工作的质量保证",
+          "code": "GB/T 32150-2025",
+          "note": "行业指南数据质量管理要求（CETS-AG-04.01-V01-2024）"
         },
         "id": "Q-INT-01",
         "level": "info",
         "name": "比强度指标是否落在行业合理区间",
-        "status": "pending",
+        "ref": {
+          "source": "《企业温室气体排放核算与报告指南 铝冶炼行业》（CETS-AG-04.01-V01-2024，环办气候函〔2024〕321号；2024-09-14）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202409/t20240914_1086067.html",
+          "version": "CETS-AG-04.01-V01-2024"
+        },
+        "status": "verified",
         "type": "intensity_plausibility"
       }
     ],
     "thresholds": {
       "intensity_max": {
         "clause": {
-          "article": "待核对",
+          "article": "工程筛查阈值（非政策数值）",
           "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "note": "比强度合理区间上限（排放量/产量）；M3 校核层定值，来源：本工具工程判据，非官方发布数值"
         },
-        "status": "pending",
+        "status": "verified",
         "unit": "tCO2e_per_unit_output",
-        "value": null
+        "value": 5.0
       },
       "intensity_min": {
         "clause": {
-          "article": "待核对",
+          "article": "工程筛查阈值（非政策数值）",
           "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "note": "比强度合理区间下限（排放量/产量）；M3 校核层定值，来源：本工具工程判据，非官方发布数值"
         },
-        "status": "pending",
+        "status": "verified",
         "unit": "tCO2e_per_unit_output",
-        "value": null
+        "value": 0.5
       },
       "magnitude": {
         "clause": {
-          "article": "待核对",
+          "article": "工程筛查阈值（非政策数值）",
           "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "note": "单源排放量占全厂合计占比上限（超过即提示复核量级）；M3 校核层定值，来源：本工具工程判据，非官方发布数值"
         },
-        "status": "pending",
+        "status": "verified",
         "unit": "ratio",
-        "value": null
+        "value": 0.95
       },
       "yoy": {
         "clause": {
-          "article": "待核对",
+          "article": "工程筛查阈值（非政策数值）",
           "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "note": "同一排放源活动数据跨年度变化率上限；M3 校核层定值，来源：本工具工程判据，非官方发布数值"
         },
-        "status": "pending",
+        "status": "verified",
         "unit": "ratio",
-        "value": null
+        "value": 0.50
       }
     }
   },
   "quota": {
     "allowed_methods": [
       "benchmark",
+      "intensity_coefficient",
       "historical_intensity",
       "none"
     ],
-    "method": null,
+    "clause": {
+      "article": "三（二）钢铁、水泥、铝冶炼行业：碳排放强度系数法",
+      "code": "国环规气候〔2026〕1号",
+      "note": "《全国碳排放权交易市场2025、2026年度发电行业以及2026年度钢铁、水泥、铝冶炼行业配额总量和分配方案》"
+    },
+    "derivation": {
+      "band": {
+        "clause": {
+          "article": "表 3 2026 年度碳排放强度系数",
+          "code": "国环规气候〔2026〕1号",
+          "note": "强度系数分段推导常数（斜率/带宽/封顶）"
+        },
+        "status": "verified",
+        "unit": "1",
+        "value": 0.20
+      },
+      "cap": {
+        "clause": {
+          "article": "表 3 2026 年度碳排放强度系数",
+          "code": "国环规气候〔2026〕1号",
+          "note": "强度系数分段推导常数（斜率/带宽/封顶）"
+        },
+        "status": "verified",
+        "unit": "1",
+        "value": 0.03
+      },
+      "slope": {
+        "clause": {
+          "article": "表 3 2026 年度碳排放强度系数",
+          "code": "国环规气候〔2026〕1号",
+          "note": "强度系数分段推导常数（斜率/带宽/封顶）"
+        },
+        "status": "verified",
+        "unit": "1",
+        "value": 0.15
+      }
+    },
+    "method": "intensity_coefficient",
     "method_clause": {
-      "article": "待核对",
-      "code": null,
-      "note": "条款要点与数值待官方原文核对（M1）"
+      "article": "三（二）钢铁、水泥、铝冶炼行业：碳排放强度系数法",
+      "code": "国环规气候〔2026〕1号",
+      "note": "《全国碳排放权交易市场2025、2026年度发电行业以及2026年度钢铁、水泥、铝冶炼行业配额总量和分配方案》"
     },
     "params": {
       "benchmark_value": {
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "三（二）：行业平衡值",
+          "code": "国环规气候〔2026〕1号",
+          "note": "行业平衡值（BP）当年度由全国碳市场管理平台测算并公布，方案正文未印具体数值 → 外部输入（平台可查），试算层不得静默取 0"
         },
-        "status": "pending",
+        "status": "input_required",
         "unit": "tCO2e_per_unit_output",
-        "value": null
-      },
-      "correction_factor": {
-        "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
-        },
-        "status": "pending",
-        "unit": "1",
         "value": null
       }
     },
-    "status": "pending"
+    "ref": {
+      "source": "《全国碳排放权交易市场2025、2026年度发电行业以及2026年度钢铁、水泥、铝冶炼行业配额总量和分配方案》（国环规气候〔2026〕1号）",
+      "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk03/202609/t20260903_1165029.html",
+      "version": "国环规气候〔2026〕1号"
+    },
+    "status": "verified"
   },
   "report": {
     "disclaimer": "本报告由本地核算工具生成，结果仅供企业内部参考；正式排放数据以主管部门核定结果、第三方核查机构结论为准。配额试算结果不构成任何配额分配承诺。",
@@ -314,16 +407,21 @@
   "schema": "ghg-ruleset/v1",
   "standard": {
     "clause": {
-      "article": "待核对",
-      "code": null,
-      "note": "条款要点与数值待官方原文核对（M1）"
+      "article": "封面 / 前言",
+      "code": "GB/T 32150-2025",
+      "note": "封面载「代替 GB/T 32150—2015」；日期与国家标准化管理委员会标准详情页一致"
     },
     "code": "GB/T 32150-2025",
-    "effective": null,
+    "effective": "2026-07-01",
     "label": "工业企业温室气体排放核算和报告通则（新版，现行）",
-    "published": null,
-    "status": "pending",
-    "supersedes": null,
-    "validity": null
+    "published": "2025-12-31",
+    "ref": {
+      "source": "全国标准信息公共服务平台（openstd.samr.gov.cn）标准详情页",
+      "url": "https://openstd.samr.gov.cn/bzgk/gb/newGbInfo?hcno=6E4997D6B3118055931BC13C71B9A452",
+      "version": "2026-10-13 抓取"
+    },
+    "status": "verified",
+    "supersedes": "GB/T 32150-2015",
+    "validity": "现行"
   }
 }

@@ -4,10 +4,22 @@
   1. **单点索引** —— 坐标空间（通则版本 × 年度 × 行业）由 ``data/rules/manifest.json``
      唯一枚举；代码不得内联标准短键/年度/行业名。
   2. **门控单点** —— :meth:`RulesIndex.effective_ruleset` 是**唯一**允许进入计算路径的入口，
-     任一携带 ``status`` 的条目非 ``verified``（或数值字段为 null）即抛
-     :class:`RulesetNotEffective`。:meth:`RulesIndex.pack` 仅供只读预览。
+     按**计算路径作用域**（scope）校验该路径所引用的块：任一携带 ``status`` 的条目非
+     ``verified``（或数值字段为 null）即抛 :class:`RulesetNotEffective`。
+     :meth:`RulesIndex.pack` 仅供只读预览。
   3. **混算拦截** —— :func:`detect_mixed_coordinates` 在输入里找出全部坐标，
      多于一个即抛 :class:`MixedCoordinateError`。
+
+作用域（scope）设计（plan/04 §4.3、plan/06 D1-1）：
+  不同消费路径引用不同块，把一整包当一个门会让"配额方案未公布"这类**与核算无关**的
+  pending 条目阻断整个核算路径。故门控按路径分作用域，逐路径放行/拦截：
+
+  * ``calc``（默认）—— 核算路径：``standard`` / ``boundary`` / ``engine`` / ``factors``；
+  * ``quota`` —— 配额试算路径：``quota``；
+  * ``check`` —— 校核路径：``quality``。
+
+  ``pending`` 的块在其**自身路径**上仍被拦截（例如 ``quality`` 全 pending → ``check`` 退出码 1），
+  但不牵连无关路径。
 """
 
 import hashlib
@@ -17,6 +29,7 @@ from decimal import Decimal
 from . import jsonio
 from .coordinates import Coordinate, parse_coordinate
 from .errors import (
+    BenchConfigError,
     CoordinateError,
     MixedCoordinateError,
     RulesetNotEffective,
@@ -27,9 +40,23 @@ MANIFEST_NAME = "manifest.json"
 SCHEMA_RULESET = "ghg-ruleset/v1"
 STATUS_VERIFIED = "verified"
 STATUS_PENDING = "pending"
+# 外部输入槽：该数值**不由规则包承载**（如三行业配额"平衡值"当年度由全国碳市场管理平台
+# 测算公布、方案正文未印数值）。它不是"未核对的政策数值"，故不阻断门控；其缺失由消费方
+# 在运行时显式索取（不得静默取 0）。见 plan/06 D3-2。
+STATUS_INPUT_REQUIRED = "input_required"
 
 # 携带这些键且值为 null 的条目视为"未核对"（null = 待核对占位，非零值）
 NULLABLE_POLICY_KEYS = ("value",)
+
+# 计算路径作用域 → 该路径引用的顶层块（plan/04 §4.3、plan/06 D1-1）
+SCOPE_CALC = "calc"
+SCOPE_QUOTA = "quota"
+SCOPE_CHECK = "check"
+SCOPE_BLOCKS = {
+    SCOPE_CALC: ("standard", "boundary", "engine", "factors"),
+    SCOPE_QUOTA: ("quota",),
+    SCOPE_CHECK: ("quality",),
+}
 
 
 def _load_json(path):
@@ -57,12 +84,44 @@ def _entry_label(path, node):
 
 
 def _entry_is_effective(node):
-    if node.get("status") != STATUS_VERIFIED:
+    """该条目是否**不阻断**其所在计算路径的门控。
+
+    * ``verified`` 且数值非 null → 放行；
+    * ``verified`` 但数值为 null → 拦截（"已核对"却无数值 = 未核对）；
+    * ``input_required`` → 放行（外部输入槽，非规则包承载的政策数值；运行时显式索取）；
+    * 其余（含 ``pending``）→ 拦截。
+    """
+    status = node.get("status")
+    if status == STATUS_INPUT_REQUIRED:
+        return True
+    if status != STATUS_VERIFIED:
         return False
     for key in NULLABLE_POLICY_KEYS:
         if key in node and node[key] is None:
             return False
     return True
+
+
+def _entry_is_usable(node):
+    """该条目是否携带可直接消费的数值（运行时判定，供试算层索取外部输入用）。"""
+    return node.get("status") == STATUS_VERIFIED and node.get("value") is not None
+
+
+def _scoped_entries(pack, scope):
+    """产出指定作用域内携带 ``status`` 的条目 (path, node)。
+
+    ``scope=None`` 表示整包（全块）。
+    """
+    top_keys = None if scope is None else SCOPE_BLOCKS[scope]
+    for key in sorted(pack.keys()):
+        if top_keys is not None and key not in top_keys:
+            continue
+        child = pack[key]
+        if isinstance(child, (dict, list)):
+            for path, node in _iter_entries(child, key):
+                yield path, node
+        elif isinstance(child, dict) and "status" in child:
+            yield key, child
 
 
 class RulesIndex(object):
@@ -147,10 +206,26 @@ class RulesIndex(object):
     def pack_sha256(self, coord):
         return self._entry(coord)[0].get("sha256")
 
-    def effective_ruleset(self, coord):
+    def bench_targets(self):
+        """内置基准的验收门槛（``manifest.bench.targets``）。
+
+        门槛是**数据不是代码**（plan/06 D4-1）：与"零政策字面量"同一条纪律，避免把验收
+        门槛内联进引擎成为"抄进代码的第二份真相"。缺失即抛 :class:`BenchConfigError`
+        （退出码 2），**不得**回落到代码内默认值。
+        """
+        targets = (self._manifest.get("bench") or {}).get("targets")
+        if not isinstance(targets, dict) or not targets:
+            raise BenchConfigError(
+                "manifest 缺少基准门槛配置 bench.targets（见 plan/06 D4-1）；"
+                "请重跑 tools/gen_rulesets.py 重生成 manifest"
+            )
+        return dict(targets)
+
+    def effective_ruleset(self, coord, scope=SCOPE_CALC):
         """门控入口：返回通过校验的规则包，否则抛 :class:`RulesetNotEffective`。
 
-        这是**唯一**允许把规则数值交给计算路径的方法。
+        这是**唯一**允许把规则数值交给计算路径的方法。``scope`` 决定校验哪些块
+        （默认核算路径；``quota`` / ``check`` 各查各的块，见模块 docstring）。
         """
         pack = self.pack(coord)
         if pack.get("schema") != SCHEMA_RULESET:
@@ -163,17 +238,20 @@ class RulesIndex(object):
             raise RulesetValidationError(
                 "规则包 %s 内声明的坐标与索引不一致：%r" % (coord.key, declared)
             )
-        blocked = [_entry_label(p, n) for p, n in _iter_entries(pack)
+        blocked = [_entry_label(p, n) for p, n in _scoped_entries(pack, scope)
                    if not _entry_is_effective(n)]
         if blocked:
             raise RulesetNotEffective(coord.key, blocked)
         return pack
 
-    def gate_report(self, coord):
-        """门控体检（不抛异常）：返回待核对条目清单。"""
+    def gate_report(self, coord, scope=None):
+        """门控体检（不抛异常）：返回待核对条目清单。
+
+        ``scope=None`` 检查整包；否则只检查该作用域的块。
+        """
         pack = self.pack(coord)
         pending = []
-        for path, node in _iter_entries(pack):
+        for path, node in _scoped_entries(pack, scope):
             if not _entry_is_effective(node):
                 pending.append({
                     "entry": _entry_label(path, node),
@@ -182,6 +260,7 @@ class RulesIndex(object):
                 })
         return {
             "coordinate": coord.key,
+            "scope": scope or "all",
             "effective": not pending,
             "pending_count": len(pending),
             "pending": pending,

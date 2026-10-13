@@ -1,0 +1,18 @@
+{
+  "baseline": {
+    "industry": "steel",
+    "standard": "gbt32150-2015",
+    "year": 2023
+  },
+  "coordinate": {
+    "industry": "steel",
+    "standard": "gbt32150-2025",
+    "year": 2024
+  },
+  "facility": {
+    "name": "混算（合成）",
+    "synthetic": true
+  },
+  "schema": "ghg-profile/v1",
+  "sources": []
+}

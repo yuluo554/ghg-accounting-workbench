@@ -1,0 +1,21 @@
+{
+  "fallback_note": "因子来源优先级（通则 7.4）：企业实测 > 官方因子库 > 行业缺省。官方因子库手摘未成（WAF 阻断）时，行业缺省值仍可用，且逐条挂行业指南附录 A 条款号。",
+  "generated_on": "2026-10-13",
+  "generator": "gen_factors/0.1.0",
+  "schema": "ghg-factor-ledger/v1",
+  "sources": [
+    {
+      "access_note": "官方入口 data.ncsc.org.cn 直连返回 HTTP 412（WAF 拦截），M1 未能逐条摘录因子数值；按数据纪律不编造数值，缺省因子改由各行业核算指南附录 A 官方缺省值承担（见 data/rules/ruleset-*.json 的 factors.industry_default_values）。发布通知页（mee.gov.cn）已核对：第二版新增和更新共 291 个因子，因子总数 576 个。",
+      "access_status": "blocked_waf_http_412",
+      "entries": [],
+      "entry_url": "https://data.ncsc.org.cn/factories/index",
+      "id": "mee-factor-db-v2",
+      "notice_snapshot": "data/knowledge/raw/mee-2026-03-01-factors-db-v2.html",
+      "notice_snapshot_sha256": "edfc0fbff53f7973f169c1cae6204c062358ff6b2b6acc03113cf88bcef23205",
+      "notice_url": "https://www.mee.gov.cn/ywgz/ydqhbh/wsqtkz/202603/t20260301_1145117.shtml",
+      "publisher": "生态环境部",
+      "released": "2026-03-01",
+      "title": "国家温室气体排放因子数据库（第二版）"
+    }
+  ]
+}

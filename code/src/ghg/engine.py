@@ -116,3 +116,24 @@ def collect_refs(expr):
 
     visit(expr)
     return sorted(refs)
+
+
+def collect_refs_by_op(expr):
+    """按 ``op`` 分类收集 ref（去重排序）。
+
+    返回 ``{"var": [...], "const": [...]}``。供规则包自洽扫描区分
+    "变量引用"（须落在合法变量集内）与"系数引用"（须能在 ``engine.coefficients`` 解析）——
+    两者校验依据不同，不能混作一份清单（见 plan/06 D4-3）。
+    """
+    out = {"var": set(), "const": set()}
+
+    def visit(node):
+        if isinstance(node, dict):
+            op = node.get("op")
+            if op in out and isinstance(node.get("ref"), str):
+                out[op].add(node["ref"])
+            for arg in node.get("args", []) or []:
+                visit(arg)
+
+    visit(expr)
+    return {key: sorted(values) for key, values in out.items()}

@@ -10,15 +10,20 @@
         ],
         "category": "combustion",
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "5.2",
+          "code": "CETS-AG-01.01-V04-2026",
+          "note": "发电设施核算边界内的化石燃料燃烧排放（含启动锅炉、燃气轮机等主要生产系统；生物质掺烧仅计化石燃料部分）；通则 2025 前言 b) 将「燃料燃烧排放」更名为「化石燃料燃烧排放」"
         },
-        "delta_vs_2015": null,
+        "delta_vs_2015": "adjusted",
         "id": "stationary_combustion",
         "name": "化石燃料燃烧排放",
-        "required": null,
-        "status": "pending"
+        "ref": {
+          "source": "《企业温室气体排放核算与报告指南 发电设施》（CETS-AG-01.01-V04-2026，环办气候函〔2026〕237号；2026-06-29）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202606/t20260629_1160473.html",
+          "version": "CETS-AG-01.01-V04-2026"
+        },
+        "required": true,
+        "status": "verified"
       },
       {
         "applicable_industries": [
@@ -29,15 +34,20 @@
         ],
         "category": "purchased_energy",
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "5.2",
+          "code": "CETS-AG-01.01-V04-2026",
+          "note": "2026 版指南全文删除「购入使用电力排放」，购入使用电量改列辅助报告项；工作方案明确发电行业不覆盖间接排放；通则 2025 增加 7.5.6 外购非化石能源电力排放因子要求及附录 B"
         },
-        "delta_vs_2015": null,
+        "delta_vs_2015": "adjusted",
         "id": "purchased_electricity",
         "name": "净购入电力隐含排放",
-        "required": null,
-        "status": "pending"
+        "ref": {
+          "source": "《企业温室气体排放核算与报告指南 发电设施》（CETS-AG-01.01-V04-2026，环办气候函〔2026〕237号；2026-06-29）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202606/t20260629_1160473.html",
+          "version": "CETS-AG-01.01-V04-2026"
+        },
+        "required": false,
+        "status": "verified"
       },
       {
         "applicable_industries": [
@@ -48,15 +58,20 @@
         ],
         "category": "purchased_energy",
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "5.2",
+          "code": "CETS-AG-01.01-V04-2026",
+          "note": "发电行业核算范围不含净购入热力隐含排放（工作方案：不覆盖间接排放）；通则 2025 增加 7.5.7 外购非化石能源热力排放因子选取要求"
         },
-        "delta_vs_2015": null,
+        "delta_vs_2015": "adjusted",
         "id": "purchased_heat",
         "name": "净购入热力隐含排放",
-        "required": null,
-        "status": "pending"
+        "ref": {
+          "source": "《企业温室气体排放核算与报告指南 发电设施》（CETS-AG-01.01-V04-2026，环办气候函〔2026〕237号；2026-06-29）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202606/t20260629_1160473.html",
+          "version": "CETS-AG-01.01-V04-2026"
+        },
+        "required": false,
+        "status": "verified"
       },
       {
         "applicable_industries": [
@@ -64,15 +79,20 @@
         ],
         "category": "other",
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "5.2",
+          "code": "CETS-AG-01.01-V04-2026",
+          "note": "发电设施指南核算范围为化石燃料燃烧产生的二氧化碳排放，未设逃逸排放源"
         },
-        "delta_vs_2015": null,
+        "delta_vs_2015": "same",
         "id": "fugitive_emission",
         "name": "逃逸排放",
-        "required": null,
-        "status": "pending"
+        "ref": {
+          "source": "《企业温室气体排放核算与报告指南 发电设施》（CETS-AG-01.01-V04-2026，环办气候函〔2026〕237号；2026-06-29）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202606/t20260629_1160473.html",
+          "version": "CETS-AG-01.01-V04-2026"
+        },
+        "required": false,
+        "status": "verified"
       }
     ]
   },
@@ -85,20 +105,25 @@
     "coefficients": {
       "oxidation_rate": {
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "6.2.5.1（2026 更新通知附件 1 引述原条款）",
+          "code": "CETS-AG-01.01-V04-2026",
+          "note": "更新前条款：燃煤的碳氧化率取 99%；燃油和燃气采用附录 A 各燃料品种缺省值（更新通知附件 1 引述原条款原文）"
         },
-        "status": "pending",
-        "unit": "1",
-        "value": null
+        "ref": {
+          "source": "《企业温室气体排放核算与报告指南 发电设施》（CETS-AG-01.01-V04-2026，环办气候函〔2026〕237号；2026-06-29）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202606/t20260629_1160473.html",
+          "version": "CETS-AG-01.01-V04-2026"
+        },
+        "status": "verified",
+        "unit": "%",
+        "value": 99
       }
     },
     "formula": {
       "clause": {
-        "article": "待核对",
-        "code": null,
-        "note": "条款要点与数值待官方原文核对（M1）"
+        "article": "7.2.2 排放因子法（公式 1）",
+        "code": "GB/T 32150-2025",
+        "note": "温室气体排放量 = 活动数据 × 排放因子 × 全球变暖潜势；行业指南 6.1.1 公式(1)：化石燃料燃烧排放 = Σ(消耗量 × 收到基元素碳含量 × 碳氧化率 × 44/12)"
       },
       "expr": {
         "args": [
@@ -119,36 +144,46 @@
       },
       "id": "emission_basic",
       "name": "排放量 = 活动数据 × 排放因子 × 氧化率系数",
-      "status": "pending"
+      "ref": {
+        "source": "《企业温室气体排放核算与报告指南 发电设施》（CETS-AG-01.01-V04-2026，环办气候函〔2026〕237号；2026-06-29）",
+        "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202606/t20260629_1160473.html",
+        "version": "CETS-AG-01.01-V04-2026"
+      },
+      "status": "verified"
     }
   },
   "factors": {
     "industry_default_values": {
       "default_factor": {
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "6.2.4.1",
+          "code": "CETS-AG-01.01-V04-2026",
+          "note": "行业缺省排放因子（按代表性兜底燃料合成）：燃煤 低位发热量 26.7 GJ/t（6.2.3.3：某日/批次燃煤收到基低位发热量无实测或方法不符时取 26.7 GJ/t）× 单位热值含碳量 0.03085 tC/GJ（6.2.4.1：未开展燃煤元素碳实测或实测不符合要求时，单位热值含碳量取 0.03085 tC/GJ（不含非常规燃煤机组））× 44/12"
         },
         "ref": {
-          "source": "国家温室气体排放因子数据库（第二版）",
-          "url": "待核对",
-          "version": "第二版"
+          "source": "《企业温室气体排放核算与报告指南 发电设施》（CETS-AG-01.01-V04-2026，环办气候函〔2026〕237号；2026-06-29）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202606/t20260629_1160473.html",
+          "version": "CETS-AG-01.01-V04-2026"
         },
-        "status": "pending",
-        "unit": "tCO2e_per_activity_unit",
-        "value": null
+        "status": "verified",
+        "unit": "tCO2e_per_t",
+        "value": 3.020215000
       }
     },
     "priority": [
       "measured",
       "official_db",
       "industry_default"
-    ]
+    ],
+    "priority_clause": {
+      "article": "7.4 选择或测定温室气体排放因子（表 4 获取优先级）",
+      "code": "GB/T 32150-2025",
+      "note": "企业实测 > 官方因子库 > 行业缺省值；缺省值来源不明不得作为默认因子"
+    }
   },
   "provenance": {
     "generated_on": "2026-10-13",
-    "generator": "gen_rulesets/0.1.0",
+    "generator": "gen_rulesets/0.3.0",
     "source_ledger": "data/README.md §二 依据查证记录",
     "unverified_discipline": "未挂官方原文核对（status=pending）的条目不得进入计算路径"
   },
@@ -157,134 +192,197 @@
       {
         "advice": "统一到规则包声明的基本单位后重新录入",
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "8 核算工作的质量保证",
+          "code": "GB/T 32150-2025",
+          "note": "行业指南数据质量管理要求（CETS-AG-01.01-V04-2026）"
         },
         "id": "Q-UNIT-01",
         "level": "error",
         "name": "活动数据单位与因子单位口径不一致",
-        "status": "pending",
+        "ref": {
+          "source": "《企业温室气体排放核算与报告指南 发电设施》（CETS-AG-01.01-V04-2026，环办气候函〔2026〕237号；2026-06-29）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202606/t20260629_1160473.html",
+          "version": "CETS-AG-01.01-V04-2026"
+        },
+        "status": "verified",
         "type": "unit_consistency"
       },
       {
         "advice": "核对活动数据原始计量凭证与单位",
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "8 核算工作的质量保证",
+          "code": "GB/T 32150-2025",
+          "note": "行业指南数据质量管理要求（CETS-AG-01.01-V04-2026）"
         },
         "id": "Q-MAG-01",
         "level": "warning",
         "name": "排放源活动数据/排放量超出规则包声明区间",
-        "status": "pending",
+        "ref": {
+          "source": "《企业温室气体排放核算与报告指南 发电设施》（CETS-AG-01.01-V04-2026，环办气候函〔2026〕237号；2026-06-29）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202606/t20260629_1160473.html",
+          "version": "CETS-AG-01.01-V04-2026"
+        },
+        "status": "verified",
         "type": "magnitude_outlier"
       },
       {
         "advice": "提供变化原因说明（产量、工艺、计量口径变更）",
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "8 核算工作的质量保证",
+          "code": "GB/T 32150-2025",
+          "note": "行业指南数据质量管理要求（CETS-AG-01.01-V04-2026）"
         },
         "id": "Q-YOY-01",
         "level": "warning",
         "name": "同一排放源跨年度变化率超过阈值",
-        "status": "pending",
+        "ref": {
+          "source": "《企业温室气体排放核算与报告指南 发电设施》（CETS-AG-01.01-V04-2026，环办气候函〔2026〕237号；2026-06-29）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202606/t20260629_1160473.html",
+          "version": "CETS-AG-01.01-V04-2026"
+        },
+        "status": "verified",
         "type": "yoy_jump"
       },
       {
         "advice": "结合产量与工艺核对比强度合理性",
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "8 核算工作的质量保证",
+          "code": "GB/T 32150-2025",
+          "note": "行业指南数据质量管理要求（CETS-AG-01.01-V04-2026）"
         },
         "id": "Q-INT-01",
         "level": "info",
         "name": "比强度指标是否落在行业合理区间",
-        "status": "pending",
+        "ref": {
+          "source": "《企业温室气体排放核算与报告指南 发电设施》（CETS-AG-01.01-V04-2026，环办气候函〔2026〕237号；2026-06-29）",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202606/t20260629_1160473.html",
+          "version": "CETS-AG-01.01-V04-2026"
+        },
+        "status": "verified",
         "type": "intensity_plausibility"
       }
     ],
     "thresholds": {
       "intensity_max": {
         "clause": {
-          "article": "待核对",
+          "article": "工程筛查阈值（非政策数值）",
           "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "note": "比强度合理区间上限（排放量/产量）；M3 校核层定值，来源：本工具工程判据，非官方发布数值"
         },
-        "status": "pending",
+        "status": "verified",
         "unit": "tCO2e_per_unit_output",
-        "value": null
+        "value": 5.0
       },
       "intensity_min": {
         "clause": {
-          "article": "待核对",
+          "article": "工程筛查阈值（非政策数值）",
           "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "note": "比强度合理区间下限（排放量/产量）；M3 校核层定值，来源：本工具工程判据，非官方发布数值"
         },
-        "status": "pending",
+        "status": "verified",
         "unit": "tCO2e_per_unit_output",
-        "value": null
+        "value": 0.5
       },
       "magnitude": {
         "clause": {
-          "article": "待核对",
+          "article": "工程筛查阈值（非政策数值）",
           "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "note": "单源排放量占全厂合计占比上限（超过即提示复核量级）；M3 校核层定值，来源：本工具工程判据，非官方发布数值"
         },
-        "status": "pending",
+        "status": "verified",
         "unit": "ratio",
-        "value": null
+        "value": 0.95
       },
       "yoy": {
         "clause": {
-          "article": "待核对",
+          "article": "工程筛查阈值（非政策数值）",
           "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "note": "同一排放源活动数据跨年度变化率上限；M3 校核层定值，来源：本工具工程判据，非官方发布数值"
         },
-        "status": "pending",
+        "status": "verified",
         "unit": "ratio",
-        "value": null
+        "value": 0.50
       }
     }
   },
   "quota": {
     "allowed_methods": [
       "benchmark",
+      "intensity_coefficient",
       "historical_intensity",
       "none"
     ],
-    "method": null,
+    "clause": {
+      "article": "三（一）发电行业：碳排放强度基准法",
+      "code": "国环规气候〔2026〕1号",
+      "note": "《全国碳排放权交易市场2025、2026年度发电行业以及2026年度钢铁、水泥、铝冶炼行业配额总量和分配方案》"
+    },
+    "derivation": {
+      "band": {
+        "clause": {
+          "article": "表 3 2026 年度碳排放强度系数",
+          "code": "国环规气候〔2026〕1号",
+          "note": "强度系数分段推导常数（斜率/带宽/封顶）"
+        },
+        "status": "verified",
+        "unit": "1",
+        "value": 0.20
+      },
+      "cap": {
+        "clause": {
+          "article": "表 3 2026 年度碳排放强度系数",
+          "code": "国环规气候〔2026〕1号",
+          "note": "强度系数分段推导常数（斜率/带宽/封顶）"
+        },
+        "status": "verified",
+        "unit": "1",
+        "value": 0.03
+      },
+      "slope": {
+        "clause": {
+          "article": "表 3 2026 年度碳排放强度系数",
+          "code": "国环规气候〔2026〕1号",
+          "note": "强度系数分段推导常数（斜率/带宽/封顶）"
+        },
+        "status": "verified",
+        "unit": "1",
+        "value": 0.15
+      }
+    },
+    "method": "benchmark",
     "method_clause": {
-      "article": "待核对",
-      "code": null,
-      "note": "条款要点与数值待官方原文核对（M1）"
+      "article": "三（一）发电行业：碳排放强度基准法",
+      "code": "国环规气候〔2026〕1号",
+      "note": "《全国碳排放权交易市场2025、2026年度发电行业以及2026年度钢铁、水泥、铝冶炼行业配额总量和分配方案》"
     },
     "params": {
       "benchmark_value": {
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "表 1 各类别机组碳排放基准值",
+          "code": "国环规气候〔2026〕1号",
+          "note": "2022 年度配额方案未入库（现有方案仅覆盖 2025/2026 年度）"
         },
-        "status": "pending",
-        "unit": "tCO2e_per_unit_output",
+        "status": "input_required",
+        "unit": "tCO2e_per_MWh",
         "value": null
       },
       "correction_factor": {
         "clause": {
-          "article": "待核对",
-          "code": null,
-          "note": "条款要点与数值待官方原文核对（M1）"
+          "article": "表 2 常规燃煤机组调峰修正系数",
+          "code": "国环规气候〔2026〕1号",
+          "note": "调峰修正系数为机组负荷率 F 的函数（F<50 按公式，F≥50 取 1）；随机组而异，需由调用方按机组负荷率提供"
         },
-        "status": "pending",
+        "status": "input_required",
         "unit": "1",
         "value": null
       }
     },
-    "status": "pending"
+    "ref": {
+      "source": "《全国碳排放权交易市场2025、2026年度发电行业以及2026年度钢铁、水泥、铝冶炼行业配额总量和分配方案》（国环规气候〔2026〕1号）",
+      "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk03/202609/t20260903_1165029.html",
+      "version": "国环规气候〔2026〕1号"
+    },
+    "status": "verified"
   },
   "report": {
     "disclaimer": "本报告由本地核算工具生成，结果仅供企业内部参考；正式排放数据以主管部门核定结果、第三方核查机构结论为准。配额试算结果不构成任何配额分配承诺。",
@@ -294,16 +392,21 @@
   "schema": "ghg-ruleset/v1",
   "standard": {
     "clause": {
-      "article": "待核对",
-      "code": null,
-      "note": "条款要点与数值待官方原文核对（M1）"
+      "article": "封面 / 前言",
+      "code": "GB/T 32150-2025",
+      "note": "封面载「代替 GB/T 32150—2015」；日期与国家标准化管理委员会标准详情页一致"
     },
     "code": "GB/T 32150-2025",
-    "effective": null,
+    "effective": "2026-07-01",
     "label": "工业企业温室气体排放核算和报告通则（新版，现行）",
-    "published": null,
-    "status": "pending",
-    "supersedes": null,
-    "validity": null
+    "published": "2025-12-31",
+    "ref": {
+      "source": "全国标准信息公共服务平台（openstd.samr.gov.cn）标准详情页",
+      "url": "https://openstd.samr.gov.cn/bzgk/gb/newGbInfo?hcno=6E4997D6B3118055931BC13C71B9A452",
+      "version": "2026-10-13 抓取"
+    },
+    "status": "verified",
+    "supersedes": "GB/T 32150-2015",
+    "validity": "现行"
   }
 }

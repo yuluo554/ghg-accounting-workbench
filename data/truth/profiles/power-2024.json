@@ -1,0 +1,27 @@
+{
+  "coordinate": {
+    "industry": "power",
+    "standard": "gbt32150-2025",
+    "year": 2024
+  },
+  "facility": {
+    "credit_code": "90000000power2024SYN",
+    "name": "示例发电（合成）有限公司",
+    "note": "虚构企业（合成数据），非真实企业；不得用于对外披露",
+    "synthetic": true
+  },
+  "output": {
+    "unit": "MWh",
+    "value": "470337"
+  },
+  "schema": "ghg-profile/v1",
+  "sources": [
+    {
+      "activity": {
+        "unit": "t",
+        "value": "117977"
+      },
+      "source_id": "stationary_combustion"
+    }
+  ]
+}

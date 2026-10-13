@@ -1,0 +1,393 @@
+{
+  "cases": {
+    "bad_format_missing_activity_value": {
+      "coordinate": "gbt32150-2025/2024/steel",
+      "expected": "error_missing_activity_value",
+      "file": "profiles/steel-2024-bad-format.json",
+      "note": "档案存在该源条目但 activity.value 为 null → 按缺输入处理（退出码 2）",
+      "sha256": "1733a09d439999e4ebcbbf7344054436bb2a2b955bf047b144333f3516f281bd"
+    },
+    "factor_unavailable": {
+      "coordinate": "gbt32150-2025/2024/steel",
+      "expected": "error_factor_unavailable",
+      "file": "profiles/steel-2024-factor-unavailable.json",
+      "note": "引擎按空规则包（缺 factors 块）核算时应报 FactorUnavailable",
+      "sha256": "5af8bc53616af2c39ba645d9f864a0b60c58c4917899641919ca3ea5dfdfb9e8"
+    },
+    "missing_required_source": {
+      "coordinate": "gbt32150-2025/2024/steel",
+      "expected": "error_missing_required_source",
+      "file": "profiles/steel-2024-missing-source.json",
+      "missing_source_id": "carbon_product",
+      "sha256": "b664e1f7e95495d416d39456ccb7e7ec4f8f2b663b08b37eb6269425f2e4dd44"
+    },
+    "mixed_coordinates": {
+      "expected": "error_mixed_coordinates",
+      "file": "profiles/mixed-coordinates.json",
+      "sha256": "8fd940a52d4f02daa264a8318d8233ec716ef0ea4a389d3156dabf39befde6f6"
+    },
+    "quality_bad_unit": {
+      "coordinate": "gbt32150-2025/2024/steel",
+      "expected_level": "error",
+      "expected_rule": "Q-UNIT-01",
+      "expected_source_id": "purchased_electricity",
+      "file": "profiles/steel-2024-bad-unit.json",
+      "note": "未被纳入核算的选填源录入未知单位 → 校核层命中单位一致性检查",
+      "sha256": "a1c50800b9151375e32577126bd9dd477f8569bd5b92aa226a866990a09ffd4c"
+    },
+    "quality_intensity_out_of_range": {
+      "coordinate": "gbt32150-2025/2024/steel",
+      "expected_level": "info",
+      "expected_rule": "Q-INT-01",
+      "file": "profiles/steel-2024-intensity.json",
+      "note": "产量压到 1/10 → 比强度约放大 10 倍，越出规则包区间",
+      "sha256": "cd4a2f74964e0ce49ea7cc0576861c74f30006da5a0c6d755665553d6bca465c"
+    },
+    "quality_magnitude_outlier": {
+      "coordinate": "gbt32150-2025/2024/steel",
+      "expected_level": "warning",
+      "expected_rule": "Q-MAG-01",
+      "expected_source_id": "stationary_combustion",
+      "file": "profiles/steel-2024-magnitude.json",
+      "note": "燃烧源活动数据放大 200 倍 → 单源排放量占比超过规则包量级阈值",
+      "sha256": "a2c93ac469a5219b33ce2224355ec279a9baf0a029989829b763803bb6529604"
+    },
+    "quality_yoy_jump": {
+      "baseline_coordinate": "gbt32150-2025/2023/steel",
+      "baseline_file": "profiles/steel-2023-yoy-baseline.json",
+      "baseline_sha256": "d2b7f20d2bfd3d0d561702be26b0fe4528b74661bab39d5a9faef6aefbda352e",
+      "clean_file": "profiles/steel-2024-yoy-clean.json",
+      "clean_sha256": "f8b8f44a54d350a5f02853b25dcc4b36dc674aa2fe0ebceaa620d3666eb745a5",
+      "coordinate": "gbt32150-2025/2024/steel",
+      "expected_level": "warning",
+      "expected_rule": "Q-YOY-01",
+      "expected_source_id": "stationary_combustion",
+      "file": "profiles/steel-2024-yoy-jump.json",
+      "note": "clean 档案同比未放大（不命中，误报对照）；jump 档案同比放大 3 倍（命中）",
+      "sha256": "632a78760a8e8f53433a771037727f9e99f19affb3edb58c9655de30dddd62ee"
+    },
+    "quota_benchmark": {
+      "coordinate": "gbt32150-2025/2025/power",
+      "correction_factor": "0.97",
+      "expected": {
+        "actual": "296845.48573515000",
+        "allocated": "303373.726236",
+        "gap": "6528.24050085000",
+        "gap_ratio": "0.02199204911161961953233965038"
+      },
+      "file": "profiles/power-2025.json",
+      "method": "benchmark",
+      "note": "发电 2025 基准值规则包已核对；调峰修正系数由算例显式提供（外部输入）",
+      "sha256": "dc84f4abfdd9e0084bf6aacb7f066f46211964ff51738a0ef09ddc0b7d0de08b"
+    },
+    "quota_intensity_coefficient": {
+      "benchmark_value": "2.1",
+      "coordinate": "gbt32150-2025/2024/steel",
+      "expected": {
+        "actual": "332299.21207535360",
+        "allocated": "334672.8904362887160894180968",
+        "gap": "2373.6783609351160894180968",
+        "gap_ratio": "0.007143195874917845320493529942"
+      },
+      "file": "profiles/steel-2024.json",
+      "method": "intensity_coefficient",
+      "note": "行业平衡值（BP）平台可查 → 算例显式提供；α 由偏离度经规则包分段常数推出",
+      "sha256": "5b802accec436052ba2548492f223e313307b62b82e629be7029a4f155f494cd"
+    },
+    "quota_method_none": {
+      "coordinate": "gbt32150-2025/2025/power",
+      "expected": "not_applicable",
+      "note": "规则包 quota.method=none 时试算显式返回 not_applicable（配额量为 None，非 0）"
+    },
+    "quota_missing_benchmark": {
+      "coordinate": "gbt32150-2025/2024/steel",
+      "expected": "error_quota_unavailable",
+      "file": "profiles/steel-2024.json",
+      "note": "行业平衡值为外部输入，未提供时试算层必须硬失败（不得静默取 0）",
+      "sha256": "5b802accec436052ba2548492f223e313307b62b82e629be7029a4f155f494cd"
+    }
+  },
+  "controls": {
+    "quality_clean": [
+      {
+        "file": "profiles/aluminum-2024.json",
+        "note": "常规档案：四类检查应零命中（含产量，比强度落在规则包区间内）"
+      },
+      {
+        "file": "profiles/cement-2024.json",
+        "note": "常规档案：四类检查应零命中（含产量，比强度落在规则包区间内）"
+      },
+      {
+        "file": "profiles/power-2024.json",
+        "note": "常规档案：四类检查应零命中（含产量，比强度落在规则包区间内）"
+      },
+      {
+        "file": "profiles/steel-2023.json",
+        "note": "常规档案：四类检查应零命中（含产量，比强度落在规则包区间内）"
+      },
+      {
+        "file": "profiles/steel-2024.json",
+        "note": "常规档案：四类检查应零命中（含产量，比强度落在规则包区间内）"
+      },
+      {
+        "file": "profiles/steel-2024-measured-factor.json",
+        "note": "实测因子档案：因子来源合法、单位口径一致 → 零命中"
+      },
+      {
+        "file": "profiles/steel-2015-2024.json",
+        "note": "旧版通则档案：跨版本不引入校核误报"
+      }
+    ],
+    "quality_non_error": [
+      {
+        "file": "profiles/steel-2024-unit-kg.json",
+        "note": "kg 录入可显式换算 → Q-UNIT-01 降级为 warning（plan/06 D3-4）"
+      }
+    ],
+    "quality_yoy_clean": {
+      "baseline_file": "profiles/steel-2023-yoy-baseline.json",
+      "file": "profiles/steel-2024-yoy-clean.json",
+      "note": "同比活动数据逐位相同（变化率 0）→ 跨年突变检查不得命中（误报对照）"
+    }
+  },
+  "generated_on": "2026-10-13",
+  "generator": "gen_synthetic/0.1.0",
+  "profiles": {
+    "aluminum-2024": {
+      "coordinate": "gbt32150-2025/2024/aluminum",
+      "file": "profiles/aluminum-2024.json",
+      "line_count": 2,
+      "lines": [
+        {
+          "activity": "8517",
+          "category": "process",
+          "emission": "19079.752909140",
+          "factor": "2.240196420",
+          "oxidation_rate": "1",
+          "source_id": "process_emission"
+        },
+        {
+          "activity": "97917",
+          "category": "combustion",
+          "emission": "214966.24659999720",
+          "factor": "2.240196420",
+          "oxidation_rate": "0.98",
+          "source_id": "stationary_combustion"
+        }
+      ],
+      "sha256": "df7f74cd8d31f36b790e92d6ab4a647c3c2491bb55bad200015dceed4532fcee",
+      "total": "234045.99950913720"
+    },
+    "cement-2024": {
+      "coordinate": "gbt32150-2025/2024/cement",
+      "file": "profiles/cement-2024.json",
+      "line_count": 2,
+      "lines": [
+        {
+          "activity": "17369",
+          "category": "process",
+          "emission": "41105.434409160",
+          "factor": "2.366597640",
+          "oxidation_rate": "1",
+          "source_id": "process_emission"
+        },
+        {
+          "activity": "114333",
+          "category": "combustion",
+          "emission": "267874.40589437880",
+          "factor": "2.366597640",
+          "oxidation_rate": "0.99",
+          "source_id": "stationary_combustion"
+        }
+      ],
+      "sha256": "8500ced726645f687b262fae869f79ee6403ee34bf00f6359a5d05ce76ece577",
+      "total": "308979.84030353880"
+    },
+    "power-2024": {
+      "coordinate": "gbt32150-2025/2024/power",
+      "file": "profiles/power-2024.json",
+      "line_count": 1,
+      "lines": [
+        {
+          "activity": "117977",
+          "category": "combustion",
+          "emission": "352752.74600445000",
+          "factor": "3.020215000",
+          "oxidation_rate": "0.99",
+          "source_id": "stationary_combustion"
+        }
+      ],
+      "sha256": "d78e9539829dbf85eb34a4d2beceaa35c3ab8b46ae65f1da096e6b67525d7fe1",
+      "total": "352752.74600445000"
+    },
+    "steel-2015-2024": {
+      "coordinate": "gbt32150-2015/2024/steel",
+      "file": "profiles/steel-2015-2024.json",
+      "line_count": 3,
+      "lines": [
+        {
+          "activity": "2110",
+          "category": "carbon_product",
+          "emission": "4807.630273600",
+          "factor": "2.278497760",
+          "oxidation_rate": "1",
+          "source_id": "carbon_product"
+        },
+        {
+          "activity": "11560",
+          "category": "process",
+          "emission": "26339.434105600",
+          "factor": "2.278497760",
+          "oxidation_rate": "1",
+          "source_id": "process_emission"
+        },
+        {
+          "activity": "140179",
+          "category": "combustion",
+          "emission": "316203.56212404960",
+          "factor": "2.278497760",
+          "oxidation_rate": "0.99",
+          "source_id": "stationary_combustion"
+        }
+      ],
+      "sha256": "19e6f186c1180bb373b98b25129a4490ca79bbf047869e8e9035bf5511be4550",
+      "total": "347350.62650324960"
+    },
+    "steel-2023": {
+      "coordinate": "gbt32150-2025/2023/steel",
+      "file": "profiles/steel-2023.json",
+      "line_count": 3,
+      "lines": [
+        {
+          "activity": "6621",
+          "category": "carbon_product",
+          "emission": "15085.933668960",
+          "factor": "2.278497760",
+          "oxidation_rate": "1",
+          "source_id": "carbon_product"
+        },
+        {
+          "activity": "14635",
+          "category": "process",
+          "emission": "33345.814717600",
+          "factor": "2.278497760",
+          "oxidation_rate": "1",
+          "source_id": "process_emission"
+        },
+        {
+          "activity": "167237",
+          "category": "combustion",
+          "emission": "377238.63859022880",
+          "factor": "2.278497760",
+          "oxidation_rate": "0.99",
+          "source_id": "stationary_combustion"
+        }
+      ],
+      "sha256": "d00631fed1416129a64f684ffef2bd35bf7813a773c31e23533cdc9f8ed6691c",
+      "total": "425670.38697678880"
+    },
+    "steel-2024": {
+      "coordinate": "gbt32150-2025/2024/steel",
+      "file": "profiles/steel-2024.json",
+      "line_count": 3,
+      "lines": [
+        {
+          "activity": "3713",
+          "category": "carbon_product",
+          "emission": "8460.062182880",
+          "factor": "2.278497760",
+          "oxidation_rate": "1",
+          "source_id": "carbon_product"
+        },
+        {
+          "activity": "4158",
+          "category": "process",
+          "emission": "9473.993686080",
+          "factor": "2.278497760",
+          "oxidation_rate": "1",
+          "source_id": "process_emission"
+        },
+        {
+          "activity": "139364",
+          "category": "combustion",
+          "emission": "314365.15620639360",
+          "factor": "2.278497760",
+          "oxidation_rate": "0.99",
+          "source_id": "stationary_combustion"
+        }
+      ],
+      "sha256": "5b802accec436052ba2548492f223e313307b62b82e629be7029a4f155f494cd",
+      "total": "332299.21207535360"
+    },
+    "steel-2024-measured-factor": {
+      "coordinate": "gbt32150-2025/2024/steel",
+      "file": "profiles/steel-2024-measured-factor.json",
+      "line_count": 3,
+      "lines": [
+        {
+          "activity": "3127",
+          "category": "carbon_product",
+          "emission": "7124.862495520",
+          "factor": "2.278497760",
+          "oxidation_rate": "1",
+          "source_id": "carbon_product"
+        },
+        {
+          "activity": "9899",
+          "category": "process",
+          "emission": "11277.424663120",
+          "factor": "1.139248880",
+          "oxidation_rate": "1",
+          "source_id": "process_emission"
+        },
+        {
+          "activity": "61465",
+          "category": "combustion",
+          "emission": "69323.69308510800",
+          "factor": "1.139248880",
+          "oxidation_rate": "0.99",
+          "source_id": "stationary_combustion"
+        }
+      ],
+      "note": "显式因子（实测 / 官方因子库）优先于行业缺省",
+      "sha256": "e05e1a699afaeeef373c8085ccabea2b764a749b0e599a92b073c164f4c2ae0b",
+      "total": "87725.98024374800"
+    },
+    "steel-2024-unit-kg": {
+      "coordinate": "gbt32150-2025/2024/steel",
+      "file": "profiles/steel-2024-unit-kg.json",
+      "line_count": 3,
+      "lines": [
+        {
+          "activity": "828",
+          "category": "carbon_product",
+          "emission": "1886.596145280",
+          "factor": "2.278497760",
+          "oxidation_rate": "1",
+          "source_id": "carbon_product"
+        },
+        {
+          "activity": "18430",
+          "category": "process",
+          "emission": "41992.713716800",
+          "factor": "2.278497760",
+          "oxidation_rate": "1",
+          "source_id": "process_emission"
+        },
+        {
+          "activity": "113.438",
+          "category": "combustion",
+          "emission": "255.88354660989120",
+          "factor": "2.278497760",
+          "oxidation_rate": "0.99",
+          "source_id": "stationary_combustion"
+        }
+      ],
+      "note": "stationary_combustion 活动数据以 kg 录入，引擎须显式换算到 t",
+      "sha256": "6fa90051399b58670f8d54fd0236f93e715d8f10c7e5dbffb3233b221af9172b",
+      "total": "44135.19340868989120"
+    }
+  },
+  "schema": "ghg-truth/v1",
+  "seed": "ghg-synthetic-2026-10-13"
+}

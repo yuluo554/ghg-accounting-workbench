@@ -1,0 +1,37 @@
+{
+  "coordinate": {
+    "industry": "steel",
+    "standard": "gbt32150-2025",
+    "year": 2024
+  },
+  "facility": {
+    "credit_code": "90000000steel2024badformatSYN",
+    "name": "示例钢铁（合成）有限公司",
+    "note": "虚构企业（合成数据），非真实企业；不得用于对外披露",
+    "synthetic": true
+  },
+  "schema": "ghg-profile/v1",
+  "sources": [
+    {
+      "activity": {
+        "unit": "t",
+        "value": null
+      },
+      "source_id": "stationary_combustion"
+    },
+    {
+      "activity": {
+        "unit": "t",
+        "value": "9195"
+      },
+      "source_id": "process_emission"
+    },
+    {
+      "activity": {
+        "unit": "t",
+        "value": "1900"
+      },
+      "source_id": "carbon_product"
+    }
+  ]
+}
