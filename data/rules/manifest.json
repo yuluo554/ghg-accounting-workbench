@@ -1,0 +1,320 @@
+{
+  "coordinates": [
+    {
+      "file": "ruleset-gbt32150-2015-2022-power.json",
+      "industry": "power",
+      "sha256": "209cb1f7b3e54f692a861fd43256599ef7fe40f858cf6361be32ccd680aeb35a",
+      "standard": "gbt32150-2015",
+      "year": 2022
+    },
+    {
+      "file": "ruleset-gbt32150-2015-2022-steel.json",
+      "industry": "steel",
+      "sha256": "847e57f761cd9e7acdc8563e8031d86d1e8f61558a835b579137e8ff6c4b51fc",
+      "standard": "gbt32150-2015",
+      "year": 2022
+    },
+    {
+      "file": "ruleset-gbt32150-2015-2022-cement.json",
+      "industry": "cement",
+      "sha256": "b900e459b8dafc8c9e7ea908a5b9a953a8a77781b08e4a831c3bda1e6e8181c7",
+      "standard": "gbt32150-2015",
+      "year": 2022
+    },
+    {
+      "file": "ruleset-gbt32150-2015-2022-aluminum.json",
+      "industry": "aluminum",
+      "sha256": "57b898926eb4743ccb21d7c47a367c7f18d58def6db0b8b9a29c3813d01d636e",
+      "standard": "gbt32150-2015",
+      "year": 2022
+    },
+    {
+      "file": "ruleset-gbt32150-2015-2023-power.json",
+      "industry": "power",
+      "sha256": "a6c7d4faac912d305c351c874ffa364a8ef3dbd287df0ffd5084f223e2a58007",
+      "standard": "gbt32150-2015",
+      "year": 2023
+    },
+    {
+      "file": "ruleset-gbt32150-2015-2023-steel.json",
+      "industry": "steel",
+      "sha256": "af8919194f3500fcc7c733fcfeb9309a012520243f9548626b61b12151511a1f",
+      "standard": "gbt32150-2015",
+      "year": 2023
+    },
+    {
+      "file": "ruleset-gbt32150-2015-2023-cement.json",
+      "industry": "cement",
+      "sha256": "a6b5aa9591454a296d009b74620c1784a329dacefa8ae8048f87fbb880f1f409",
+      "standard": "gbt32150-2015",
+      "year": 2023
+    },
+    {
+      "file": "ruleset-gbt32150-2015-2023-aluminum.json",
+      "industry": "aluminum",
+      "sha256": "3d58b5beb4b6e8ef1a3ee9b4c7640c49fe343fe3d4dad9421b6c9a79d0aee898",
+      "standard": "gbt32150-2015",
+      "year": 2023
+    },
+    {
+      "file": "ruleset-gbt32150-2015-2024-power.json",
+      "industry": "power",
+      "sha256": "980b83a864e17c536bdf217bdde1a57e6906d5e35848bd5e1f16b2446c883eeb",
+      "standard": "gbt32150-2015",
+      "year": 2024
+    },
+    {
+      "file": "ruleset-gbt32150-2015-2024-steel.json",
+      "industry": "steel",
+      "sha256": "95575f680b51868a67126f532e7dac942537d2124717177541b5dbfd19c95db4",
+      "standard": "gbt32150-2015",
+      "year": 2024
+    },
+    {
+      "file": "ruleset-gbt32150-2015-2024-cement.json",
+      "industry": "cement",
+      "sha256": "45cf2c0ff23fef4ac2462e34925705f3709351939f90ea80855513ca969e98c8",
+      "standard": "gbt32150-2015",
+      "year": 2024
+    },
+    {
+      "file": "ruleset-gbt32150-2015-2024-aluminum.json",
+      "industry": "aluminum",
+      "sha256": "c622c7607de914b4454f56f6c244133020b8c1eacc4bdbae706e252a9a7b1d55",
+      "standard": "gbt32150-2015",
+      "year": 2024
+    },
+    {
+      "file": "ruleset-gbt32150-2015-2025-power.json",
+      "industry": "power",
+      "sha256": "39a91227fa90b76d02d268766d83747056be43a4ef3e10ef20c1b3336d7e1049",
+      "standard": "gbt32150-2015",
+      "year": 2025
+    },
+    {
+      "file": "ruleset-gbt32150-2015-2025-steel.json",
+      "industry": "steel",
+      "sha256": "6e13f3e7737dff8d773285f72aa0dc15ee4c3d317027074c81213f5ca2d12d4d",
+      "standard": "gbt32150-2015",
+      "year": 2025
+    },
+    {
+      "file": "ruleset-gbt32150-2015-2025-cement.json",
+      "industry": "cement",
+      "sha256": "b9fab8e55753c3afd7eb0682083a4adff331c214b42724061f7aefe1bfa0b6db",
+      "standard": "gbt32150-2015",
+      "year": 2025
+    },
+    {
+      "file": "ruleset-gbt32150-2015-2025-aluminum.json",
+      "industry": "aluminum",
+      "sha256": "25fc9fce9a65f83ce06b7ad4df38e9c88d396f1be2925fa100a6cf0626c47d89",
+      "standard": "gbt32150-2015",
+      "year": 2025
+    },
+    {
+      "file": "ruleset-gbt32150-2015-2026-power.json",
+      "industry": "power",
+      "sha256": "a7fc4cdbd39ff8ae25ba1e65389452e45beee12b330e5a632784e6fb776466d7",
+      "standard": "gbt32150-2015",
+      "year": 2026
+    },
+    {
+      "file": "ruleset-gbt32150-2015-2026-steel.json",
+      "industry": "steel",
+      "sha256": "e604d29366f0f80293f798f7f2b517a145eac9014e5fe65f66aa0188d64b3a13",
+      "standard": "gbt32150-2015",
+      "year": 2026
+    },
+    {
+      "file": "ruleset-gbt32150-2015-2026-cement.json",
+      "industry": "cement",
+      "sha256": "10d9ee9f19bc4c55d53411b8f29d9718447b0d5180c1ad1ed59d5984f7f31461",
+      "standard": "gbt32150-2015",
+      "year": 2026
+    },
+    {
+      "file": "ruleset-gbt32150-2015-2026-aluminum.json",
+      "industry": "aluminum",
+      "sha256": "769d9b3497702ee4cf56637c23e63f8cdedb351c602682a57ac8a697246a92d9",
+      "standard": "gbt32150-2015",
+      "year": 2026
+    },
+    {
+      "file": "ruleset-gbt32150-2025-2022-power.json",
+      "industry": "power",
+      "sha256": "b65c8845657d95b1b3faedb6819f977f8501ee3ae194091c6497adb939d94ebf",
+      "standard": "gbt32150-2025",
+      "year": 2022
+    },
+    {
+      "file": "ruleset-gbt32150-2025-2022-steel.json",
+      "industry": "steel",
+      "sha256": "28c274a9689669da7573cb0272b8be0df9db28b2fa1d61169a63622763af173c",
+      "standard": "gbt32150-2025",
+      "year": 2022
+    },
+    {
+      "file": "ruleset-gbt32150-2025-2022-cement.json",
+      "industry": "cement",
+      "sha256": "b59bf4e45a968018def480f46eb2a8728222ab555e953789e9bb2dbea19cfdf1",
+      "standard": "gbt32150-2025",
+      "year": 2022
+    },
+    {
+      "file": "ruleset-gbt32150-2025-2022-aluminum.json",
+      "industry": "aluminum",
+      "sha256": "0f564e7022c106066579bb4f6246d43f00f34018b40b4fb9fe4b60cbb0ac78b5",
+      "standard": "gbt32150-2025",
+      "year": 2022
+    },
+    {
+      "file": "ruleset-gbt32150-2025-2023-power.json",
+      "industry": "power",
+      "sha256": "8f19c2f1bdb48631ba1feceacddee0f8512b77038c47ab3409c2d969a0f22938",
+      "standard": "gbt32150-2025",
+      "year": 2023
+    },
+    {
+      "file": "ruleset-gbt32150-2025-2023-steel.json",
+      "industry": "steel",
+      "sha256": "70c6bcf762c5977b2edbf2ea53eea0ce19d66facebf384e05d180f6e282a85ae",
+      "standard": "gbt32150-2025",
+      "year": 2023
+    },
+    {
+      "file": "ruleset-gbt32150-2025-2023-cement.json",
+      "industry": "cement",
+      "sha256": "7669304dfdb655f02fed4e9b5cb3c679d98d21025076c6511b47a19107221c2f",
+      "standard": "gbt32150-2025",
+      "year": 2023
+    },
+    {
+      "file": "ruleset-gbt32150-2025-2023-aluminum.json",
+      "industry": "aluminum",
+      "sha256": "2db56dfd4892e3cd93dda921d6267d2ee581a96c7e2045a5ac0d3d7d4589d655",
+      "standard": "gbt32150-2025",
+      "year": 2023
+    },
+    {
+      "file": "ruleset-gbt32150-2025-2024-power.json",
+      "industry": "power",
+      "sha256": "f17a59186f2635ea0a43e4d49085776dc61ee0f896806f475a19b200d0f6ad8c",
+      "standard": "gbt32150-2025",
+      "year": 2024
+    },
+    {
+      "file": "ruleset-gbt32150-2025-2024-steel.json",
+      "industry": "steel",
+      "sha256": "1cb56b3b5eb782ce276b08da7dfc31ffa9ccb8581d0a0de8ba4248ca101f4da2",
+      "standard": "gbt32150-2025",
+      "year": 2024
+    },
+    {
+      "file": "ruleset-gbt32150-2025-2024-cement.json",
+      "industry": "cement",
+      "sha256": "93a385380fe00e10fd36e64f1809965de44c73ce4a715dd44366760802af55aa",
+      "standard": "gbt32150-2025",
+      "year": 2024
+    },
+    {
+      "file": "ruleset-gbt32150-2025-2024-aluminum.json",
+      "industry": "aluminum",
+      "sha256": "5132e2afa12cad6a665cf81306f714310942942a11dab89521c85769d252e083",
+      "standard": "gbt32150-2025",
+      "year": 2024
+    },
+    {
+      "file": "ruleset-gbt32150-2025-2025-power.json",
+      "industry": "power",
+      "sha256": "3982c05f787b45c549f5ce5c18a2e3e13718c09fede5d069ef91607cb0820060",
+      "standard": "gbt32150-2025",
+      "year": 2025
+    },
+    {
+      "file": "ruleset-gbt32150-2025-2025-steel.json",
+      "industry": "steel",
+      "sha256": "29fb885e3126d618c8efc4658de76b9b47cb484e262c3b2ded77213f8875111a",
+      "standard": "gbt32150-2025",
+      "year": 2025
+    },
+    {
+      "file": "ruleset-gbt32150-2025-2025-cement.json",
+      "industry": "cement",
+      "sha256": "5b28917e757a66230f0d3a0b938daf2b209b62cbe213ba462b8ed585f975008c",
+      "standard": "gbt32150-2025",
+      "year": 2025
+    },
+    {
+      "file": "ruleset-gbt32150-2025-2025-aluminum.json",
+      "industry": "aluminum",
+      "sha256": "165875dd87484013232a531cf9059c40e150b9c78851e32422358fbd772a0cd3",
+      "standard": "gbt32150-2025",
+      "year": 2025
+    },
+    {
+      "file": "ruleset-gbt32150-2025-2026-power.json",
+      "industry": "power",
+      "sha256": "72e856942982c80a0a150f18aa54aeb9fdb1bfa95992f02dd026d01a21963482",
+      "standard": "gbt32150-2025",
+      "year": 2026
+    },
+    {
+      "file": "ruleset-gbt32150-2025-2026-steel.json",
+      "industry": "steel",
+      "sha256": "5ebad87e085fa76c9758d6cc25e8878254b25f1815ad40bb482e285d97b951e5",
+      "standard": "gbt32150-2025",
+      "year": 2026
+    },
+    {
+      "file": "ruleset-gbt32150-2025-2026-cement.json",
+      "industry": "cement",
+      "sha256": "d5a122aafe7fcaba873cfa3eb71638a9f2e3d0c10fb90bd6883c1321bc11251a",
+      "standard": "gbt32150-2025",
+      "year": 2026
+    },
+    {
+      "file": "ruleset-gbt32150-2025-2026-aluminum.json",
+      "industry": "aluminum",
+      "sha256": "c1ff47da98984c13c7e55470dd27e5877ddb8b6f30c7e27063a82dfe5a3bf4d1",
+      "standard": "gbt32150-2025",
+      "year": 2026
+    }
+  ],
+  "generated_on": "2026-10-13",
+  "generator": "gen_rulesets/0.1.0",
+  "industries": [
+    "power",
+    "steel",
+    "cement",
+    "aluminum"
+  ],
+  "labels": {
+    "industries": {
+      "aluminum": "铝冶炼",
+      "cement": "水泥",
+      "power": "发电",
+      "steel": "钢铁"
+    },
+    "standards": {
+      "gbt32150-2015": "工业企业温室气体排放核算和报告通则（旧版，废止）",
+      "gbt32150-2025": "工业企业温室气体排放核算和报告通则（新版，现行）"
+    }
+  },
+  "schema": "ghg-manifest/v1",
+  "standards": [
+    "gbt32150-2015",
+    "gbt32150-2025"
+  ],
+  "units_file": {
+    "file": "units.json",
+    "sha256": "4dee845be643f5b08a5daf299493df7ed4370ddac648d0fddfd62b3f3a074b84"
+  },
+  "years": [
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ]
+}

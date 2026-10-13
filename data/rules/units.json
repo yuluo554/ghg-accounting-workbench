@@ -1,0 +1,53 @@
+{
+  "dimensions": {
+    "electricity": {
+      "base": "MWh",
+      "units": {
+        "GWh": 1000,
+        "MWh": 1,
+        "kWh": 0.001,
+        "万kWh": 10
+      }
+    },
+    "emission": {
+      "base": "tCO2e",
+      "units": {
+        "kgCO2e": 0.001,
+        "tCO2e": 1
+      }
+    },
+    "energy": {
+      "base": "GJ",
+      "units": {
+        "GJ": 1,
+        "MJ": 0.001,
+        "TJ": 1000
+      }
+    },
+    "mass": {
+      "base": "t",
+      "units": {
+        "kg": 0.001,
+        "kt": 1000,
+        "t": 1
+      }
+    },
+    "ratio": {
+      "base": "1",
+      "units": {
+        "%": 0.01,
+        "1": 1
+      }
+    },
+    "volume": {
+      "base": "Nm3",
+      "units": {
+        "Nm3": 1,
+        "万Nm3": 10000
+      }
+    }
+  },
+  "note": "单位换算因子为定义性关系（SI/法定计量单位定义），非政策数值；政策数值一律挂在规则包 status 门控之下。",
+  "schema": "ghg-units/v1",
+  "verified": true
+}

@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ghg-accounting-workbench"
+version = "0.1.0"
+description = "企业温室气体排放核算与报告工作台（GB/T 32150 新旧双标尺 × 年度 × 行业三维版本化规则集，本地核算）"
+readme = { text = "企业温室气体排放核算与报告工作台 — CLI + 桌面双形态，全本地核算、零上传。", content-type = "text/plain" }
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [{ name = "yuluo554" }]
+keywords = ["ghg", "carbon-accounting", "gbt32150", "emission-factor", "carbon-market"]
+classifiers = [
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.12",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Scientific/Engineering :: Atmospheric Science",
+]
+# 核心层零第三方依赖：计算与基准仅用标准库
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7,<9", "PyYAML>=6,<7"]
+gui = ["PySide6>=6.6,<7"]
+build = ["pyinstaller>=5.13,<6"]
+
+[project.scripts]
+ghg = "ghg.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
