@@ -367,7 +367,11 @@ def sha256_file(path):
 
 
 def attachment_ledger(dist_dir=None, root=None):
-    """dist 内每个 exe 目录 → ASCII 附件名 + sha256 + 字节数。"""
+    """dist 内每个 exe 目录 → 发布附件台账。
+
+    发布附件是**打包后的 zip**（ASCII 名），故台账优先给 zip 的 sha256 与字节数；
+    zip 尚未生成时回落到 exe 本体（并标 ``packed: False``），让台账在打包前后都可用。
+    """
     root = root or ROOT
     dist_dir = dist_dir or os.path.join(root, "dist")
     rows = []
@@ -380,6 +384,17 @@ def attachment_ledger(dist_dir=None, root=None):
         exe = os.path.join(sub, "%s.exe" % name)
         if not os.path.isfile(exe):
             continue
+        archive = os.path.join(dist_dir, "%s-windows-x64.zip" % name)
+        packed = os.path.isfile(archive)
+        if packed:
+            rows.append({
+                "name": name,
+                "attachment": os.path.basename(archive),
+                "sha256": sha256_file(archive),
+                "bytes": os.path.getsize(archive),
+                "packed": True,
+            })
+            continue
         total = 0
         for dirpath, _dirnames, filenames in os.walk(sub):
             for fname in filenames:
@@ -389,10 +404,10 @@ def attachment_ledger(dist_dir=None, root=None):
                     pass
         rows.append({
             "name": name,
-            "attachment": "%s-windows-x64.zip" % name,
-            "exe": "%s.exe" % name,
+            "attachment": os.path.basename(archive),
             "sha256": sha256_file(exe),
             "bytes": total,
+            "packed": False,
         })
     return rows
 
@@ -541,8 +556,13 @@ def _cmd_ledger(args):
     if not rows:
         print("dist 内无已构建 exe（先跑 PyInstaller）")
         return 2
+    if args.json:
+        print(json.dumps(rows, ensure_ascii=False, indent=2))
+        return 0
     for row in rows:
-        print("%s  sha256=%s  bytes=%d" % (row["attachment"], row["sha256"], row["bytes"]))
+        note = "" if row["packed"] else "（zip 未生成，此项为 exe 本体）"
+        print("%s  sha256=%s  bytes=%d%s"
+              % (row["attachment"], row["sha256"], row["bytes"], note))
     return 0
 
 
@@ -585,6 +605,7 @@ def main(argv=None):
 
     p_ledger = sub.add_parser("ledger", help="dist 附件 sha256 台账")
     p_ledger.add_argument("--dist-dir", default=None)
+    p_ledger.add_argument("--json", action="store_true", help="输出 JSON（供留档引用）")
     p_ledger.set_defaults(func=_cmd_ledger)
 
     p_pack = sub.add_parser("pack", help="dist → ASCII 名 zip")
