@@ -9,13 +9,18 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 CODE_DIR = os.path.dirname(HERE)
 REPO_ROOT = os.path.dirname(CODE_DIR)
 SRC_DIR = os.path.join(CODE_DIR, "src")
+GUI_DIR = os.path.join(CODE_DIR, "gui")
 
 if SRC_DIR not in sys.path:
     sys.path.insert(0, SRC_DIR)
+if GUI_DIR not in sys.path:
+    sys.path.insert(0, GUI_DIR)
 if REPO_ROOT not in sys.path:
     sys.path.insert(0, REPO_ROOT)
 
 os.environ.setdefault("PYTHONDONTWRITEBYTECODE", "1")
+# GUI 测试一律 offscreen：无头 CI 也必须能跑（见 test_m5_gui.py）
+os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
 
 
 @pytest.fixture(scope="session")

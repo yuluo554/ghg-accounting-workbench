@@ -4,6 +4,7 @@ from decimal import Decimal
 
 import pytest
 
+from ghg import jsonio
 from ghg.coordinates import Coordinate
 from ghg.errors import (
     CoordinateError,
@@ -12,6 +13,9 @@ from ghg.errors import (
     RulesetValidationError,
 )
 from ghg.rules import (
+    SCOPE_CALC,
+    SCOPE_CHECK,
+    SCOPE_QUOTA,
     STATUS_PENDING,
     STATUS_VERIFIED,
     RulesIndex,
@@ -46,19 +50,41 @@ def test_pack_declares_matching_coordinate(rules_index):
 
 # ---------- 门控（M0 核心行为）----------
 
-def test_every_coordinate_is_blocked_in_m0(rules_index):
-    """M0 数据初态：全部条目 pending，故每个坐标都被门控拦截。"""
-    for coord in rules_index.coordinates():
-        with pytest.raises(RulesetNotEffective):
-            rules_index.effective_ruleset(coord)
+def test_gate_is_scoped_by_calc_path(rules_index):
+    """M1 立规、M3 收口：门控按计算路径分作用域（plan/04 §4.3）。
+
+    核算路径可通过的坐标存在（M1 已挂官方原文核对）；M3 起校核阈值与配额参数已就位，
+    故**校核路径与配额路径亦全部可通过**——"分作用域"仍由各块独立门控体现
+    （见 test_scope_blocks_are_independent）。
+    """
+    calc_ok = [c for c in rules_index.coordinates()
+               if rules_index.gate_report(c, scope=SCOPE_CALC)["effective"]]
+    assert len(calc_ok) > 0, "应至少有一个坐标的核算路径可通过门控"
+    assert all(rules_index.gate_report(c, scope=SCOPE_QUOTA)["effective"]
+               for c in rules_index.coordinates()), "M3 起配额路径应全部可通过"
+    assert all(rules_index.gate_report(c, scope=SCOPE_CHECK)["effective"]
+               for c in rules_index.coordinates()), "M3 起校核路径应全部可通过"
+
+
+def test_scope_blocks_are_independent(rules_index):
+    """分作用域仍生效：把 quota 块改回 pending 只拦配额路径，不牵连核算/校核。"""
+    coord = rules_index.resolve("gbt32150-2025", 2024, "steel")
+    pack = jsonio.loads(jsonio.dumps(rules_index.pack(coord)))
+    pack["quota"]["status"] = STATUS_PENDING
+    index = _index_with_pack(rules_index, coord, pack)
+    assert index.gate_report(coord, scope=SCOPE_QUOTA)["effective"] is False
+    assert index.gate_report(coord, scope=SCOPE_CALC)["effective"] is True
+    assert index.gate_report(coord, scope=SCOPE_CHECK)["effective"] is True
 
 
 def test_gate_report_lists_pending(rules_index):
-    coord = rules_index.coordinates()[0]
-    report = rules_index.gate_report(coord)
-    assert report["effective"] is False
-    assert report["pending_count"] > 0
-    assert all(item["status"] == STATUS_PENDING for item in report["pending"])
+    """整包口径下仍有待核对条目（如 quota 未覆盖年度 / 2026 发电碳氧化率）→ 列表非空。"""
+    reports = [rules_index.gate_report(c) for c in rules_index.coordinates()]
+    pending_reports = [r for r in reports if not r["effective"]]
+    assert pending_reports, "整包口径应存在被拦截坐标"
+    for report in pending_reports:
+        assert report["pending_count"] > 0
+        assert all(item["status"] == STATUS_PENDING for item in report["pending"])
 
 
 def test_ruleset_not_effective_exit_code():
@@ -153,17 +179,43 @@ def test_parse_payload_with_index(rules_index):
     assert coord.standard == rules_index.standards[0]
 
 
-# ---------- 数据初态纪律 ----------
+# ---------- 数据态纪律（M1）----------
 
-def test_all_policy_values_are_null_in_m0(rules_index):
-    """M0 纪律：全部数值字段为 null（未核对不得生效）。"""
+def test_verified_entries_have_values_and_clauses(rules_index):
+    """M1 纪律：凡 status=verified 的条目必须有非空 value、真实条款号与出处。
+
+    （M0 的「全部数值为 null」断言在 M1 已由本断言取代：核对过的条目必须带值 +
+    条款 + 出处，未核对的一律维持 pending 且未经门控不得进入计算路径。）
+    """
     from ghg.rules import _iter_entries
+    verified_count = 0
     for coord in rules_index.coordinates():
         pack = rules_index.pack(coord)
         for path, node in _iter_entries(pack):
-            if "value" in node:
-                assert node["value"] is None, "%s.%s 数值非空" % (coord.key, path)
-            assert node["status"] == STATUS_PENDING
+            if node.get("status") == STATUS_VERIFIED:
+                verified_count += 1
+                if "value" in node:
+                    assert node["value"] is not None, "%s.%s 已核对但数值为空" % (coord.key, path)
+                clause = node.get("clause") or {}
+                assert clause.get("article"), "%s.%s 已核对但缺条款号" % (coord.key, path)
+                assert clause.get("article") != "待核对", "%s.%s 条款号仍为占位" % (coord.key, path)
+            else:
+                # pending 条目绝不得携带数值（未核对不得生效）
+                if "value" in node:
+                    assert node["value"] is None, "%s.%s pending 却携带数值" % (coord.key, path)
+    assert verified_count > 0, "M1 应存在已核对（verified）条目"
+
+
+def test_pending_entries_never_enter_calc_path(rules_index):
+    """未核对条目不得进入计算路径：核算路径可通过的坐标内不得残留 pending。"""
+    from ghg.rules import _scoped_entries
+    for coord in rules_index.coordinates():
+        if not rules_index.gate_report(coord, scope=SCOPE_CALC)["effective"]:
+            continue
+        pack = rules_index.pack(coord)
+        leftover = [p for p, n in _scoped_entries(pack, SCOPE_CALC)
+                    if n.get("status") != STATUS_VERIFIED]
+        assert leftover == [], "%s 核算路径残留未核对条目：%s" % (coord.key, leftover)
 
 
 def test_units_file_is_verified_definitional(rules_index):
