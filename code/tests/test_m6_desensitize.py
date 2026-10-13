@@ -94,6 +94,15 @@ def test_email_pattern_ignores_noreply():
     assert D.find_text_leaks("作者 %s" % NOREPLY) == []
 
 
+def test_ssh_remote_user_is_not_a_personal_email():
+    """``git@github.com`` 的 ``git`` 是通用 SSH 远端用户，与个人身份无关。
+
+    实测踩过：发布文档里的 ``git@github.com:user/repo.git`` 克隆命令被判成个人邮箱。
+    """
+    ssh = "git" + AT + "github" + ".com"
+    assert D.find_text_leaks("git clone %s:yuluo554/repo.git" % ssh) == []
+
+
 def test_official_url_is_not_an_abs_path():
     """官方来源 URL 不得被误判成盘符路径（``s:`` 前是字母 ``p``）。"""
     text = '"ref": "https://www.mee.gov.cn/xxgk/2026/abc.html"'

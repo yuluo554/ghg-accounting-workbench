@@ -45,6 +45,11 @@ NOREPLY_RE = re.compile(
 #: 通用邮箱形态（用于工作树 / 构建产物扫描）
 EMAIL_RE = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 
+#: 非个人邮箱形态：SSH 远端写法 ``git@<host>`` 的 ``git`` 是**通用**远端用户，
+#: 与个人身份无关（每台机器、每个仓库都一样）→ 不判泄露，否则文档里的
+#: ``git@github.com:...`` 克隆命令会被误报。
+GENERIC_EMAIL_USERS = ("git",)
+
 #: 开发机绝对路径泄露：Windows 盘符路径 / 用户主目录（POSIX 与 Windows 两种写法）。
 #: 盘符形态加负向先行断言，避免把 ``https://www.mee.gov.cn/`` 这类**官方来源 URL**
 #: 误判成盘符路径（``s:`` 前是字母 ``p``）。
@@ -103,6 +108,8 @@ def find_text_leaks(text, deny_emails=()):
     for match in EMAIL_RE.finditer(text):
         addr = match.group(0)
         if NOREPLY_RE.match(addr):
+            continue
+        if addr.split("@", 1)[0].lower() in GENERIC_EMAIL_USERS:
             continue
         leaks.append(("email", addr))
     for pattern in ABS_PATH_RES:
