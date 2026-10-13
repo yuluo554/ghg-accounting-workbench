@@ -1,0 +1,148 @@
+# 命令行演示记录（由 tools/gen_demo.py 生成）
+# 数据目录：data
+# 注意：退出码单独记录，不接管道（管道会吞掉真实退出码）
+
+## coords
+$ ghg coords
+规则包坐标空间（通则版本 × 年度 × 行业）
+  通则：gbt32150-2015（工业企业温室气体排放核算和报告通则（旧版，废止））、gbt32150-2025（工业企业温室气体排放核算和报告通则（新版，现行））
+  年度：2022、2023、2024、2025、2026
+  行业：power（发电）、steel（钢铁）、cement（水泥）、aluminum（铝冶炼）
+  坐标总数：40
+→ 退出码 0
+
+## rules show（门控通过）
+$ ghg rules show --standard gbt32150-2025 --year 2024 --industry steel
+规则包 gbt32150-2025/2024/steel
+  schema：ghg-ruleset/v1
+  排放源条目：5
+  校核规则：4
+  核算路径门控：通过（全部条目已核对）
+  整包门控：通过（全部条目已核对）
+→ 退出码 0
+
+## rules show（门控拦截）
+$ ghg rules show --standard gbt32150-2025 --year 2026 --industry power
+规则包 gbt32150-2025/2026/power
+  schema：ghg-ruleset/v1
+  排放源条目：4
+  校核规则：4
+  核算路径门控：拦截（1 项未核对）
+  整包门控：拦截（1 项未核对）
+    - engine.coefficients.oxidation_rate（pending）
+→ 退出码 1
+
+## calc（端到端出数）
+$ ghg calc --input data/truth/profiles/steel-2024.json
+# 企业温室气体排放核算报告（内部参考）
+
+## 0 报告头
+  报告主体：示例钢铁（合成）有限公司
+  规则包坐标：gbt32150-2025/2024/steel
+  通则编号：GB/T 32150-2025
+  行业：钢铁
+  工具版本：0.1.0
+  生成时间：2026-10-13T18:34:59
+  免责声明：本报告由本地核算工具生成，结果仅供企业内部参考；正式排放数据以主管部门核定结果、第三方核查机构结论为准。配额试算结果不构成任何配额分配承诺。
+
+## 1 核算边界
+  应核算排放源 3 项，纳入 3 项
+    [纳入] carbon_product（固碳产品隐含排放）— 应核算排放源，档案已提供活动数据；依据 CETS-AG-03.01-V01-2024 5.2
+    [纳入] process_emission（工业生产过程排放）— 应核算排放源，档案已提供活动数据；依据 CETS-AG-03.01-V01-2024 5.2
+    [排除] purchased_electricity（净购入电力隐含排放）— 非应核算排放源，档案未提供活动数据（排除）；依据 CETS-AG-03.01-V01-2024 5.2
+    [排除] purchased_heat（净购入热力隐含排放）— 非应核算排放源，档案未提供活动数据（排除）；依据 CETS-AG-03.01-V01-2024 5.2
+    [纳入] stationary_combustion（化石燃料燃烧排放）— 应核算排放源，档案已提供活动数据；依据 CETS-AG-03.01-V01-2024 5.2
+
+## 2 逐排放源明细表
+| 源 id | 源名称 | 活动数据 | 单位 | 排放因子 | 因子来源 | 氧化率 | 排放量(tCO2e) | 依据条款 |
+|---|---|---|---|---|---|---|---|---|
+| carbon_product | 固碳产品隐含排放 | 3713 | t | 2.278498 | industry_default | 1 | 8460.062 | CETS-AG-03.01-V01-2024 5.2 |
+| process_emission | 工业生产过程排放 | 4158 | t | 2.278498 | industry_default | 1 | 9473.994 | CETS-AG-03.01-V01-2024 5.2 |
+| stationary_combustion | 化石燃料燃烧排放 | 139364 | t | 2.278498 | industry_default | 0.99 | 314365.156 | CETS-AG-03.01-V01-2024 5.2 |
+| 合计 |  |  |  |  |  |  | 332299.212 |  |
+
+## 3 因子来源表
+| 因子 id | 数值 | 单位 | 来源层级 | 出处 | status | 用于排放源 |
+|---|---|---|---|---|---|---|
+| default_factor | 2.278498 | tCO2e_per_t | industry_default | 《企业温室气体排放核算与报告指南 钢铁行业》（CETS-AG-03.01-V01-2024，环办气候函〔2025〕27号；2025-01-24） | verified | carbon_product、process_emission、stationary_combustion |
+
+## 8 数据溯源表
+| 报告数字位置 | 值 | 活动数据来源 | 因子来源 | 规则条款 | 规则包条目 id |
+|---|---|---|---|---|---|
+| 明细表:carbon_product | 8460.062 | 企业档案 sources[carbon_product].activity | industry_default | CETS-AG-03.01-V01-2024 5.2 | boundary.sources.carbon_product |
+| 明细表:process_emission | 9473.994 | 企业档案 sources[process_emission].activity | industry_default | CETS-AG-03.01-V01-2024 5.2 | boundary.sources.process_emission |
+| 明细表:stationary_combustion | 314365.156 | 企业档案 sources[stationary_combustion].activity | industry_default | CETS-AG-03.01-V01-2024 5.2 | boundary.sources.stationary_combustion |
+| 因子来源表:default_factor | 2.278498 | （因子，非活动数据） | industry_default | CETS-AG-03.01-V01-2024 附录 A 附表 A.1 | factors.industry_default_values.default_factor |
+
+  排放总量：332299.212 tCO2e
+→ 退出码 0
+
+## check（干净档案）
+$ ghg check --input data/truth/profiles/steel-2024.json
+数据质量校核结果（坐标 gbt32150-2025/2024/steel）
+  规则总数：4；已执行：3
+  问题计数：错误 0 / 警告 0 / 提示 0（合计 0）
+  （无命中问题）
+  [跳过] Q-YOY-01（yoy_jump）：未提供上一年度核算结果（yoy_jump 需跨年度对比）
+→ 退出码 0
+
+## check（坏单位命中 error）
+$ ghg check --input data/truth/profiles/steel-2024-bad-unit.json
+数据质量校核结果（坐标 gbt32150-2025/2024/steel）
+  规则总数：4；已执行：3
+  问题计数：错误 1 / 警告 0 / 提示 0（合计 1）
+  [error] Q-UNIT-01 源 purchased_electricity：活动数据单位无法识别：'stone'（不在单位换算表中）
+        依据：GB/T 32150-2025 8 核算工作的质量保证
+        建议：统一到规则包声明的基本单位后重新录入
+  [跳过] Q-YOY-01（yoy_jump）：未提供上一年度核算结果（yoy_jump 需跨年度对比）
+→ 退出码 2
+
+## quota（缺外部输入 → rc 2）
+$ ghg quota --input data/truth/profiles/steel-2024.json
+错误：配额参数 quota.params.benchmark_value 需外部提供（规则包不承载该数值：行业平衡值（BP）当年度由全国碳市场管理平台测算并公布，方案正文未印具体数值 → 外部输入（平台可查），试算层不得静默取 0）；试算层不得静默取 0 —— 请通过参数显式给出
+→ 退出码 2
+
+## quota（显式给平衡值）
+$ ghg quota --input data/truth/profiles/steel-2024.json --benchmark-value 2
+配额试算结果（坐标 gbt32150-2025/2024/steel）
+  方法学：intensity_coefficient
+  依据：国环规气候〔2026〕1号 三（二）钢铁、水泥、铝冶炼行业：碳排放强度系数法
+  核算排放量：332299.212 tCO2e
+  试算配额量：332299.33 tCO2e
+  履约预判：缺口 0.118 tCO2e （占排放量 0%）
+  参数 benchmark_value：2（来源：caller）
+  参数 correction_factor：0（来源：derived）
+  参数 deviation：0
+  参数 intensity：2
+  参数 output：166150
+  免责声明：本报告由本地核算工具生成，结果仅供企业内部参考；正式排放数据以主管部门核定结果、第三方核查机构结论为准。配额试算结果不构成任何配额分配承诺。
+→ 退出码 0
+
+## bench（三类基准）
+$ ghg bench
+内置离线基准（FR-07；工具版本 0.1.0）
+  [套件] rules：480/480 通过（达成率 1）
+  [套件] factor：116/116 通过（达成率 1）
+  [套件] cases：29/29 通过（达成率 1）
+  指标：
+    [达标] case_false_positive_rate = 0（门槛 >= 0）
+    [达标] case_hit_rate = 1（门槛 >= 0.95）
+    [达标] factor_unit_consistency_rate = 1（门槛 >= 1）
+    [达标] rules_self_consistency_rate = 1（门槛 >= 1）
+    [达标] runtime_seconds = 0.030013（门槛 <= 2）
+  异常用例命中：12/12；干净对照档案 8 个，误报 0 个
+  结论：三类基准全部达标
+→ 退出码 0
+
+## selftest
+$ ghg selftest
+自检：工具版本 0.1.0
+  数据目录：data
+  [OK] 坐标空间完整（40 格）
+  [OK] 门控可拦截未核对条目（整包拦截 2 / 共 40）
+  [OK] 核算路径存在可出数坐标（核算路径可通过 38 / 共 40）
+  [OK] 单位换算往返一致（全部单位通过）
+  [OK] 报告导出可用（MD/XLSX + 溯源完整）（gbt32150-2015/2022/power：溯源 2 行）
+结论：全部通过
+→ 退出码 0
+
