@@ -306,11 +306,16 @@ def rewrite_history(old_email, new_name, new_email, root=None, log=print):
         log("历史中已无 %s，无需改写" % old_email)
         return False
 
+    # author 与 committer 必须**各自独立**判定：早期版本用 if/elif 串联，
+    # 结果 ae 命中后就跳过了 ce，只改了一半（实测 ce 仍留真实邮箱）。
     env_filter = "; ".join([
         'if [ "$GIT_AUTHOR_EMAIL" = "%s" ]' % old_email,
-        'then GIT_AUTHOR_EMAIL="%s" GIT_AUTHOR_NAME="%s" export GIT_AUTHOR_EMAIL GIT_AUTHOR_NAME' % (new_email, new_name),
-        'elif [ "$GIT_COMMITTER_EMAIL" = "%s" ]' % old_email,
-        'then GIT_COMMITTER_EMAIL="%s" GIT_COMMITTER_NAME="%s" export GIT_COMMITTER_EMAIL GIT_COMMITTER_NAME' % (new_email, new_name),
+        'then GIT_AUTHOR_EMAIL="%s" GIT_AUTHOR_NAME="%s" export GIT_AUTHOR_EMAIL GIT_AUTHOR_NAME'
+        % (new_email, new_name),
+        "fi",
+        'if [ "$GIT_COMMITTER_EMAIL" = "%s" ]' % old_email,
+        'then GIT_COMMITTER_EMAIL="%s" GIT_COMMITTER_NAME="%s" export GIT_COMMITTER_EMAIL GIT_COMMITTER_NAME'
+        % (new_email, new_name),
         "fi",
     ])
     log("改写全历史提交元数据：%s → %s" % (old_email, new_email))
