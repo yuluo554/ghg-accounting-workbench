@@ -1,6 +1,6 @@
 # RELEASE-v0.1.1 —— 发布留档
 
-> 状态：**发布执行中**（发布提交已推送、CI 三 job 全绿；附件与回填在发布后提交到本文件）。
+> 状态：**已发布**（2026-10-19，Release 创建于 13:01Z，附件上传完成 13:04Z）。
 > 仓库 <https://github.com/yuluo554/ghg-accounting-workbench>，
 > Release 目标 [`v0.1.1`](https://github.com/yuluo554/ghg-accounting-workbench/releases/tag/v0.1.1)。
 > 本文件记录**发布前验证 + 发布时/发布后回填结果**，全部为实测值。
@@ -14,7 +14,8 @@
 |---|---|
 | 仓库 | `ghg-accounting-workbench`（PUBLIC / MIT / non-fork） |
 | 默认分支 | `main` |
-| 发布提交（代码 / v0.1.1 标签） | `d7d7533dbad54ba8900411b622200340c34f800f`（其上一条 `60aeac3` 为代码提交；`d7d7533` 仅新增本文件） |
+| 发布提交（代码 / v0.1.1 标签） | `d7d7533dbad54ba8900411b622200340c34f800f`（代码提交为 `60aeac3`；`d7d7533` 仅新增本文件） |
+| Release 地址 | <https://github.com/yuluo554/ghg-accounting-workbench/releases/tag/v0.1.1> |
 | 上一版本 | `v0.1.0`（标签未移动） |
 | 版本号 | `code/pyproject.toml` = `code/src/ghg/__init__.py` = `code/gui/ghg_gui/__init__.py` = `0.1.1` |
 | 构建环境 | **干净 clone + 新 venv**：py3.12.10 / PySide6 6.12.0 / PyInstaller 6.22.3 |
@@ -53,8 +54,8 @@
 
 | 附件名 | 内容 | 字节数 | sha256 |
 |---|---|---|---|
-| `ghg-cli-windows-x64.zip` | `dist/ghg-cli/`（CLI exe + 随包数据） | 18,052,906 | `ecc99478d969fef9bcabd1122ef1709f011b34779104a3cd04b6bbc7874eddfa` |
-| `ghg-gui-windows-x64.zip` | `dist/ghg-gui/`（GUI exe + PySide6 + 随包数据） | 123,962,741 | `0c958524ce85a7af35b45356de742065008bd3403db27007e0fe88352bdb6b3e` |
+| `ghg-cli-windows-x64.zip` | `dist/ghg-cli/`（CLI exe + 随包数据） | 18,052,906 | `f6afc3221d2c1b8318e9d49b23627031bd8f350658a1aeca3c8e487fff52604b` |
+| `ghg-gui-windows-x64.zip` | `dist/ghg-gui/`（GUI exe + PySide6 + 随包数据） | 123,962,741 | `a120b2d142ec39ccc677e08e8f0a02b149ba5b743c833545d27c8d105735fc22` |
 
 ### 附：本机工作树另一次构建的对照（未上传）
 
@@ -110,7 +111,7 @@ gh release create v0.1.1 \
 
 | # | 项 | 结果 |
 |---|---|---|
-| R-1 | CI 三 job（test ubuntu / test windows / package） | ✅ 全绿（run `39255830402`，提交 `60aeac3`） |
+| R-1 | CI 三 job（test ubuntu / test windows / package） | ✅ 全绿：代码提交 `60aeac3` → run `39255830402`；留档提交 `d7d7533` → run `39256392977`；两次均 test×2 + package 全 success |
 | R-2 | 干净 clone 复验 | ✅ SSH clone @ `60aeac3`；`312 passed, 5 skipped` + 门禁 rc 0 + 基准三类达标 + 脱敏审计 rc 0 |
 | R-3 | 干净 clone 构建 | ✅ 两个 spec `Build complete!`；双 exe `--selftest` rc 0；`version` → `ghg 0.1.1` |
 | R-4 | Release 附件上传 | ✅ 双附件 `state=uploaded`；字节数与本地一致（见 §七） |
@@ -120,6 +121,18 @@ gh release create v0.1.1 \
 
 ## 七、发布物下载复验（实测）
 
-<!-- BACKFILL:RELEASE-VERIFY -->
+| # | 项 | 实测结果 |
+|---|---|---|
+| V-1 | 下载两个附件 | `gh release download v0.1.1` rc 0；字节数 18,052,906 / 123,962,741，与上传前一致 |
+| V-2 | 下载物 sha256 | CLI `f6afc322…52604b`、GUI `a120b2d1…35fc22` —— **与本地打包值逐字节相同** |
+| V-3 | 解压后 CLI `--selftest` | rc **0**；输出含「冻结态数据目录在 exe 目录内」 |
+| V-4 | 解压后 GUI `--selftest`（offscreen） | rc **0**；同上断言通过 |
+| V-5 | 解压后 `version` | `ghg 0.1.1` |
+| V-6 | 解压后 `bench` | 三类基准全部达标（12/12 命中、误报 0） |
+| V-7 | 解压后 `rules check` | 核算 38/40、配额 40/40、校核 40/40，退出码 **1**（既有契约） |
+| V-8 | 发布包内容 | CLI zip 76 条目、GUI zip 230 条目；两者均**不含** `knowledge/raw`；随包 `knowledge/` 只有 `clauses.json`（21,452 B） |
+| V-9 | 打包可复跑 | 同一 dist 连续两次 `pack`，两个 zip sha256 完全相同 |
+
+> 复验目录：`%TEMP%\ghg-rel-v011`（下载 + 解压 + 运行），复验后保留为证据，可按需删除。
 
 > 回填原则：**只写实测到的**；未跑的项明确写"未验证"，不留空、不预填。
