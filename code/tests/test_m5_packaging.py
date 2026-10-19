@@ -139,17 +139,24 @@ def test_gui_spec_console_disabled():
     assert "console=False" in text
 
 
-def test_build_extra_pins_setuptools_below_81():
-    """打包 extra 必须钉住 ``setuptools<81``。
+def test_build_extra_pins_modern_pyinstaller():
+    """打包 extra 钉 PyInstaller 6.x，且不再需要 ``setuptools<81``。
 
-    PyInstaller 5.x 仍 ``import pkg_resources``，而 setuptools 81 起移除了该模块；
-    Python 3.12 新建 venv 默认不带旧版 setuptools → 干净环境照 README 打包会直接
-    ``ModuleNotFoundError``（M6 干净环境实测踩到）。这条钉在 extra 里，
-    让"照文档走"必然拿到可用的构建环境，而不是靠 README 的一句提醒。
+    规格变更（v0.1.1，2026-10-19）：原断言要求 ``setuptools<81``，起因是 PyInstaller
+    5.x 仍 ``import pkg_resources``（setuptools 81 起移除该模块）。PyInstaller 6.x
+    已不再依赖 ``pkg_resources``，故 build extra 统一为 ``pyinstaller>=6.22,<7``，
+    并把 ``setuptools<81`` 这条全局降级去掉——留着它反而会压低构建工具版本。
+    实测（py3.12 + PyInstaller 6.22.3 + PySide6 6.12.0）：两个 spec 均构建成功、
+    双 exe ``--selftest`` rc 0。这条仍是**正向断言**：pin 丢了或退回 5.x 都会失败。
     """
     pyproject = os.path.join(P.repo_root(), "code", "pyproject.toml")
     text = open(pyproject, "r", encoding="utf-8").read()
-    assert "setuptools<81" in text, "build extra 未钉住 setuptools<81"
+    build_line = [ln for ln in text.splitlines()
+                  if ln.startswith("build =")][0]
+    assert "pyinstaller>=6.22,<7" in build_line, \
+        "build extra 未钉 PyInstaller 6.22：%s" % build_line
+    assert "setuptools<81" not in text, \
+        "PyInstaller 6.x 不再需要 setuptools<81，该降级应移除"
 
 
 # ---------- 真实打包产物（可选：已构建时校验）----------
@@ -159,15 +166,27 @@ def _dist_exe(name):
     return os.path.join(root, "dist", name, "%s.exe" % name)
 
 
+def _dist_data_candidates(exe_name):
+    """dist 内数据目录的候选位置（按 PyInstaller 版本）。
+
+    PyInstaller 5 把 datas 放在 ``<exe_dir>/data``；PyInstaller 6 起统一放进
+    ``<exe_dir>/_internal/data``。``ghg.paths._frozen_candidates`` 两处都查，
+    故断言也要覆盖两种布局——只认旧布局会让 PyInstaller 6 的产物**假通过/假失败**。
+    """
+    exe_dir = os.path.dirname(_dist_exe(exe_name))
+    return [os.path.join(exe_dir, "data"),
+            os.path.join(exe_dir, "_internal", "data")]
+
+
 @pytest.mark.parametrize("exe_name", [P.CLI_EXE_NAME, P.GUI_EXE_NAME])
 def test_built_exe_has_data_inside_dist(exe_name):
     """已构建时：dist 内必须含 data/rules/manifest.json（冻结态定位标记）。"""
     exe = _dist_exe(exe_name)
     if not os.path.isfile(exe):
         pytest.skip("未构建 %s（先跑 py -m PyInstaller tools/%s.spec）" % (exe_name, exe_name))
-    dist_dir = os.path.dirname(exe)
-    marker = os.path.join(dist_dir, "data", "rules", "manifest.json")
-    assert os.path.isfile(marker), "dist 内缺定位标记：%s" % marker
+    markers = [os.path.join(d, "rules", "manifest.json") for d in _dist_data_candidates(exe_name)]
+    assert any(os.path.isfile(m) for m in markers), \
+        "dist 内缺定位标记（查过 %s）" % "、".join(markers)
 
 
 def test_built_exe_data_excludes_raw_snapshots():
@@ -176,8 +195,9 @@ def test_built_exe_data_excludes_raw_snapshots():
         exe = _dist_exe(exe_name)
         if not os.path.isfile(exe):
             continue
-        raw_dir = os.path.join(os.path.dirname(exe), "data", "knowledge", "raw")
-        assert not os.path.isdir(raw_dir), "dist 含官方原文快照：%s" % raw_dir
+        for data_dir in _dist_data_candidates(exe_name):
+            raw_dir = os.path.join(data_dir, "knowledge", "raw")
+            assert not os.path.isdir(raw_dir), "dist 含官方原文快照：%s" % raw_dir
 
 
 def test_built_exe_selftest_exit_0():

@@ -98,11 +98,18 @@ def capture_screenshots(out_dir, data_dir):
     else:                                        # pragma: no cover - 视机器字体而定
         sys.stderr.write("警告：未找到可用的中文字体，截图中文可能显示为方块\n")
 
-    window = build_window(data_dir)
-    window.resize(1180, 720)
+    # 截图里显示的是相对仓库根的路径（不泄露开发机绝对路径），
+    # 故渲染期间把 CWD 固定到仓库根，保证引擎能按该相对路径加载档案。
+    previous_cwd = os.getcwd()
+    os.chdir(ROOT)
+    try:
+        window = build_window(data_dir)
+        window.resize(1180, 720)
 
-    # 让每个页面都先跑一次，截图里才有真实结果（不是空表格）
-    _populate(window, data_dir)
+        # 让每个页面都先跑一次，截图里才有真实结果（不是空表格）
+        _populate(window, data_dir)
+    finally:
+        os.chdir(previous_cwd)
 
     written = []
     for attr, filename, _label in SHOTS:
@@ -117,18 +124,24 @@ def capture_screenshots(out_dir, data_dir):
 
 
 def _populate(window, data_dir):
-    """用内置示例档案把四个页面填上真实结果（截图不得是空表）。"""
-    steel = os.path.join(data_dir, "truth", "profiles", "steel-2024.json")
+    """用内置示例档案把四个页面填上真实结果（截图不得是空表）。
 
-    window.calc_page.profile_edit.setText(steel)
+    截图里的档案路径用**仓库相对形式**：演示素材是要发布的产物，原样写绝对路径
+    会把开发机路径（``<盘符>:\\<仓库根>\\...``）留在 README 首屏截图里。
+    引擎按相对路径解析（生成时 CWD = 仓库根），故结果与绝对路径完全一致。
+    """
+    steel = os.path.join(data_dir, "truth", "profiles", "steel-2024.json")
+    shown = _display(steel)
+
+    window.calc_page.profile_edit.setText(shown)
     window.calc_page.run_action()
     window.calc_page.refresh()
 
-    window.check_page.profile_edit.setText(steel)
+    window.check_page.profile_edit.setText(shown)
     window.check_page.run_action()
     window.check_page.refresh()
 
-    window.quota_page.profile_edit.setText(steel)
+    window.quota_page.profile_edit.setText(shown)
     window.quota_page.benchmark_edit.setText("2")
     window.quota_page.output_edit.setText("166150")
     window.quota_page.run_action()

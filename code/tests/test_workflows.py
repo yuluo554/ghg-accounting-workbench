@@ -67,10 +67,70 @@ def test_checkout_uses_full_history():
                     )
 
 
-def test_ci_covers_python_matrix():
-    """CI 应覆盖 py3.8 与 3.12（下限与当前主流）。"""
-    text = ""
+def _ci_doc():
+    """只取 test 矩阵所在的 workflow（当前仅 ci.yml）。"""
+    docs = {}
     for name in _workflow_files():
-        text += open(os.path.join(WORKFLOWS_DIR, name), encoding="utf-8").read()
-    assert "3.8" in text, "CI 未覆盖 Python 3.8（项目下限）"
-    assert "3.12" in text, "CI 未覆盖 Python 3.12"
+        docs[name] = yaml.safe_load(open(os.path.join(WORKFLOWS_DIR, name), encoding="utf-8"))
+    return docs
+
+
+def test_ci_covers_python_matrix():
+    """CI 的 test 矩阵覆盖 py3.12（v0.1.1 起的唯一受支持下限）。
+
+    规格变更（2026-10-19，D-3 A）：原断言要求 CI 含 "3.8"，因为 3.8 是项目下限。
+    Python 3.8 已于 2024-10-07 EOL，`requires-python` 抬到 >=3.12，CI 矩阵随之
+    去 3.8。本断言改为**正向**锁新口径：test 矩阵必须含 windows 与 ubuntu 的
+    3.12 组合，且**不得**再出现 3.8（防止悄悄退回 EOL 解释器）。
+    `fetch-depth: 0` 断言（test_checkout_uses_full_history）保持不变。
+    """
+    versions = set()
+    for _name, doc in _ci_doc().items():
+        for job in (doc.get("jobs") or {}).values():
+            for entry in ((job.get("strategy") or {}).get("matrix") or {}).get("include") or []:
+                if "python-version" in entry:
+                    versions.add(str(entry["python-version"]))
+    assert "3.12" in versions, "CI test 矩阵未覆盖 Python 3.12（项目下限）"
+    assert "3.8" not in versions, "CI 仍覆盖已 EOL 的 Python 3.8"
+
+
+def test_ci_has_package_job_building_both_specs():
+    """接线守门：CI 必须有 package job 真构建两个 spec + 双 exe --selftest。
+
+    v0.1.1 新增（D7-2）：此前 spec 构建只在本地/发版时跑，发布物可复现性没有
+    常驻门禁。这里断言"存在带这四件事的 job"，而不是只看 yml 里出现过字符串，
+    避免把命令塞进注释或无关 step 也能骗过门禁。
+    """
+    found = None
+    for _name, doc in _ci_doc().items():
+        for job_id, job in (doc.get("jobs") or {}).items():
+            script = "\n".join(str(step.get("run", "")) for step in (job.get("steps") or []))
+            if "PyInstaller" not in script:
+                continue
+            checks = {
+                "CLI spec": "ghg_cli.spec" in script,
+                "GUI spec": "ghg_gui.spec" in script,
+                "CLI selftest": "ghg-cli.exe --selftest" in script,
+                "GUI selftest": "ghg-gui.exe --selftest" in script,
+            }
+            if all(checks.values()):
+                found = job_id
+                break
+        if found:
+            break
+    assert found, "CI 缺少构建两个 spec 并跑双 exe --selftest 的 package job"
+
+
+def test_workflow_actions_are_modern():
+    """actions 版本不得退回已收 Node20 弃用警告的旧版（v0.1.1 升 v7）。"""
+    for name in _workflow_files():
+        doc = yaml.safe_load(open(os.path.join(WORKFLOWS_DIR, name), encoding="utf-8"))
+        for job_id, job in (doc.get("jobs") or {}).items():
+            for step in job.get("steps") or []:
+                uses = str(step.get("uses", ""))
+                if uses.startswith("actions/checkout@"):
+                    assert uses.endswith("@v7"), \
+                        "workflow %s job %s 的 checkout 应为 v7：%s" % (name, job_id, uses)
+                if uses.startswith("actions/setup-python@"):
+                    assert uses.endswith("@v7"), \
+                        "workflow %s job %s 的 setup-python 应为 v7：%s" % (name, job_id, uses)

@@ -156,12 +156,59 @@
           "sha256": "6054f6166cbe2dc12b3d18726fe2e6c0add4210559968a3ac30a17623e2a317e"
         },
         {
+          "bytes": 266200,
+          "file": "mee-2026-06-29-power-update-att1.pdf",
+          "present": true,
+          "sha256": "b2456e4dd4e32d8651633e61fd5ff88dbe2fea59007ddda98a900d1219d3c4d6"
+        },
+        {
+          "bytes": 266351,
+          "file": "mee-2026-06-29-power-update-att2.pdf",
+          "present": true,
+          "sha256": "bc8f081f029b76750064c393037657b0f456ac0bf2d939dce4fa41151779cd0e"
+        },
+        {
           "bytes": 3491,
           "file": "power-update-1.txt",
           "present": true,
           "sha256": "321a2d5cb508e57bf2da352b7e9b4acf73a63eb86c2013ecd2b1cbc5549afaf8"
+        },
+        {
+          "bytes": 3787,
+          "file": "power-update-2.txt",
+          "present": true,
+          "sha256": "ee72ff64e62f7c358ce904f223157c38cbfa7913381b2325b55fc7960b8fd577"
+        },
+        {
+          "bytes": 62700,
+          "file": "power-update-3.txt",
+          "present": true,
+          "sha256": "428b3b04795a170212523066f345cbb276f4bc6251fb443ab7c562d32afff4d2"
+        },
+        {
+          "bytes": 80160,
+          "file": "power-update-4.txt",
+          "present": true,
+          "sha256": "eaead1cac63312f7c59fc67bb6775c9ff0355665c8f811c979e95b513a76d6d6"
+        },
+        {
+          "bytes": 45852,
+          "file": "mee-list-wsqtkz-2026-10.html",
+          "present": true,
+          "sha256": "9fe6bdef87d326cd2cfe928b3d402f1a07c1c7417cd37677b2b571220f037e4f"
         }
       ],
+      "snapshot_roles": {
+        "mee-2026-06-29-power-ag-full.pdf": "核算指南全文 PDF（CETS-AG-01.01-V04-2026）",
+        "mee-2026-06-29-power-guideline-update.html": "更新通知页面（文号/日期/spec_no 出处）",
+        "mee-2026-06-29-power-update-att1.pdf": "更新通知附件 1：核算指南技术要求更新内容（PDF 原件）",
+        "mee-2026-06-29-power-update-att2.pdf": "更新通知附件 2：核查技术指南技术要求更新内容（PDF 原件）",
+        "mee-list-wsqtkz-2026-10.html": "生态环境部「温室气体控制」栏目列表页（用于定位 2026-06-29 更新通知的导航快照）",
+        "power-update-1.txt": "附件 1 的 pdftotext 文本（核算指南更新内容，便于逐字检索）",
+        "power-update-2.txt": "附件 2 的 pdftotext 文本（核查指南更新内容，便于逐字检索）",
+        "power-update-3.txt": "核算指南全文 pdftotext 文本（CETS-AG-01.01-V04-2026）",
+        "power-update-4.txt": "核查技术指南全文 pdftotext 文本（CETS-VG-01.01-V02-2026）"
+      },
       "spec_no": "CETS-AG-01.01-V04-2026",
       "status_text": "现行（适用自 2026 年度起）",
       "title": "《企业温室气体排放核算与报告指南 发电设施》",

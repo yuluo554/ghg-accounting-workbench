@@ -6,6 +6,6 @@
   * 代码内不得出现任何规则包政策数值或坐标字面量（由 tools/check_zero_literals.py 门禁）。
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 __all__ = ["__version__"]

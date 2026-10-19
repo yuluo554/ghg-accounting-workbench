@@ -13,10 +13,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # ubuntu 新镜像对 py3.8 支持存疑，旧解释器只在 windows 守（见 plan/03 §二）
+        # v0.1.1 起下限抬到 3.12（Python 3.8 已于 2024-10-07 EOL，见 plan/06 D7-1）
         include:
-          - os: windows-latest
-            python-version: "3.8"
           - os: windows-latest
             python-version: "3.12"
           - os: ubuntu-latest
@@ -26,12 +24,12 @@ jobs:
       PYTHONUTF8: "1"
     steps:
       - name: Checkout (full history for history-scanning gates)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -68,7 +66,56 @@ jobs:
         run: |
           python -c "import sys; sys.path.insert(0, 'code/src'); from ghg.cli import main; sys.exit(main(['selftest']))"
 
-      - name: Report export smoke (FR-06 三产物)
+      - name: Report export smoke (FR-06 三产物 + NFR-04 可复现)
         run: |
-          python -c "import sys, os; sys.path.insert(0, 'code/src'); from ghg.cli import main; rc = main(['report', '--input', 'data/truth/profiles/steel-2024.json', '--out-dir', os.environ.get('RUNNER_TEMP', '.'), '--format', 'md,xlsx']); sys.exit(rc)"
+          python -c "import sys, os; sys.path.insert(0, 'code/src'); from ghg.cli import main; rc = main(['report', '--input', 'data/truth/profiles/steel-2024.json', '--out-dir', os.environ.get('RUNNER_TEMP', '.'), '--format', 'md,xlsx', '--generated-at', '2026-01-01T00:00:00']); sys.exit(rc)"
           python -c "import sys, os; p = os.path.join(os.environ.get('RUNNER_TEMP', '.'), 'report.md'); assert os.path.isfile(p), 'report.md 未生成'; raw = open(p, 'rb').read(); assert b'\r' not in raw, 'report.md 含 CR'"
+
+  # 打包门禁（v0.1.1 新增）：spec 构建与 exe 验收不能只在本地/发版时跑。
+  # 发布物是 py3.12 + PyInstaller 6.22 构建的；此 job 让"能不能打出可用 exe"
+  # 成为常驻门禁（D7-2）。
+  package:
+    name: package (windows / py3.12)
+    runs-on: windows-latest
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+      PYTHONUTF8: "1"
+      QT_QPA_PLATFORM: "offscreen"
+    steps:
+      - name: Checkout (full history for history-scanning gates)
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install (editable + dev + gui + build extras)
+        working-directory: code
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev,gui,build]"
+
+      - name: Build CLI spec
+        run: python -m PyInstaller tools/ghg_cli.spec --noconfirm --clean --distpath dist --workpath build
+
+      - name: Build GUI spec
+        run: python -m PyInstaller tools/ghg_gui.spec --noconfirm --clean --distpath dist --workpath build
+
+      - name: CLI exe selftest
+        run: |
+          .\dist\ghg-cli\ghg-cli.exe --selftest
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: GUI exe selftest (offscreen)
+        run: |
+          .\dist\ghg-gui\ghg-gui.exe --selftest
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      # 探活：exe 真的能跑（不是"文件存在就算过"），并复核随包数据不含 raw 快照。
+      # PyInstaller 6 把 datas 放进 _internal/（5 放在 exe 同级），故查 _internal 布局。
+      - name: Packaged data whitelist check
+        run: |
+          python -c "import os; assert os.path.isfile('dist/ghg-cli/_internal/data/rules/manifest.json'), 'CLI 随包数据缺失'; assert not os.path.isdir('dist/ghg-cli/_internal/data/knowledge/raw'), 'CLI 包含 raw 快照'; assert os.path.isfile('dist/ghg-gui/_internal/data/rules/manifest.json'), 'GUI 随包数据缺失'; assert not os.path.isdir('dist/ghg-gui/_internal/data/knowledge/raw'), 'GUI 包含 raw 快照'; print('packaged data OK')"

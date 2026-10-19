@@ -4,6 +4,7 @@
 用 ``cli.main(argv)`` 直接调用（不经子进程），便于覆盖捕获与速度。
 """
 
+import hashlib
 import json
 import os
 from decimal import Decimal
@@ -82,9 +83,10 @@ def test_units_ok(run):
 
 
 def test_version_ok(run):
+    """版本口径单一源：CLI 输出必须等于包内 `__version__`（不写死字面量）。"""
     code, out, _ = run("version")
     assert code == EXIT_OK
-    assert "0.1.0" in out
+    assert out.strip() == "%s %s" % (cli.CLI_NAME, cli.__version__)
 
 
 def test_selftest_ok(run):
@@ -303,6 +305,60 @@ def test_report_no_cr_bytes(run, profile_file, tmp_path):
     assert text_files, "未找到文本产物"
     for path in text_files:
         assert b"\r" not in path.read_bytes(), "文本产物含 CR：%s" % path.name
+
+
+def test_report_fixed_generated_at_is_byte_identical(run, profile_file, tmp_path):
+    """NFR-04 CLI 级：固定 --generated-at 后两次导出 11 个产物逐字节一致。
+
+    报告正文是唯一允许时间戳出现处（FR-06.3）；默认路径取当前时间，
+    故确定性由显式 `--generated-at` 提供，不能只靠测试层注入。
+    """
+    fixed = "2026-01-01T00:00:00"
+    dirs = [tmp_path / "a", tmp_path / "b"]
+    for out_dir in dirs:
+        out_dir.mkdir()
+        code, _, _ = run("report", "--input", profile_file, "--out-dir", str(out_dir),
+                         "--with-check", "--with-quota", "--benchmark-value", "2",
+                         "--output", "100000", "--generated-at", fixed)
+        assert code == EXIT_OK
+
+    names = sorted(p.name for p in dirs[0].iterdir())
+    assert names == sorted(p.name for p in dirs[1].iterdir())
+    assert len(names) == 11, "报告产物应为 MD + 9 CSV + XLSX，实际 %d" % len(names)
+    for name in names:
+        digests = [hashlib.sha256((d / name).read_bytes()).hexdigest() for d in dirs]
+        assert digests[0] == digests[1], "产物字节不一致：%s" % name
+
+
+def test_report_fixed_generated_at_appears_in_head(run, profile_file, tmp_path):
+    """--generated-at 的值原样进入报告头（规范化 ISO 8601）。"""
+    out_dir = tmp_path / "out"
+    out_dir.mkdir()
+    code, _, _ = run("report", "--input", profile_file, "--out-dir", str(out_dir),
+                     "--format", "md", "--generated-at", "2026-01-01T00:00:00")
+    assert code == EXIT_OK
+    text = (out_dir / "report.md").read_bytes().decode("utf-8")
+    assert "2026-01-01T00:00:00" in text
+
+
+def test_calc_fixed_generated_at_is_deterministic(run, profile_file):
+    """NFR-04 CLI 级：`ghg calc --generated-at` 两次 stdout 完全一致。"""
+    argv = ("calc", "--input", profile_file, "--generated-at", "2026-01-01T00:00:00")
+    code_a, out_a, _ = run(*argv)
+    code_b, out_b, _ = run(*argv)
+    assert code_a == EXIT_OK and code_b == EXIT_OK
+    assert out_a == out_b
+    assert "2026-01-01T00:00:00" in out_a
+
+
+def test_invalid_generated_at_exit_2(run, profile_file, tmp_path):
+    """非法 --generated-at → 退出码 2（用法错误；不得静默回落当前时间）。"""
+    for argv in (("calc", "--input", profile_file, "--generated-at", "not-a-time"),
+                 ("report", "--input", profile_file, "--out-dir", str(tmp_path),
+                  "--generated-at", "2026-13-45T99:99:99")):
+        code, _, err = run(*argv)
+        assert code == EXIT_INPUT
+        assert "--generated-at" in err
 
 
 def test_report_with_check_and_quota_sections(run, profile_file, tmp_path):

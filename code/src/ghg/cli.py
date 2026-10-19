@@ -12,6 +12,7 @@ import argparse
 import json
 import os
 import sys
+from datetime import datetime
 
 from . import __version__, jsonio
 from .bench import SUITES, render_bench_text, run_bench
@@ -173,6 +174,27 @@ def cmd_rules_check(ctx, args):
     return EXIT_OK if not (len(reports) - len(calc_effective)) else EXIT_GATE
 
 
+def _parse_generated_at(value):
+    """解析 ``--generated-at``（ISO 8601）；非法即退出码 2（用法错误）。
+
+    合法值规范化为 ``YYYY-MM-DDTHH:MM:SS[+HH:MM]``（``Z`` 视同 UTC），
+    保证同一输入得到同一报告头字节；缺省返回 ``None``（由 pipeline 取当前时间，
+    保持 FR-06.3 的报告头生成时间）。
+    """
+    if not value:
+        return None
+    text = str(value).strip()
+    if text.endswith(("Z", "z")):
+        text = text[:-1] + "+00:00"
+    try:
+        moment = datetime.fromisoformat(text)
+    except ValueError:
+        raise InputError(
+            "非法的 --generated-at：%r（须为 ISO 8601，如 2026-01-01T00:00:00）" % value
+        )
+    return moment.isoformat(timespec="seconds")
+
+
 def cmd_calc(ctx, args):
     """核算入口（M2 完整编排）：门控 → 边界识别 → 逐源计算 → 因子表 → 溯源表。
 
@@ -184,6 +206,7 @@ def cmd_calc(ctx, args):
     report = compute_full(
         payload, coord, ctx.index, ctx.units,
         diff_standard=getattr(args, "diff_standard", None),
+        generated_at=_parse_generated_at(getattr(args, "generated_at", None)),
     )
     if getattr(args, "report", None):
         text = render_report_text(report)
@@ -294,6 +317,7 @@ def cmd_report(ctx, args):
     report = compute_full(
         payload, coord, ctx.index, ctx.units,
         diff_standard=getattr(args, "diff_standard", None),
+        generated_at=_parse_generated_at(getattr(args, "generated_at", None)),
     )
     quality, quota = _quality_and_quota(ctx, payload, coord, report["calc"], args)
     clause_index = None if getattr(args, "no_clauses", False) else load_clause_index(ctx.data_dir)
@@ -577,6 +601,9 @@ def build_parser():
                    help="附带双标尺差异（另一版通则短键，同年同行业）")
     p.add_argument("--report", default=None,
                    help="同时把 Markdown 报告写入指定路径（FR-06.1）")
+    p.add_argument("--generated-at", dest="generated_at", default=None,
+                   help="固定报告头生成时间（ISO 8601，如 2026-01-01T00:00:00）；"
+                        "给出后同输入两次输出逐字节一致（NFR-04）")
     p.set_defaults(func=cmd_calc)
 
     p = sub.add_parser("check", help="数据质量校核（四类检查 + 分级问题清单）")
@@ -622,6 +649,9 @@ def build_parser():
                    help="历史强度（--with-quota）")
     p.add_argument("--no-clauses", dest="no_clauses", action="store_true",
                    help="不加载条款库（报告 §7 依据清单显式标注不可用）")
+    p.add_argument("--generated-at", dest="generated_at", default=None,
+                   help="固定报告头生成时间（ISO 8601，如 2026-01-01T00:00:00）；"
+                        "给出后同输入两次导出逐字节一致（NFR-04）")
     p.set_defaults(func=cmd_report)
 
     p = sub.add_parser("convert", help="单位换算")

@@ -234,3 +234,29 @@ def test_knowledge_clause_index_covers_all_sources(data_dir):
             assert _sha256(path) == snap["sha256"], "快照 sha256 失配：%s" % snap["file"]
             total += 1
     assert total >= 15
+
+
+def test_knowledge_raw_dir_has_no_unregistered_file(data_dir):
+    """守门：`raw/` 下每个文件都必须在台账中出现 sha256（双向一一对应）。
+
+    历史缺口：M6 新增的 4 份访问证据（附件 PDF / pdftotext 文本 / 栏目列表页）
+    进了 `raw/` 却未登记，导致"逐份 sha256"是假话。此断言的可证伪性：
+    删掉台账里任一条 `sha256`，或往 `raw/` 放一个新文件，测试立即失败。
+    """
+    knowledge = os.path.join(data_dir, "knowledge")
+    index = jsonio.load(os.path.join(knowledge, "clauses.json"))
+    registered = {}
+    for src in index["sources"]:
+        for snap in src["snapshot_files"]:
+            registered[snap["file"]] = snap["sha256"]
+    raw_dir = os.path.join(knowledge, "raw")
+    on_disk = sorted(f for f in os.listdir(raw_dir)
+                     if os.path.isfile(os.path.join(raw_dir, f)))
+    assert on_disk, "raw/ 为空，守门失效"
+    unregistered = [f for f in on_disk if f not in registered]
+    assert not unregistered, "raw/ 下存在未登记快照：%s" % ", ".join(unregistered)
+    missing = [f for f in registered if f not in on_disk]
+    assert not missing, "台账登记了不存在的快照：%s" % ", ".join(missing)
+    for name in on_disk:
+        assert _sha256(os.path.join(raw_dir, name)) == registered[name], \
+            "快照 sha256 失配：%s" % name

@@ -10,6 +10,6 @@
   * 全部页面可 **offscreen** 运行（``QT_QPA_PLATFORM=offscreen``），测试不依赖真实显示器。
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 __all__ = ["__version__"]

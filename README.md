@@ -4,19 +4,22 @@
 > 规则内核 = **GB/T 32150 新旧双标尺 × 年度 × 行业** 三维版本化规则集；数据底座 = 官方排放因子库（第二版）。
 > **全本地核算、零上传、零 LLM 依赖** —— 每一个数字都能追到来源，每一条数值都必须挂官方原文核对后才生效。
 
-状态：✅ **M6 完成（2026-10-13）—— 已发布**（M0–M6 全部完成）。
-发布版 [`v0.1.0`](https://github.com/yuluo554/ghg-accounting-workbench/releases/tag/v0.1.0) 附双 exe；
+状态：✅ **v0.1.1 已发布（2026-10-19）**；M0–M6 全部完成（2026-10-13 首发 v0.1.0）。
+发布版 [`v0.1.1`](https://github.com/yuluo554/ghg-accounting-workbench/releases/tag/v0.1.1) 附双 exe（py3.12 + PyInstaller 6.22 构建）；
+`v0.1.0` 为首发版留档。
 全历史提交元数据已改写为 **GitHub noreply**（`ae` 与 `ce` 两字段均无个人邮箱），脱敏审计固化为
 `tools/desensitize.py`（提交元数据 / 工作树 / 构建产物 / 附件台账四步可复跑 + 探活守门），
-发布附件为 ASCII 名 zip 并**固定时间戳可复跑**（sha256 留档见 [plan/RELEASE-M6.md](plan/RELEASE-M6.md)）；
-干净环境（新 clone + 全新 venv 逐条照 README）实测通过，CI 三矩阵（windows×{3.8,3.12} + ubuntu×3.12）全绿。
+发布附件为 ASCII 名 zip 并**固定时间戳可复跑**（sha256 留档见 [plan/RELEASE-v0.1.1.md](plan/RELEASE-v0.1.1.md)、[plan/RELEASE-M6.md](plan/RELEASE-M6.md)）；
+干净环境（新 clone + 全新 venv 逐条照 README）实测通过，CI 矩阵（windows×3.12 + ubuntu×3.12）与 package job（双 spec 构建 + 双 exe `--selftest`）全绿。
 
 **M5 交付（2026-10-13）—— 桌面交付与可核证报告导出**。
 `ghg report` 一次落盘**三产物**：Markdown（人读）+ 9 张 CSV + XLSX（机读），章节覆盖 §0 报告头 … §8 数据溯源表，
 按需追加 §5 校核与 §6 配额章节；**溯源行数 == 明细 + 因子**且每条 `rule_entry_id` 可解析（不得导出"半溯源"报告），
-机读产物**无外链**（断网可开、可归档），XLSX 用自研最小 writer（零第三方依赖）且**同输入逐字节一致**。
+机读产物**无外链**（断网可开、可归档），XLSX 用自研最小 writer（零第三方依赖）；
+报告头生成时间是**唯一允许的时间戳**（FR-06.3），`ghg report` / `ghg calc` 均支持 `--generated-at <ISO 8601>` 固定它 ——
+固定后同一输入两次输出**逐字节一致**（11 个产物可逐个比对 sha256），缺省口径为"除报告头生成时间外逐字节一致"。
 桌面形态 **PySide6 四页签**（核算 / 校核 / 配额 / 基准）**只消费引擎 API、零判定逻辑**（导入门禁锁定），
-**offscreen 测试常驻**（无显示器也能跑）；**PyInstaller onedir 双 exe**（`ghg-cli` 13 MB / `ghg-gui` 101 MB），
+**offscreen 测试常驻**（无显示器也能跑）；**PyInstaller onedir 双 exe**（v0.1.1 实测目录体积 `ghg-cli` 17.2 MiB / `ghg-gui` 118.2 MiB，PyInstaller 6.22 产物），
 `exe --selftest` 通过并断言**数据目录落在 dist 内**；随包数据走**显式白名单**（官方原文快照约 11 MB 是核对留档，不进包）。
 演示素材（四页签离屏截图 + 命令行记录）由 `tools/gen_demo.py` 可复跑生成，落在 [docs/demo/](docs/demo/)；技术报告见 [docs/技术报告.md](docs/技术报告.md)。
 `ghg bench` 一条命令跑全三类基准并输出指标：**规则自洽率 100%**（40 坐标包 × 12 项 = 480/480）、
@@ -141,8 +144,7 @@ python -c "import sys; sys.path[:0]=['code/src','code/gui']; from ghg_gui.main i
 QT_QPA_PLATFORM=offscreen python -c "import sys; sys.path[:0]=['code/src','code/gui']; from ghg_gui.main import main; sys.exit(main(['--selftest']))"
 
 # 4. 打包双 exe（PyInstaller onedir；数据白名单取自 tools/ghg_packaging.py）
-python -m pip install -e "code[build]"
-python -m pip install "setuptools<81"                     # PyInstaller 5.x 仍需 pkg_resources（见 §九）
+python -m pip install -e "code[build]"                    # pyinstaller>=6.22,<7（无需 setuptools 降级）
 python -m PyInstaller tools/ghg_cli.spec --noconfirm      # → dist/ghg-cli/ghg-cli.exe
 python -m PyInstaller tools/ghg_gui.spec --noconfirm      # → dist/ghg-gui/ghg-gui.exe
 
@@ -202,9 +204,10 @@ ghg calc --input /tmp/mixed.json   # → 错误：输入包含多个规则包坐
 | **M3** | 校核层（四类数据质量检查 + 分级问题清单）与配额试算（方法学分支 + 免责声明强制） | ✅ 2026-10-13 |
 | **M4** | 内置基准（规则自洽 / 因子与单位 / 边界用例），一条命令跑全，指标入 README | ✅ 2026-10-13 |
 | M5 | 桌面交付：PySide6 + PyInstaller 双 exe + 可核证报告导出 + 技术报告 + 演示素材 | ✅ 2026-10-13 |
-| M6 | 脱敏发布 GitHub + Release | ⬜ |
+| M6 | 脱敏发布 GitHub + Release | ✅ 2026-10-13 |
+| **v0.1.1** | 二次迭代：`--generated-at` 可复现口径、知识快照台账补齐、文档数字回写、Python 3.12 / PySide6 6.12 / PyInstaller 6.22、CI package job | ✅ 2026-10-19 |
 
-**测试状态**：`288 passed`（pytest；py3.8 与 py3.12 双跑；含门控分作用域、混算拦截、冻结字节守门、零字面量门禁探活、workflow 守门、**M1 双路真值对账 + 四生成器位级一致**、**M2 边界识别 / 双标尺差异 / 完整编排 / 溯源完整性 / 失败路径退出码**、**M3 四类校核命中与分级 / 只读层 / 阈值取自规则包 / 配额方法学分支与外部输入索取 / 免责声明强制 / 配额真值对账**、**M4 三类基准全绿 + 每套件可证伪探活 + 门槛取自 manifest + 只读/确定性**、**M5 报告三产物 / 溯源完整性 / 无外链 / XLSX 字节确定性 / GUI offscreen 四页签 / 界面导入门禁 / 打包白名单探活 / 冻结态数据定位 / 演示素材可复跑**）。
+**测试状态**：`317 passed`（pytest；py3.12 单解释器，Python 3.8 已于 2024-10-07 EOL 故不再守；含门控分作用域、混算拦截、冻结字节守门、零字面量门禁探活、workflow 守门、**M1 双路真值对账 + 四生成器位级一致 + 快照台账一一对应**、**M2 边界识别 / 双标尺差异 / 完整编排 / 溯源完整性 / 失败路径退出码**、**M3 四类校核命中与分级 / 只读层 / 阈值取自规则包 / 配额方法学分支与外部输入索取 / 免责声明强制 / 配额真值对账**、**M4 三类基准全绿 + 每套件可证伪探活 + 门槛取自 manifest + 只读/确定性**、**M5 报告三产物 / 溯源完整性 / 无外链 / XLSX 字节确定性 / GUI offscreen 四页签 / 界面导入门禁 / 打包白名单探活 / 冻结态数据定位 / 演示素材可复跑**、**v0.1.1 `--generated-at` CLI 级逐字节复现 / 非法时间退出码 2 / CI package job 接线**）。
 
 **评测基准**（M4 落地；`ghg bench` 一条命令跑全，退出码 0 达标 / 1 未达标 / 2 用法错误）：
 
@@ -225,7 +228,7 @@ ghg calc --input /tmp/mixed.json   # → 错误：输入包含多个规则包坐
 │  ├─ pyproject.toml     包定义（核心零依赖；extras: dev / gui / build）
 │  ├─ src/ghg/           核心层（stdlib only；report 报告导出 M5）
 │  ├─ gui/ghg_gui/       桌面形态（PySide6；service 为唯一引擎调用点）
-│  └─ tests/             测试（288 项）
+│  └─ tests/             测试（317 项）
 ├─ tools/
 │  ├─ gen_rulesets.py            三维规则包确定性生成器
 │  ├─ gen_factors.py             官方因子库台账生成器
@@ -252,7 +255,7 @@ ghg calc --input /tmp/mixed.json   # → 错误：输入包含多个规则包坐
 
 ```bash
 cd code
-python -m pytest -q                              # 全量测试（288 项；GUI 测试自动 offscreen）
+python -m pytest -q                              # 全量测试（317 项；GUI 测试自动 offscreen）
 cd ..
 python tools/check_zero_literals.py --selftest   # 零政策字面量门禁（含阳性对照；扫引擎 + GUI）
 python tools/bench.py                            # 内置基准（三类全跑；退出码 0 达标）
@@ -265,7 +268,7 @@ python -m PyInstaller tools/ghg_cli.spec --noconfirm && python -m PyInstaller to
 ./dist/ghg-cli/ghg-cli.exe --selftest            # 打包产物验收（数据目录须在 dist 内）
 ```
 
-CI：三矩阵 `windows×{3.8, 3.12}` + `ubuntu×{3.12}`，`fetch-depth: 0`（历史类守门测试需要全量历史）。
+CI：矩阵 `windows×{3.12}` + `ubuntu×{3.12}` + `windows×3.12 package`（PyInstaller 双 exe 构建 + `--selftest`），`fetch-depth: 0`（历史类守门测试需要全量历史）。
 
 ## 八、限制与免责
 
@@ -277,7 +280,7 @@ CI：三矩阵 `windows×{3.8, 3.12}` + `ubuntu×{3.12}`，`fetch-depth: 0`（�
 
 ## 九、已知环境问题
 
-- **Python 3.8 为下限**：核心层只用 3.8 兼容语法；`Path.write_text(newline=)` 是 3.10+ 参数，本仓库统一走 `write_bytes`。
+- **Python 3.12 为下限**（v0.1.1 起）：Python 3.8 已于 2024-10-07 EOL，`requires-python`、CI 矩阵与 `test_workflows.py` 同步抬到 3.12；`Path.write_text(newline=)` 是 3.10+ 参数，本仓库统一走 `write_bytes`。
 - **Windows 控制台编码**：CLI 入口 `_ensure_utf8_stdio()` 按流编码探针 reconfigure，避免 cp1252/pipeline 下中文输出崩 `UnicodeEncodeError`。
 - **冻结产物 CR 漂移**：`.gitattributes` 只 `eol=lf` 管不住脚本写盘；生成器一律 `write_bytes`，并有"无 CR 字节"守门测试。
 - **`py` 启动器会无视 venv**：README 的安装段一律用 `python -m pip ...`（venv 激活后 `python` 才指向 venv）。
