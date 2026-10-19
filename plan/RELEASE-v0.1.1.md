@@ -14,7 +14,7 @@
 |---|---|
 | 仓库 | `ghg-accounting-workbench`（PUBLIC / MIT / non-fork） |
 | 默认分支 | `main` |
-| 发布提交 | `60aeac33b4eb78c6dbe87bc31ce0ded1ab455b82` |
+| 发布提交（代码 / v0.1.1 标签） | `d7d7533dbad54ba8900411b622200340c34f800f`（其上一条 `60aeac3` 为代码提交；`d7d7533` 仅新增本文件） |
 | 上一版本 | `v0.1.0`（标签未移动） |
 | 版本号 | `code/pyproject.toml` = `code/src/ghg/__init__.py` = `code/gui/ghg_gui/__init__.py` = `0.1.1` |
 | 构建环境 | **干净 clone + 新 venv**：py3.12.10 / PySide6 6.12.0 / PyInstaller 6.22.3 |
