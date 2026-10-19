@@ -16,6 +16,7 @@
 | 默认分支 | `main` |
 | 发布提交（代码 / v0.1.1 标签） | `d7d7533dbad54ba8900411b622200340c34f800f`（代码提交为 `60aeac3`；`d7d7533` 仅新增本文件） |
 | Release 地址 | <https://github.com/yuluo554/ghg-accounting-workbench/releases/tag/v0.1.1> |
+| 标签与 main 的关系 | 标签钉 `d7d7533`（发布提交，含 RELEASE-NOTES 与附件哈希）；**本文件 §六/§七 的下载复验回填随 main 前进**（`b47cf2a`）。与 v0.1.0 同一做法（见 `RELEASE-M6.md` 注）：标签钉发布提交，回填随 main 走，不移动已发布的标签 |
 | 上一版本 | `v0.1.0`（标签未移动） |
 | 版本号 | `code/pyproject.toml` = `code/src/ghg/__init__.py` = `code/gui/ghg_gui/__init__.py` = `0.1.1` |
 | 构建环境 | **干净 clone + 新 venv**：py3.12.10 / PySide6 6.12.0 / PyInstaller 6.22.3 |
